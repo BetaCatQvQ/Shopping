@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopping.dao.ReviewDao">
+
+	<resultMap type="Review" id="BaseResultMap">
+		<id column="reviewId" property="reviewId" />
+		<result column="content" property="content" />
+		<result column="reviewCreateDate" property="reviewCreateDate" />
+	</resultMap>
+
+	<resultMap type="Review" id="FullResultMap" extends="BaseResultMap">
+		<association property="user" resultMap="com.shopping.dao.UserDao.BaseResultMap" />
+		<association property="orderItem" resultMap="com.shopping.dao.OrderItemDao.BaseResultMap" />
+	</resultMap>
+
+	<resultMap type="Review" id="SuperResultMap" extends="BaseResultMap">
+		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
+		<association property="orderItem" resultMap="com.shopping.dao.OrderItemDao.SuperResultMap" />
+	</resultMap>
+
+</mapper>

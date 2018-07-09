@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopping.dao.ProductImageDao">
+
+	<resultMap type="ProductImage" id="BaseResultMap">
+		<id column="productImageId" property="productImageId" />
+		<result column="productImagePath" property="productImagePath" />
+	</resultMap>
+
+	<resultMap type="ProductImage" id="FullResultMap" extends="BaseResultMap">
+		<association property="product" resultMap="com.shopping.dao.ProductDao.BaseResultMap" />
+	</resultMap>
+
+	<resultMap type="ProductImage" id="SuperResultMap" extends="BaseResultMap">
+		<association property="product" resultMap="com.shopping.dao.ProductDao.SuperResultMap" />
+	</resultMap>
+
+</mapper>

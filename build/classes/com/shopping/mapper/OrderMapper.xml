@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopping.dao.OrderDao">
+
+	<resultMap type="Order" id="BaseResultMap">
+		<id column="orderId" property="orderId" />
+		<result column="orderCreateDate" property="orderCreateDate" />
+	</resultMap>
+
+	<resultMap type="Order" id="FullResultMap" extends="BaseResultMap">
+		<association property="user" resultMap="com.shopping.dao.UserDao.BaseResultMap" />
+	</resultMap>
+
+	<resultMap type="Order" id="SuperResultMap" extends="BaseResultMap">
+		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
+	</resultMap>
+
+</mapper>

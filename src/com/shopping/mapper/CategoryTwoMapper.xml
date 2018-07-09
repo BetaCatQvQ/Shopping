@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopping.dao.CategoryTwoDao">
+
+	<resultMap type="CategoryTwo" id="BaseResultMap">
+		<id column="categoryTwoId" property="categoryTwoId" />
+		<result column="categoryTwoName" property="categoryTwoName" />
+	</resultMap>
+
+	<resultMap type="CategoryTwo" id="FullResultMap" extends="BaseResultMap">
+		<association property="categoryOne" resultMap="com.shopping.dao.CategoryOneDao.BaseResultMap" />
+	</resultMap>
+
+	<resultMap type="CategoryTwo" id="SuperResultMap" extends="BaseResultMap">
+		<association property="categoryOne" resultMap="com.shopping.dao.CategoryOneDao.SuperResultMap" />
+	</resultMap>
+	
+</mapper>
