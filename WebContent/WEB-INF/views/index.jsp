@@ -156,7 +156,7 @@
         <div class="category-tab-content">
             <ul class="normal-nav">
                 <c:forEach items="${categories}" var="c">
-                    <li class="nav-item" category_id="${c.id}">${c.name}</li>
+                    <li class="nav-item" category_id="${c.categoryOneId}">${c.categoryOneName}</li>
                 </c:forEach>
             </ul>
             <%@include file="include/hot-word-con.jsp" %>
