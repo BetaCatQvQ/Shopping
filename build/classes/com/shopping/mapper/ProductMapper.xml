@@ -10,12 +10,26 @@
 		<result column="productCreateDate" property="productCreateDate" />
 	</resultMap>
 
-	<resultMap type="Product" id="FullResultMap" extends="BaseResultMap">
-		<association property="categoryThree" resultMap="com.shopping.dao.CategoryThreeDao.BaseResultMap" />
+	<resultMap type="Product" id="FullResultMap"
+		extends="BaseResultMap">
+		<association property="categoryThree"
+			resultMap="com.shopping.dao.CategoryThreeDao.BaseResultMap" />
 	</resultMap>
 
-	<resultMap type="Product" id="SuperResultMap" extends="BaseResultMap">
-		<association property="categoryThree" resultMap="com.shopping.dao.CategoryThreeDao.SuperResultMap" />
+	<resultMap type="Product" id="SuperResultMap"
+		extends="BaseResultMap">
+		<association property="categoryThree"
+			resultMap="com.shopping.dao.CategoryThreeDao.SuperResultMap" />
+	</resultMap>
+	<resultMap type="Product" id="SuperFullResultMap"
+		extends="BaseResultMap">
+		<association property="productTypes"
+			resultMap="com.shopping.dao.ProductTypeDao.BaseResultMap" />
 	</resultMap>
 
+	<select id="getProductById" resultMap="SuperFullResultMap">
+		select * from product as p
+		inner join producttype as pt on p.productId = pt.productId
+		where p.productId = #{id}
+	</select>
 </mapper>

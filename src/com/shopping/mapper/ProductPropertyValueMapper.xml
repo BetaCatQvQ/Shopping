@@ -11,12 +11,15 @@
 
 	<resultMap type="ProductPropertyValue" id="FullResultMap" extends="BaseResultMap">
 		<association property="productProperty" resultMap="com.shopping.dao.ProductPropertyDao.BaseResultMap" />
-		<association property="product" resultMap="com.shopping.dao.ProductDao.BaseResultMap" />
 	</resultMap>
 
 	<resultMap type="ProductPropertyValue" id="SuperResultMap" extends="BaseResultMap">
 		<association property="productProperty" resultMap="com.shopping.dao.ProductPropertyDao.SuperResultMap" />
 		<association property="product" resultMap="com.shopping.dao.ProductDao.SuperResultMap" />
 	</resultMap>
-
+	<select id="getPropertysByProductId" resultMap="FullResultMap">
+	    select * from productproperty as p
+	    inner join productpropertyvalue as pv on p.productPropertyId = pv.productPropertyId
+	    where pv.productId = #{id}
+	</select>
 </mapper>

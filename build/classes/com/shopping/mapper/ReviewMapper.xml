@@ -19,5 +19,4 @@
 		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
 		<association property="orderItem" resultMap="com.shopping.dao.OrderItemDao.SuperResultMap" />
 	</resultMap>
-
 </mapper>

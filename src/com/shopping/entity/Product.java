@@ -1,25 +1,31 @@
 package com.shopping.entity;
 
 import java.math.BigInteger;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 public class Product {
 	/**
-	 * 产品编号
+	 * 浜у搧缂栧彿
 	 */
 	private BigInteger productId;
 	/**
-	 * 三级分类
+	 * 涓夌骇鍒嗙被
 	 */
 	private CategoryThree categoryThree;
 	/**
-	 * 产品名称
+	 * 浜у搧鍚嶇О
 	 */
 	private String productName;
 	/**
-	 * 产品上架日期
+	 * 浜у搧涓婃灦鏃ユ湡
 	 */
 	private Date productCreateDate;
+	
+	/**
+	 * 绫诲瀷鍒楄〃
+	 */
+	private List<ProductType> productTypes;
 
 	// getter --- setter
 	public BigInteger getProductId() {
@@ -53,5 +59,14 @@ public class Product {
 	public void setProductCreateDate(Date productCreateDate) {
 		this.productCreateDate = productCreateDate;
 	}
+
+	public List<ProductType> getProductTypes() {
+		return productTypes;
+	}
+
+	public void setProductTypes(List<ProductType> productTypes) {
+		this.productTypes = productTypes;
+	}
+
 
 }
