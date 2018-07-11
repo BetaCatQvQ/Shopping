@@ -7,11 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import com.shopping.entity.ProductDetailImage;
 
 public interface ProductDetailImageDao {
-	
+
 	/**
-	 * 获取商品描述图
-	 * @param id 商品编号
-	 * @return 图片列表
+	 * 鏍规嵁id鑾峰彇鍟嗗搧鍥剧墖
+	 * @param id 鍟嗗搧id
+	 * @return 鍥剧墖鍒楄〃
 	 */
 	List<ProductDetailImage> getImagesByProductId(@Param("id") Long id);
 }
