@@ -1,5 +1,7 @@
 package com.shopping.entity;
 
+import java.util.List;
+
 public class CategoryTwo {
 	/**
 	 * 二级菜单编号
@@ -13,6 +15,11 @@ public class CategoryTwo {
 	 * 二级菜单名称
 	 */
 	private String categoryTwoName;
+	
+	/**
+	 * 三级菜单
+	 */
+	private List<CategoryThree> CategoryThrees;
 
 	// getter --- setter
 	public Integer getCategoryTwoId() {
@@ -37,6 +44,14 @@ public class CategoryTwo {
 
 	public void setCategoryTwoName(String categoryTwoName) {
 		this.categoryTwoName = categoryTwoName;
+	}
+
+	public List<CategoryThree> getCategoryThrees() {
+		return CategoryThrees;
+	}
+
+	public void setCategoryThrees(List<CategoryThree> categoryThrees) {
+		CategoryThrees = categoryThrees;
 	}
 
 }

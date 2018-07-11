@@ -8,7 +8,7 @@
         <%-- 图片logo --%>
         <div class="logo">
             <a href="${context}">
-                <img src="img/fore/tmall-logo.png">
+                <img src="/Shopping/img/fore/tmall-logo.png">
             </a>
         </div>
 
@@ -60,10 +60,10 @@
         </span>
         <span>
             <a href="">
-                <img src="img/fore/tmall-shop.png">
+                <img src="/Shopping/img/fore/tmall-shop.png">
             </a>
             <a href="">
-                <img src="img/fore/tmall-international.png">
+                <img src="/Shopping/img/fore/tmall-international.png">
             </a>
             <c:forEach items="${links}" var="link">
                 <a href="${link.link}">${link.text}</a>

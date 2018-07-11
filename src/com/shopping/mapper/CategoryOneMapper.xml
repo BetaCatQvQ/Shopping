@@ -13,6 +13,10 @@
 	</resultMap>
 
 	<resultMap type="CategoryOne" id="SuperResultMap" extends="BaseResultMap">
+		
 	</resultMap>
 	
+	<select id="getAllList" resultMap="BaseResultMap">
+		SELECT * FROM `categoryone` ORDER BY `categoryOneId`
+	</select>
 </mapper>

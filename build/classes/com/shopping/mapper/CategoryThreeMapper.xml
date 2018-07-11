@@ -10,11 +10,19 @@
 	</resultMap>
 
 	<resultMap type="CategoryThree" id="FullResultMap" extends="BaseResultMap">
-		<association property="categoryTwo" resultMap="com.shopping.dao.CategoryTwoDao.BaseResultMap" />
+		<association property="categoryTwo"
+			resultMap="com.shopping.dao.CategoryTwoDao.BaseResultMap" />
 	</resultMap>
 
 	<resultMap type="CategoryThree" id="SuperResultMap" extends="BaseResultMap">
-		<association property="categoryTwo" resultMap="com.shopping.dao.CategoryTwoDao.SuperResultMap" />
+		<association property="categoryTwo"
+			resultMap="com.shopping.dao.CategoryTwoDao.SuperResultMap" />
+	</resultMap>
+	
+	<resultMap type="CategoryThree" id="FullResultMapOfList"
+		extends="BaseResultMap">
+		<association property="products"
+			resultMap="com.shopping.dao.ProductDao.BaseResultMap" />
 	</resultMap>
 
 </mapper>

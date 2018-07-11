@@ -1,223 +1,371 @@
+<%@page import="com.shopping.entity.ProductType"%>
+<%@page import="com.shopping.entity.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" isELIgnored="false" %>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 
 
-<%@include file="include/header.jsp" %>
-<%@include file="include/top.jsp" %>
-<%@include file="include/mini-search.jsp" %>
+<%@include file="include/header.jsp"%>
+<%@include file="include/top.jsp"%>
+<%@include file="include/mini-search.jsp"%>
 
+<%
+	ProductType defaultProduct = ((Product) session.getAttribute("product")).getProductTypes().get(0);
+	session.setAttribute("defaultProduct", defaultProduct);
+%>
 <style>
-    .bigImg {
-        width: 418px;
-        height: 418px;
-    }
+div.productDetailDiv {
+	width: 790px;
+	margin: 40px auto;
+}
 
-    .smallImg {
-        width: 56px !important;
-        height: 56px;
-        border: 2px solid white;
-    }
+div.productDetailTopPart {
+	border: 1px solid #DFDFDF;
+	border-left-width: 0px;
+}
 
-    div.product {
-        margin-top: 90px;
-        /*	margin-left: 25%;*/
-        /*margin-right: auto;
-        margin-left: auto;*/
-        position: relative;
-        float: left;
-        left: 50%;
-    }
+a.selected {
+	border-left: 1px solid #cfbfb1;
+	border-right: 1px solid #cfbfb1;
+	color: #FF0036;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 46px;
+	width: 90px;
+	text-align: center;
+	position: relative;
+}
 
-    div.imgAndInfo div.smallImageDiv {
-        width: 80%;
-        margin: 20px auto;
-    }
+a.selected:before {
+	content: "";
+	display: block;
+	border-width: 1px;
+	border-color: #FF0036;
+	border-style: solid;
+	width: 90px;
+	height: 0;
+	position: absolute;
+	top: -1px;
+	margin-left: -1px;
+}
 
-    div.imgAndInfo img.smallImg:hover {
-        border: 2px solid black;
-    }
+a.selected:after {
+	content: "";
+	display: block;
+	border-color: #FF0036 transparent transparent;
+	border-style: solid;
+	border-width: 5px;
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: -1px;
+	left: 50%;
+	margin-left: -5px;
+}
 
-    div.imgAndInfo {
-        width: 980px;
-        height: 550px;
-        display: inline-flex;
-        position: relative;
-        float: left;
-        left: -50%;
-    }
+a.productDetailTopReviewLink {
+	padding: 0px 20px;
+	border-right: 1px dotted #D2D2D2;
+	color: #333333;
+}
 
-    div.imgInimgAndInfo {
-        width: 420px;
-        float: center;
-    }
+span.productDetailTopReviewLinkNumber {
+	color: #3355B9;
+}
 
-    div.imgInimgAndInfo img {
-        width: 420px;
-    }
+div.productParamterPart {
+	border: 1px solid #DFDFDF;
+	padding: 40px;
+}
 
-    div.infoInimgAndInfo {
-        padding: 0px 20px;
-        overflow: hidden;
-        width: 560px;
-    }
+div.productParamter {
+	color: #999999;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
 
-    div.infoInimgAndInfo div.productTitle {
-        color: black;
-        font-size: 16px;
-        font-weight: bold;
-        margin: 0px 10px;
-    }
+div.productParamterList span {
+	display: block;
+	width: 220px;
+	float: left;
+	padding: 8px 0px;
+	color: #666666;
+}
 
-    div.infoInimgAndInfo div.productSubTitle {
-        color: #DD2727;
-        font-size: 12px;
-        margin: 0px 10px;
-    }
+div.productDetailImagesPart img {
+	display: block;
+	width: 790px;
+	margin: 20px 0px;
+}
 
-    div.infoInimgAndInfo div.productPriceDiv {
-        background-image: url(/img/fore/priceBackground.png);
-        height: 85px;
-        padding: 10px;
-        color: #666666;
-    }
+div.productReviewDiv {
+	width: 790px;
+	margin: 40px auto;
+}
 
-    div.infoInimgAndInfo div.gouwujuanDiv {
-        margin-top: 5px;
-    }
+div.productReviewTopPart {
+	border: 1px solid #DFDFDF;
+}
 
-    div.infoInimgAndInfo span.promotionPriceYuan {
-        font-family: Arial;
-        font-size: 18px;
-        color: #FF0036;
-    }
+a.productReviewTopPartSelectedLink {
+	padding: 0px 20px;
+	color: #333333;
+}
 
-    div.infoInimgAndInfo span.promotionPrice {
-        color: #FF0036;
-        font-family: Arial;
-        font-size: 30px;
-        font-weight: bold;
-    }
+div.productReviewContentPart {
+	padding-top: 50px;
+}
 
-    div.infoInimgAndInfo span.promotionPriceDesc {
-        color: #999999;
-        display: inline-block;
-        width: 68px;
-        position: relative;
-        left: 0px;
-        top: -10px;
-    }
+div.productReviewItem {
+	border-bottom: 1px solid #E3E3E3;
+	margin: 10px 0px;
+}
 
-    div.infoInimgAndInfo div.productSaleAndReviewNumber {
-        margin: 20px 0px;
-        border-top: 1px dotted #C9C9C9;
-        border-bottom: 1px dotted #C9C9C9;
-        padding: 10px;
-    }
+div.productReviewContentPart {
+	padding-top: 50px;
+}
 
-    div.infoInimgAndInfo div.productSaleAndReviewNumber div {
-        display: inline-block;
-        width: 49%;
-        text-align: center;
-        color: #999999;
-        font-size: 12px;
-    }
+div.productReviewItem {
+	border-bottom: 1px solid #E3E3E3;
+	margin: 10px 0px;
+}
 
-    div.infoInimgAndInfo div.productSaleAndReviewNumber div:first-child {
-        border-right: 1px solid #E5DFDA;
-    }
+div.productReviewItem div.productReviewItemDesc {
+	width: 80%;
+	display: inline-block;
+	color: #333333;
+	margin: 5px 20px;
+	float: left;
+}
 
-    div.infoInimgAndInfo div.productNumber {
-        color: #999999;
-    }
+div.productReviewItemDate {
+	margin: 15px 0px 0px 0px;
+	color: #CCCCCC;
+}
 
-    div.infoInimgAndInfo span.productNumberSettingSpan {
-        border: 1px solid #999;
-        display: inline-block;
-        width: 43px;
-        height: 32px;
-        padding-top: 7px;
-    }
+div.productReviewItem div.productReviewItemUserInfo {
+	color: #404040;
+	margin: 5px 20px;
+	padding: 20px 0;
+}
 
-    div.infoInimgAndInfo input.productNumberSetting {
-        border: 0px;
-        height: 80%;
-        width: 80%;
-    }
-
-    div.productNumber span.updown img {
-        display: inline-block;
-        vertical-align: top;
-    }
-
-    div.productNumber span.updown {
-        border: 1px solid #999;
-        display: block;
-        width: 20px;
-        height: 14px;
-        text-align: center;
-        padding-top: 4px;
-    }
-
-    div.productNumber span.updownMiddle {
-        height: 4px;
-        display: block;
-    }
-
-    div.productNumber span.arrow {
-        display: inline-block;
-        width: 22px;
-        height: 32px;
-        vertical-align: top;
-    }
-
-    div.serviceCommitment {
-        margin: 20px 0px;
-    }
-
-    div.infoInimgAndInfo span.serviceCommitmentDesc {
-        color: #999999;
-    }
-
-    div.infoInimgAndInfo span.serviceCommitmentLink a {
-        color: #666666;
-    }
-
-    div.buyDiv {
-        margin: 20px auto;
-        text-align: center;
-    }
-
-    div.buyDiv button {
-        display: inline-block;
-        margin: 0px 10px;
-        width: 180px;
-        height: 40px;
-    }
-
-    button.buyButton {
-        border: 1px solid #FF0036;
-        background-color: #FFEDED;
-        text-align: center;
-        line-height: 40px;
-        font-size: 16px;
-        color: #FF0036;
-    }
-
-    button.addCartButton {
-        border: 1px solid #FF0036;
-        background-color: #FF0036;
-        text-align: center;
-        line-height: 40px;
-        font-size: 16px;
-        color: white;
-    }
-
-    button.addCartButton span.glyphicon {
-        font-size: 12px;
-        margin-right: 8px;
-    }
+span.userInfoGrayPart {
+	color: #999999;
+}
 </style>
+<style>
+.bigImg {
+	width: 418px;
+	height: 418px;
+}
 
+.smallImg {
+	width: 56px !important;
+	height: 56px;
+	border: 2px solid white;
+}
+
+div.product {
+	margin-top: 90px;
+	/*	margin-left: 25%;*/
+	/*margin-right: auto;
+        margin-left: auto;*/
+	position: relative;
+	float: left;
+	left: 50%;
+}
+
+div.imgAndInfo div.smallImageDiv {
+	width: 80%;
+	margin: 20px auto;
+}
+
+div.imgAndInfo img.smallImg:hover {
+	border: 2px solid black;
+}
+
+div.imgAndInfo {
+	width: 980px;
+	height: 550px;
+	display: inline-flex;
+	position: relative;
+	float: left;
+	left: -50%;
+}
+
+div.imgInimgAndInfo {
+	width: 420px;
+	float: center;
+}
+
+div.imgInimgAndInfo img {
+	width: 420px;
+}
+
+div.infoInimgAndInfo {
+	padding: 0px 20px;
+	overflow: hidden;
+	width: 560px;
+}
+
+div.infoInimgAndInfo div.productTitle {
+	color: black;
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0px 10px;
+}
+
+div.infoInimgAndInfo div.productSubTitle {
+	color: #DD2727;
+	font-size: 12px;
+	margin: 0px 10px;
+}
+
+div.infoInimgAndInfo div.productPriceDiv {
+	background-image: url(/Shopping/img/fore/priceBackground.png);
+	height: 85px;
+	padding: 10px;
+	color: #666666;
+}
+
+div.infoInimgAndInfo div.gouwujuanDiv {
+	margin-top: 5px;
+}
+
+div.infoInimgAndInfo span.promotionPriceYuan {
+	font-family: Arial;
+	font-size: 18px;
+	color: #FF0036;
+}
+
+div.infoInimgAndInfo span.promotionPrice {
+	color: #FF0036;
+	font-family: Arial;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+div.infoInimgAndInfo span.promotionPriceDesc {
+	color: #999999;
+	display: inline-block;
+	width: 68px;
+	position: relative;
+	left: 0px;
+	top: -10px;
+}
+
+div.infoInimgAndInfo div.productSaleAndReviewNumber {
+	margin: 20px 0px;
+	border-top: 1px dotted #C9C9C9;
+	border-bottom: 1px dotted #C9C9C9;
+	padding: 10px;
+}
+
+div.infoInimgAndInfo div.productSaleAndReviewNumber div {
+	display: inline-block;
+	width: 49%;
+	text-align: center;
+	color: #999999;
+	font-size: 12px;
+}
+
+div.infoInimgAndInfo div.productSaleAndReviewNumber div:first-child {
+	border-right: 1px solid #E5DFDA;
+}
+
+div.infoInimgAndInfo div.productNumber {
+	color: #999999;
+}
+
+div.infoInimgAndInfo span.productNumberSettingSpan {
+	border: 1px solid #999;
+	display: inline-block;
+	width: 43px;
+	height: 32px;
+	padding-top: 7px;
+	margin-left: 5px;
+}
+
+div.infoInimgAndInfo input.productNumberSetting {
+    outLine:none;
+    text-align:center;
+	border: 0px;
+	height: 80%;
+	width: 100%;
+}
+
+div.productNumber span.updown img {
+	display: inline-block;
+	vertical-align: top;
+}
+
+div.productNumber span.updown {
+	border: 1px solid #999;
+	display: block;
+	width: 20px;
+	height: 14px;
+	text-align: center;
+	padding-top: 4px;
+}
+
+div.productNumber span.updownMiddle {
+	height: 4px;
+	display: block;
+}
+
+div.productNumber span.arrow {
+	display: inline-block;
+	width: 22px;
+	height: 32px;
+	vertical-align: top;
+}
+
+div.serviceCommitment {
+	margin: 20px 0px;
+}
+
+div.infoInimgAndInfo span.serviceCommitmentDesc {
+	color: #999999;
+}
+
+div.infoInimgAndInfo span.serviceCommitmentLink a {
+	color: #666666;
+}
+
+div.buyDiv {
+	margin: 20px auto;
+	text-align: center;
+}
+
+div.buyDiv button {
+	display: inline-block;
+	margin: 0px 10px;
+	width: 180px;
+	height: 40px;
+}
+
+button.buyButton {
+	border: 1px solid #FF0036;
+	background-color: #FFEDED;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	color: #FF0036;
+}
+
+button.addCartButton {
+	border: 1px solid #FF0036;
+	background-color: #FF0036;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	color: white;
+}
+
+button.addCartButton span.glyphicon {
+	font-size: 12px;
+	margin-right: 8px;
+}
+</style>
 <script>
     $(function () {
         $("img.smallImg").mouseenter(function () {
@@ -225,7 +373,7 @@
             $("img.bigImg").attr("src", bigImgURL);
         });
 
-        var stock = ${product.stock};
+        var stock = ${defaultProduct.restQuantity};
         $(".productNumberSetting").keyup(function () {
             var num = $(".productNumberSetting").val();
             num = parseInt(num);
@@ -237,7 +385,7 @@
                 num = stock;
             $(".productNumberSetting").val(num);
         });
-
+        
         $(".increaseNumber").click(function () {
             var num = $(".productNumberSetting").val();
             num++;
@@ -245,6 +393,8 @@
                 num = stock;
             $(".productNumberSetting").val(num);
         });
+       
+       
         $(".decreaseNumber").click(function () {
             var num = $(".productNumberSetting").val();
             --num;
@@ -270,7 +420,7 @@
                 page,
                 function (result) {
                     if ("success" == result) {
-                        var product_id = ${product.id};
+                        var product_id = ${product.productId};
                         var num = $(".productNumberSetting").val();
                         var addCartpage = "/addCart";
                         $.get(
@@ -299,97 +449,81 @@
     });
 
 </script>
-
-
-<%--<div class="page">--%>
-<%--<div id="hd" class="tb-shop">--%>
-<%--<a href="#nowhere"><img style="height: 200px;" src="img/fore/hd.jpg" /></a>--%>
-<%--</div>--%>
-<%--<nav class="tb-shop-nav">--%>
-<%--<a href="#nowhere"><span>全部商品分类</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>首页</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>荣耀</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>小米</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>华为</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>苹果</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>魅族</span></a><span> | </span>--%>
-<%--<a href="#nowhere"><span>电信卡</span></a><span> | </span>--%>
-<%--<a href="#nowhere"> <span>碎屏保</span></a>--%>
-<%--</nav>--%>
-<%--</div>--%>
-
-
 <div class="product">
-    <div class="imgAndInfo">
-        <div class="imgInimgAndInfo">
-            <img class="bigImg" src="img/product/${product.id}/1.jpg">
-            <div class="smallImageDiv">
-                <img class="smallImg" src="img/product/${product.id}/1.jpg" bigImgURL="img/product/${product.id}/1.jpg">
-                <img class="smallImg" src="img/product/${product.id}/2.jpg" bigImgURL="img/product/${product.id}/2.jpg">
-                <img class="smallImg" src="img/product/${product.id}/3.jpg" bigImgURL="img/product/${product.id}/3.jpg">
-                <img class="smallImg" src="img/product/${product.id}/4.jpg" bigImgURL="img/product/${product.id}/4.jpg">
-                <img class="smallImg" src="img/product/${product.id}/5.jpg" bigImgURL="img/product/${product.id}/5.jpg">
-                <div class="img4load hidden"></div>
-            </div>
-        </div>
+	<div class="imgAndInfo">
+		<div class="imgInimgAndInfo">
+			<img class="bigImg"
+				src="/Shopping${defaultProduct.productTypeImagePath}">
+			<div class="smallImageDiv">
+				<c:forEach items="${product.productTypes}" var="p">
+					<img class="smallImg" src="/Shopping${p.productTypeImagePath }" bigImgURL="/Shopping${p.productTypeImagePath }">
+				</c:forEach>
+				<div class="img4load hidden"></div>
+			</div>
+		</div>
 
-        <div class="infoInimgAndInfo">
-            <div class="productTitle">
-                ${product.name}
-            </div>
-            <div class="productSubTitle">
-                ${product.sub_title}
-            </div>
-            <div class="productPrice">
-                <div class="productPriceDiv">
-                    <div class="gouwujuanDiv"><img src="img/fore/tmall-coupon.png">
-                        <span> 全天猫实物商品通用</span>
-                    </div>
+		<div class="infoInimgAndInfo">
+			<div class="productTitle">
+				${defaultProduct.product.productName}</div>
+			<div class="productPrice">
+				<div class="productPriceDiv">
+					<div class="gouwujuanDiv">
+						<img src="/Shopping/img/fore/tmall-coupon.png"> <span>
+							全天猫实物商品通用</span>
+					</div>
 
-                    <div class="promotionDiv">
-                        <span class="promotionPriceDesc">价格</span>
-                        <span class="promotionPriceYuan">¥</span>
-                        <span class="promotionPrice">${product.price}</span>
-                    </div>
-                </div>
-            </div>
+					<div class="promotionDiv">
+						<span class="promotionPriceDesc">价格</span> <span
+							class="promotionPriceYuan">¥</span> <span class="promotionPrice">${defaultProduct.price}</span>
+					</div>
+				</div>
+			</div>
 
-            <div class="productSaleAndReviewNumber">
-                <div>销量<span class="redColor boldWord">${product.sale}</span></div>
-                <div>累计评价<span class="redColor boldWord">${product.reviewCount}</span></div>
-            </div>
-            <div class="productNumber">
-                <span>数量</span>
-                <span>
-                <span class="productNumberSettingSpan">
-                <input type="text" id="number" value="1" class="productNumberSetting">
-                </span>
-					<span class="arrow">
-                    <a class="increaseNumber" href="#nowhere">
-                    <span class="updown">
-                       <img src="img/fore/increase.png">
-                    </span>
+			<div class="productSaleAndReviewNumber">
+				<div>
+					销量<span class="redColor boldWord">100</span>
+				</div>
+				<div>
+					累计评价<span class="redColor boldWord">100</span>
+				</div>
+			</div>
+			<div style="color:#999;">
+			    类型<c:forEach items="${product.productTypes }" var="item">
+			    <div style="border:1px solid #eee;display:inline-block;margin:10px;"
+			        id="${product.productId }"
+			        data-id="${item.product.productId}"
+			        class="<c:if test="item.product.productId eq product.productId">selected_item</c:if>"
+			    >
+				    <img src="/Shopping${item.productTypeImagePath}" width="30px" />
+				    <span>${item.productTypeName}</span>
+			    </div>
+			    </c:forEach>
+			</div>
+			<div class="productNumber">
+				<span>数量&nbsp;</span> <span> <span class="productNumberSettingSpan">
+						<input type="text" id="number" value="1"
+						class="productNumberSetting">
+				</span> <span class="arrow"> <a class="increaseNumber"
+						href="#nowhere"> <span class="updown"> <img
+								src="/Shopping/img/fore/increase.png">
+						</span>
+					</a> <span class="updownMiddle"> </span> <a class="decreaseNumber"
+						href="#nowhere"> <span class="updown"> <img
+								src="/Shopping/img/fore/decrease.png">
+						</span>
 					</a>
-					<span class="updownMiddle"> </span>
-					<a class="decreaseNumber" href="#nowhere">
-						<span class="updown">
-                        <img src="img/fore/decrease.png">
-                    </span>
-					</a>
-					</span>
-					件</span>
-                <span>库存${product.stock}件</span>
-            </div>
-            <div class="serviceCommitment">
-                <span class="serviceCommitmentDesc">服务承诺</span>
-                <span class="serviceCommitmentLink">
-                <a href="#nowhere">正品保证</a>
-                <a href="#nowhere">极速退款</a>
-                <a href="#nowhere">赠运费险</a>
-                <a href="#nowhere">七天无理由退换</a>
-            </span>
-            </div>
-            <script>
+				</span> 件
+				</span> <span>库存${defaultProduct.restQuantity}件</span>
+			</div>
+			
+			<div class="serviceCommitment">
+				<span class="serviceCommitmentDesc">服务承诺</span> <span
+					class="serviceCommitmentLink"> <a href="#nowhere">正品保证</a> <a
+					href="#nowhere">极速退款</a> <a href="#nowhere">赠运费险</a> <a
+					href="#nowhere">七天无理由退换</a>
+				</span>
+			</div>
+			<script>
                 <%--$(function () {--%>
                 <%--$(".buyLink").click(function () {--%>
                 <%--var url = "/buyone?product_id="+${product.id}+--%>
@@ -399,195 +533,60 @@
                 <%--});--%>
 
                 function buyLink() {
-                    window.location = "/buyone?product_id="+${product.id}+
+                    window.location = "/buyone?product_id="+${product.productId}+
                     "&number=" + $("#number").val();
                 }
             </script>
-            <div class="buyDiv">
-                <%--<c:set var="number" scope="page" value="${('#number').val()}"--%>
-                <a onclick="javascript:buyLink()" class="buyLink">
-                    <button class="buyButton">立即购买</button>
-                </a>
-                <a class="addCartLink" href="#nowhere">
-                    <button class="addCartButton"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
-                </a>
-            </div>
-        </div>
-        <div style="clear:both"></div>
-    </div>
+			<div class="buyDiv">
+				<%--<c:set var="number" scope="page" value="${('#number').val()}"--%>
+				<a onclick="javascript:buyLink()" class="buyLink">
+					<button class="buyButton">立即购买</button>
+				</a> <a class="addCartLink" href="#nowhere">
+					<button class="addCartButton">
+						<span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
+					</button>
+				</a>
+			</div>
+		</div>
+		<div style="clear: both"></div>
+	</div>
 </div>
 <div style="clear: both;"></div>
 
-<style>
-    div.productDetailDiv {
-        width: 790px;
-        margin: 40px auto;
-    }
-
-    div.productDetailTopPart {
-        border: 1px solid #DFDFDF;
-        border-left-width: 0px;
-    }
-
-    a.selected {
-        border-left: 1px solid #cfbfb1;
-        border-right: 1px solid #cfbfb1;
-        color: #FF0036;
-        display: inline-block;
-        font-weight: bold;
-        line-height: 46px;
-        width: 90px;
-        text-align: center;
-        position: relative;
-    }
-
-    a.selected:before {
-        content: "";
-        display: block;
-        border-width: 1px;
-        border-color: #FF0036;
-        border-style: solid;
-        width: 90px;
-        height: 0;
-        position: absolute;
-        top: -1px;
-        margin-left: -1px;
-    }
-
-    a.selected:after {
-        content: "";
-        display: block;
-        border-color: #FF0036 transparent transparent;
-        border-style: solid;
-        border-width: 5px;
-        width: 0;
-        height: 0;
-        position: absolute;
-        top: -1px;
-        left: 50%;
-        margin-left: -5px;
-    }
-
-    a.productDetailTopReviewLink {
-        padding: 0px 20px;
-        border-right: 1px dotted #D2D2D2;
-        color: #333333;
-    }
-
-    span.productDetailTopReviewLinkNumber {
-        color: #3355B9;
-    }
-
-    div.productParamterPart {
-        border: 1px solid #DFDFDF;
-        padding: 40px;
-    }
-
-    div.productParamter {
-        color: #999999;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
-    div.productParamterList span {
-        display: block;
-        width: 220px;
-        float: left;
-        padding: 8px 0px;
-        color: #666666;
-    }
-
-    div.productDetailImagesPart img {
-        display: block;
-        width: 790px;
-        margin: 20px 0px;
-    }
-
-    div.productReviewDiv {
-        width: 790px;
-        margin: 40px auto;
-    }
-
-    div.productReviewTopPart {
-        border: 1px solid #DFDFDF;
-    }
-
-    a.productReviewTopPartSelectedLink {
-        padding: 0px 20px;
-        color: #333333;
-    }
-
-    div.productReviewContentPart {
-        padding-top: 50px;
-    }
-
-    div.productReviewItem {
-        border-bottom: 1px solid #E3E3E3;
-        margin: 10px 0px;
-    }
-
-    div.productReviewContentPart {
-        padding-top: 50px;
-    }
-
-    div.productReviewItem {
-        border-bottom: 1px solid #E3E3E3;
-        margin: 10px 0px;
-    }
-
-    div.productReviewItem div.productReviewItemDesc {
-        width: 80%;
-        display: inline-block;
-        color: #333333;
-        margin: 5px 20px;
-        float: left;
-    }
-
-    div.productReviewItemDate {
-        margin: 15px 0px 0px 0px;
-        color: #CCCCCC;
-    }
-
-    div.productReviewItem div.productReviewItemUserInfo {
-        color: #404040;
-        margin: 5px 20px;
-        padding: 20px 0;
-    }
-
-    span.userInfoGrayPart {
-        color: #999999;
-    }
-</style>
-
 <div class="productDetailDiv" style="display: block;">
-    <div class="productDetailTopPart">
-        <a class="productDetailTopPartSelectedLink selected" href="#nowhere">商品详情</a>
-        <a class="productDetailTopReviewLink" href="#nowhere">累计评价 <span
-                class="productDetailTopReviewLinkNumber">${product.reviewCount}</span> </a>
-    </div>
+	<div class="productDetailTopPart">
+		<a class="productDetailTopPartSelectedLink selected" href="#nowhere">商品详情</a>
+		<a class="productDetailTopReviewLink" href="#nowhere">累计评价 <span
+			class="productDetailTopReviewLinkNumber">100</span>
+		</a>
+	</div>
 
-    <div class="productParamterPart">
-        <div class="productParamter">产品参数：</div>
-        <div class="productParamterList">
+	<div class="productParamterPart">
+		<div class="productParamter">产品参数：</div>
+		<div class="productParamterList">
             <c:forEach items="${propertyValues}" var="pvs">
-                <span>${pvs.property.name}:${pvs.value}</span>
+                <span>${pvs.productProperty.productPropertyName}:${pvs.productPropertyValueName}</span>
             </c:forEach>
-        </div>
-        <div style="clear:both"></div>
-    </div>
-    <div class="productDetailImagesPart">
-        <img src="http://how2j.cn/tmall/img/productDetail/8626.jpg">
-    </div>
+		</div>
+		<div style="clear: both"></div>
+	</div>
+	<div class="productDetailImagesPart">
+		<c:forEach items="${productDetailImages}" var="img">
+		<img src="/Shopping${img.productDetailImagePath}">
+		</c:forEach>
+	</div>
 </div>
-<div style="clear:both"></div>
+<div style="clear: both"></div>
 <div class="productReviewDiv" style="display: block;">
-    <div class="productReviewTopPart">
-        <div class="productReviewTopPart">
-            <a class="productReviewTopPartSelectedLink" href="#nowhere">商品详情</a>
-            <a class="selected" href="#nowhere">累计评价 <span
-                    class="productReviewTopReviewLinkNumber">${product.reviewCount}</span> </a>
-        </div>
-        <div class="productReviewContentPart">
+	<div class="productReviewTopPart">
+		<div class="productReviewTopPart">
+			<a class="productReviewTopPartSelectedLink" href="#nowhere">商品详情</a>
+			<a class="selected" href="#nowhere">累计评价 <span
+				class="productReviewTopReviewLinkNumber">100</span>
+			</a>
+		</div>
+		<div class="productReviewContentPart">
+			<%--
             <c:forEach items="${reviews}" var="r">
                 <div class="productReviewItem">
                     <div class="productReviewItemDesc">
@@ -602,10 +601,11 @@
                     <div style="clear:both"></div>
                 </div>
             </c:forEach>
-        </div>
-    </div>
+         --%>
+		</div>
+	</div>
 </div>
 
 <%--<%@include file="productDetail.jsp" %>--%>
 
-<%@include file="include/footer.jsp" %>
+<%@include file="include/footer.jsp"%>
