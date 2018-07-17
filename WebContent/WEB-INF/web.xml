@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	<display-name>SSMPage</display-name>
+	<display-name>Shopping</display-name>
 	<welcome-file-list>
 		<welcome-file>Welcome</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -12,6 +12,15 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<!-- 
+	    自定义监听器
+	 -->
+	<listener>
+	    <listener-class>
+	        com.shopping.listener.InitListener
+	    </listener-class>
+	</listener>
 
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
