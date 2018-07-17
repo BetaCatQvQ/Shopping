@@ -29,8 +29,8 @@
 </style>
 <div class="mallPage" id="mallPage">
     <div class="header">
-        <a href="/home">
-            <img src="/img/fore/tmallLogo.png" class="tm-logo">
+        <a href="${ctx }/home.action">
+            <img src="${ctx }/img/fore/tmallLogo.png" class="tm-logo">
         </a>
     </div>
 </div>
@@ -155,7 +155,7 @@
 <div class="content">
     <div class="login-banner-wrap" style="width: 100%; background-color: rgb(223, 226, 231);" title="">
         <div class="inner">
-            <img src="/img/fore/loginPage-background.jpg">
+            <img src="${ctx}/img/fore/loginPage-background.jpg">
         </div>
     </div>
 
@@ -169,7 +169,7 @@
                     </div>
                 </div>
                 <div class="login-title">密码登录</div>
-                <form action="/login" class="loginForm" method="post">
+                <form action="${ctx }/login" class="loginForm" method="post">
                     <div class="field">
                         <span class="loginInputIcon">
 					        <span class=" glyphicon glyphicon-user"></span>
@@ -199,6 +199,6 @@
     </div>
 </div>
 
-
+<%@include file="include/footer.jsp"%>
 </body>
 </html>
