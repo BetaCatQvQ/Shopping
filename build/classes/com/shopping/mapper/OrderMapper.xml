@@ -13,8 +13,20 @@
 		<association property="user" resultMap="com.shopping.dao.UserDao.BaseResultMap" />
 	</resultMap>
 
+	
 	<resultMap type="Order" id="SuperResultMap" extends="BaseResultMap">
-		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
+		<association property="user"  resultMap="com.shopping.dao.UserDao.SuperResultMap" />
 	</resultMap>
-
+	
+	<resultMap type="Order" id="SuperFullResultMap" extends="BaseResultMap">
+		<collection property="orderItems" ofType="OrderItem" resultMap="com.shopping.dao.OrderItemDao.SuperFullResultMap" />
+	</resultMap>
+	
+	
+	<select id="findOrderByUserId" resultMap="SuperFullResultMap">
+	    select * from `order` as o
+	    inner join orderitem as oi on o.orderId = oi.orderId
+	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
+	    where userId = #{id}
+	</select>
 </mapper>

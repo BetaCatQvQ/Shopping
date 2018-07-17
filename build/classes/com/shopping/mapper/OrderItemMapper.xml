@@ -21,4 +21,8 @@
 		<association property="order" resultMap="com.shopping.dao.OrderDao.SuperResultMap" />
 	</resultMap>
 
+	<resultMap type="OrderItem" id="SuperFullResultMap" extends="BaseResultMap">
+		<collection ofType="ProductType" property="productType" resultMap="com.shopping.dao.ProductTypeDao.SuperFullResultMap" />
+	</resultMap>
+
 </mapper>
