@@ -1,8 +1,5 @@
 package com.shopping.dao;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -17,5 +14,5 @@ public interface ProductDao {
 	 * @param id 产品 Id
 	 * @return 产品
 	 */
-	Product getProductById(Long id);
+	Product getProductById(@Param("id") Long id);
 }
