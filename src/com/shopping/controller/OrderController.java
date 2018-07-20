@@ -25,13 +25,10 @@ public class OrderController {
 	
 	@RequestMapping
 	public String order(HttpSession session, Model model) {
-		User u = new User();
-		u.setUserId(new BigInteger("1"));
-		session.setAttribute(HttpVal.SESSION_COMMON_USER_KEY,u);
 		Optional<User> userOpt = Optional.ofNullable((User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY));
-//		if (!userOpt.isPresent()) {
-//			return "loginPage";
-//		}
+		if (!userOpt.isPresent()) {
+			return "loginPage";
+		}
 		userOpt.ifPresent(user ->{
 			model.addAttribute("orders", oService.findOrderByUserId(user.getUserId()));
 		});
