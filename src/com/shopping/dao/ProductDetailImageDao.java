@@ -9,9 +9,9 @@ import com.shopping.entity.ProductDetailImage;
 public interface ProductDetailImageDao {
 
 	/**
-	 * 鏍规嵁id鑾峰彇鍟嗗搧鍥剧墖
-	 * @param id 鍟嗗搧id
-	 * @return 鍥剧墖鍒楄〃
+	 * 查询商品描述图片
+	 * @param id 商品id
+	 * @return 图片列表
 	 */
-	List<ProductDetailImage> getImagesByProductId(@Param("id") Long id);
+	List<ProductDetailImage> getDetailImagesByProductId(@Param("id") Long id);
 }

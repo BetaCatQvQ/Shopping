@@ -17,7 +17,7 @@
 		<association property="product" resultMap="com.shopping.dao.ProductDao.SuperResultMap" />
 	</resultMap>
 	
-	<select id="getImagesByProductId" resultMap="BaseResultMap">
+	<select id="getDetailImagesByProductId" resultMap="BaseResultMap">
 	    select * from productdetailimage as pi 
 	    where pi.productId = #{id}
 	</select>

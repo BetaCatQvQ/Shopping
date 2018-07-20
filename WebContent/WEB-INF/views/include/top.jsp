@@ -15,8 +15,8 @@
         </c:if>
         <%-- 如果用户成功登录，则显示如下： --%>
         <c:if test="${!empty sessionScope.user}">
-            <span>Hi，${sessionScope.user.name}</span>
-            <span><a href="nowhere">积分 <strong>1251</strong></a></span>
+            <span>Hi，${sessionScope.user.userName}</span>
+            <!-- <span><a href="nowhere">积分 <strong>1251</strong></a></span> -->
             <span><a href="/logout">退出</a></span>
         </c:if>
 
@@ -24,7 +24,7 @@
         <%-- 导航栏右半部分：
              使用Bootstrap的pull-right类 --%>
         <span class="pull-right">
-            <a href="bought">我的订单</a>
+            <a href="order.action">我的订单</a>
             <a href="cart">
                 <span class="glyphicon glyphicon-shopping-cart redColor"></span>
                 购物车<strong id="cartTotalItemNumber">${cartTotalItemNumber}</strong>件

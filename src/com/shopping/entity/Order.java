@@ -2,6 +2,7 @@ package com.shopping.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	/**
@@ -16,6 +17,11 @@ public class Order {
 	 * 订单创建时间
 	 */
 	private Date orderCreateDate;
+	
+	/**
+	 * Order item list 
+	 */
+	private List<OrderItem> orderItems;
 
 	// getter --- setter
 	public BigInteger getOrderId() {
@@ -40,6 +46,14 @@ public class Order {
 
 	public void setOrderCreateDate(Date orderCreateDate) {
 		this.orderCreateDate = orderCreateDate;
+	}
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }

@@ -94,140 +94,135 @@
 <div class="hot-word-con" category_id="1">
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">当季流行</div>
+            <div class="title-text">热门手机</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word  highlight" href="/searchProduct?keyword=夏季新品">夏季新品</a>
-            <a class="hot-word " href="/searchProduct?keyword=商场同款">商场同款</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=仙女连衣裙">仙女连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=T恤">T恤</a>
-            <a class="hot-word " href="/searchProduct?keyword=衬衫">衬衫</a>
-            <a class="hot-word " href="/searchProduct?keyword=时髦外套">时髦外套</a>
-            <a class="hot-word " href="/searchProduct?keyword=休闲裤">休闲裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=牛仔裤">牛仔裤</a>
-            <a class="hot-word  highlight " href="/searchProduct?keyword=无痕文胸">无痕文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=运动文胸">运动文胸</a>
-            <a class="hot-word  highlight " href="/searchProduct?keyword=潮流家居服">潮流家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=百搭船袜">百搭船袜</a>
+            <a class="hot-word  highlight" href="">小米</a>
+            <a class="hot-word" href="">iPhone</a>
+            <a class="hot-word" href="">魅族</a>
+            <a class="hot-word" href="">荣耀</a>
+            <a class="hot-word" href="">努比亚</a>
+            <a class="hot-word" href="">OPPO</a>
+            <a class="hot-word" href="">vivo</a>
+            <a class="hot-word" href="">三星</a>
+            <a class="hot-word" href="">华为</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">精选上装</div>
+            <div class="title-text">特色手机</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word  highlight" href="/searchProduct?keyword=毛呢外套">毛呢外套</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=羽绒服">羽绒服</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=棉服">棉服</a>
-            <a class="hot-word " href="/searchProduct?keyword=丝绒卫衣">丝绒卫衣</a>
-            <a class="hot-word " href="/searchProduct?keyword=毛针织衫">毛针织衫</a>
-            <a class="hot-word " href="/searchProduct?keyword=时髦外套">时髦外套</a>
-            <a class="hot-word " href="/searchProduct?keyword=皮毛一体">皮毛一体</a>
-            <a class="hot-word " href="/searchProduct?keyword=皮草">皮草</a>
-            <a class="hot-word" href="/searchProduct?keyword=毛衣">毛衣</a>
-            <a class="hot-word " href="/searchProduct?keyword=衬衫">衬衫</a>
-            <a class="hot-word " href="/searchProduct?keyword=卫衣">卫衣</a>
-            <a class="hot-word " href="/searchProduct?keyword=针织衫">针织衫</a>
-            <a class="hot-word  highlight " href="/searchProduct?keyword=T恤">T恤</a>
-            <a class="hot-word " href="/searchProduct?keyword=短外套">短外套</a>
-            <a class="hot-word highlight " href="/searchProduct?keyword=小西装">小西装</a>
-            <a class="hot-word " href="/searchProduct?keyword=风衣">风衣</a>
+            <a class="hot-word" href="">AliOS</a>
+            <a class="hot-word" href="">千元指纹</a>
+            <a class="hot-word" href="">双卡双待</a>
+            <a class="hot-word" href="">大屏</a>
+            <a class="hot-word" href="">自拍</a>
+            <a class="hot-word" href="">移动</a>
+            <a class="hot-word" href="">联通</a>
+            <a class="hot-word" href="">电信</a>
+            <a class="hot-word" href="">合约机</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">浪漫裙装</div>
+            <div class="title-text">电脑整机</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word  highlight" href="/searchProduct?keyword=连衣裙">连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=半身裙">半身裙</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=A字裙">A字裙</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=荷叶边裙">荷叶边裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=大摆裙">大摆裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=包臀裙">包臀裙</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=百褶裙">百褶裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=长袖连衣裙">长袖连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=棉麻连衣裙">棉麻连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=牛仔裙">牛仔裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=蕾丝连衣裙">蕾丝连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=真丝连衣裙">真丝连衣裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=印花连衣裙">印花连衣裙</a>
+            <a class="hot-word  highlight" href="">笔记本</a>
+            <a class="hot-word" href="">平板电脑</a>
+            <a class="hot-word  highlight" href="">台式机</a>
+            <a class="hot-word" href="">一体机</a>
+            <a class="hot-word" href="">DIY</a>
+            <a class="hot-word" href="">游戏本</a>
+            <a class="hot-word  highlight" href="">iPad</a>
+            <a class="hot-word  highlight" href="">Surface</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">女士下装</div>
+            <div class="title-text">智能数码</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word  highlight" href="/searchProduct?keyword=休闲裤">休闲裤</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=阔腿裤">阔腿裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=牛仔裤">牛仔裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=打底裤">打底裤</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=开叉运动裤">开叉运动裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=哈伦裤">哈伦裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=背带裤">背带裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=小脚裤">小脚裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=西装裤">西装裤</a>
-            <a class="hot-word " href="/searchProduct?keyword=短裤">短裤</a>
+           	<a class="hot-word" href="">智能设备</a>
+           	<a class="hot-word  highlight" href="">智能手表</a>
+           	<a class="hot-word" href="">智能手环</a>
+           	<a class="hot-word" href="">VR眼镜</a>
+           	<a class="hot-word  highlight" href="">智能摄像</a>
+           	<a class="hot-word" href="">智能健康</a>
+           	<a class="hot-word" href="">智能机器人</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">特色女装</div>
+            <div class="title-text">游戏组装</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word  highlight" href="/searchProduct?keyword=时尚套装">时尚套装</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=休闲套装">休闲套装</a>
-            <a class="hot-word " href="/searchProduct?keyword=日系女装">日系女装</a>
-            <a class="hot-word  highlight" href="/searchProduct?keyword=精选妈妈装">精选妈妈装</a>
-            <a class="hot-word " href="/searchProduct?keyword=大码女装">大码女装</a>
-            <a class="hot-word " href="/searchProduct?keyword=职业套装">职业套装</a>
-            <a class="hot-word " href="/searchProduct?keyword=优雅旗袍">优雅旗袍</a>
-            <a class="hot-word " href="/searchProduct?keyword=精致礼服">精致礼服</a>
-            <a class="hot-word " href="/searchProduct?keyword=婚纱">婚纱</a>
-            <a class="hot-word " href="/searchProduct?keyword=唐装">唐装</a>
-            <a class="hot-word " href="/searchProduct?keyword=小码女装">小码女装</a>
+           <a class="hot-word" href="">DIY电脑</a>
+           <a class="hot-word  highlight" href="">竞技DIY</a>
+           <a class="hot-word" href="">显示器</a>
+           <a class="hot-word" href="">游戏本</a>
+           <a class="hot-word  highlight" href="">机械键盘</a>
+           <a class="hot-word  highlight" href="">XBOX</a>
+           <a class="hot-word" href="">游戏手柄</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">文胸塑身</div>
+            <div class="title-text">硬件存储</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word " href="/searchProduct?keyword=光面文胸">光面文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=运动文胸">运动文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=美背文胸">美背文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=聚拢文胸">聚拢文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=大杯文胸">大杯文胸</a>
-            <a class="hot-word " href="/searchProduct?keyword=轻薄塑身">轻薄塑身</a>
+            <a class="hot-word  highlight" href="">显示器</a>
+            <a class="hot-word" href="">机械键盘</a>
+            <a class="hot-word" href="">固态硬盘</a>
+            <a class="hot-word  highlight" href="">CPU</a>
+            <a class="hot-word" href="">显卡</a>
+            <a class="hot-word" href="">主板</a>
+            <a class="hot-word  highlight" href="">高速U盘</a>
+            <a class="hot-word" href="">路由器</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>
     <div class="hot-word-line">
         <div class="line-title">
-            <div class="title-text">家居服</div>
+            <div class="title-text">摄影摄像</div>
             <i>></i>
         </div>
         <div class="line-con">
-            <a class="hot-word " href="/searchProduct?keyword=春夏家居服">春夏家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=纯棉家居服">纯棉家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=莫代尔家居服">莫代尔家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=真丝家居服">真丝家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=春夏睡裙">春夏睡裙</a>
-            <a class="hot-word " href="/searchProduct?keyword=男士家居服">男士家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=情侣家居服">情侣家居服</a>
-            <a class="hot-word " href="/searchProduct?keyword=性感睡裙">性感睡裙</a>
+            <a class="hot-word" href="">相机</a>
+            <a class="hot-word  highlight" href="">单反</a>
+            <a class="hot-word" href="">单电微单</a>
+            <a class="hot-word  highlight" href="">摄像机</a>
+            <a class="hot-word  highlight" href="">自拍神器</a>
+            <a class="hot-word" href="">拍立得</a>
+            <a class="hot-word" href="">镜头</a>
+            <a class="hot-word  highlight" href="">自拍杆</a>
+            <div class="seprate clearfix"></div>
+        </div>
+    </div>
+    <div class="hot-word-line">
+        <div class="line-title">
+            <div class="title-text">影音娱乐</div>
+            <i>></i>
+        </div>
+        <div class="line-con">
+            <a class="hot-word  highlight" href="">耳机</a>
+            <a class="hot-word" href="">天猫魔盒</a>
+            <a class="hot-word  highlight" href="">数码影音</a>
+            <a class="hot-word" href="">家庭影院</a>
+            <a class="hot-word  highlight" href="">蓝牙耳机</a>
+            <a class="hot-word" href="">网络播放器</a>
             <div class="seprate clearfix"></div>
         </div>
     </div>

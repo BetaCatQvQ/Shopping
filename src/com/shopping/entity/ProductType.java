@@ -2,6 +2,7 @@ package com.shopping.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 public class ProductType {
 	/**
@@ -36,6 +37,15 @@ public class ProductType {
 	 * 上架时间
 	 */
 	private Date productTypeCreateDate;
+	/**
+	 * 商品描述图片
+	 */
+	private List<ProductDetailImage> productDetailImages;
+	/**
+	 * 商品对应的属性
+	 */
+	private List<ProductPropertyValue> productPropertyValues;
+
 
 	// getter --- setter
 	public BigInteger getProductTypeId() {
@@ -44,6 +54,22 @@ public class ProductType {
 
 	public void setProductTypeId(BigInteger productTypeId) {
 		this.productTypeId = productTypeId;
+	}
+
+	public List<ProductDetailImage> getProductDetailImages() {
+		return productDetailImages;
+	}
+
+	public void setProductDetailImages(List<ProductDetailImage> productDetailImages) {
+		this.productDetailImages = productDetailImages;
+	}
+
+	public List<ProductPropertyValue> getProductPropertyValues() {
+		return productPropertyValues;
+	}
+
+	public void setProductPropertyValues(List<ProductPropertyValue> productPropertyValues) {
+		this.productPropertyValues = productPropertyValues;
 	}
 
 	public Product getProduct() {

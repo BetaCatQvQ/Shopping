@@ -8,10 +8,6 @@
 <%@include file="include/top.jsp"%>
 <%@include file="include/mini-search.jsp"%>
 
-<%
-	ProductType defaultProduct = ((Product) session.getAttribute("product")).getProductTypes().get(0);
-	session.setAttribute("defaultProduct", defaultProduct);
-%>
 <style>
 div.productDetailDiv {
 	width: 790px;
@@ -248,9 +244,11 @@ div.infoInimgAndInfo span.promotionPriceDesc {
 	color: #999999;
 	display: inline-block;
 	width: 68px;
-	position: relative;
+    /*
+    position: relative;
 	left: 0px;
 	top: -10px;
+    */
 }
 
 div.infoInimgAndInfo div.productSaleAndReviewNumber {
@@ -286,8 +284,8 @@ div.infoInimgAndInfo span.productNumberSettingSpan {
 }
 
 div.infoInimgAndInfo input.productNumberSetting {
-    outLine:none;
-    text-align:center;
+	outLine: none;
+	text-align: center;
 	border: 0px;
 	height: 80%;
 	width: 100%;
@@ -365,9 +363,29 @@ button.addCartButton span.glyphicon {
 	font-size: 12px;
 	margin-right: 8px;
 }
+
+div.product_type {
+	border: 1px solid #eee;
+	display: inline-block;
+	margin: 10px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+div.selected_item {
+	border: 2px solid red;
+}
 </style>
 <script>
     $(function () {
+    	
+    	$("div.product_type").click(function(){
+    		if($(this).hasClass("selected_item"))return;
+    		$(this).siblings().removeClass("selected_item");
+    		$(this).addClass("selected_item");
+    		window.location = $(this).attr("data-id")+".action";
+    	});
+    	
         $("img.smallImg").mouseenter(function () {
             var bigImgURL = $(this).attr("bigImgURL");
             $("img.bigImg").attr("src", bigImgURL);
@@ -453,28 +471,44 @@ button.addCartButton span.glyphicon {
 	<div class="imgAndInfo">
 		<div class="imgInimgAndInfo">
 			<img class="bigImg"
-				src="/Shopping${defaultProduct.productTypeImagePath}">
+				src="${ctx}${defaultProduct.productTypeImagePath}">
 			<div class="smallImageDiv">
+				<%--
 				<c:forEach items="${product.productTypes}" var="p">
-					<img class="smallImg" src="/Shopping${p.productTypeImagePath }" bigImgURL="/Shopping${p.productTypeImagePath }">
+					<img class="smallImg" src="${ctx}${p.productTypeImagePath }"
+						bigImgURL="${ctx}${p.productTypeImagePath }">
 				</c:forEach>
+				 --%>
 				<div class="img4load hidden"></div>
 			</div>
 		</div>
 
 		<div class="infoInimgAndInfo">
-			<div class="productTitle">
-				${defaultProduct.product.productName}</div>
+			<div class="productTitle">${product.productName}</div>
 			<div class="productPrice">
 				<div class="productPriceDiv">
 					<div class="gouwujuanDiv">
-						<img src="/Shopping/img/fore/tmall-coupon.png"> <span>
+						<img src="${ctx}/img/fore/tmall-coupon.png"> <span>
 							全天猫实物商品通用</span>
 					</div>
 
 					<div class="promotionDiv">
-						<span class="promotionPriceDesc">价格</span> <span
-							class="promotionPriceYuan">¥</span> <span class="promotionPrice">${defaultProduct.price}</span>
+						<!-- 
+						<span class="promotionPriceDesc" style="margin-top:10px;">价格</span> 
+						<span style="margin-top:-10px;">¥</span> <span style="margin-top:10px;">${defaultProduct.price}</span><br>
+						<span class="promotionPriceDesc">优惠价</span>
+						<span class="promotionPriceYuan">¥</span> 
+						<span class="promotionPrice">${defaultProduct.salePrice}</span>
+					 -->
+						<p style="margin:0px;">
+							<span class="promotionPriceDesc">价格</span> 
+							<span>¥</span> <span>${defaultProduct.price}</span> 
+						</p>
+						<p>
+						    <span class="promotionPriceDesc">优惠价</span>
+							<span class="promotionPriceYuan">¥</span> 
+							<span class="promotionPrice">${defaultProduct.salePrice}</span>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -487,35 +521,32 @@ button.addCartButton span.glyphicon {
 					累计评价<span class="redColor boldWord">100</span>
 				</div>
 			</div>
-			<div style="color:#999;">
-			    类型<c:forEach items="${product.productTypes }" var="item">
-			    <div style="border:1px solid #eee;display:inline-block;margin:10px;"
-			        id="${product.productId }"
-			        data-id="${item.product.productId}"
-			        class="<c:if test="item.product.productId eq product.productId">selected_item</c:if>"
-			    >
-				    <img src="/Shopping${item.productTypeImagePath}" width="30px" />
-				    <span>${item.productTypeName}</span>
-			    </div>
-			    </c:forEach>
+			<div style="color: #999;">
+				类型
+				<c:forEach items="${productTypes }" var="item">
+					<div id="${product.productId }" data-id="${item.productTypeId}"
+						class="product_type <c:if test="${item.productTypeId eq defaultProduct.productTypeId}">selected_item</c:if>">
+						<img src="${ctx}${item.productTypeImagePath}" width="30px" /> <span>${item.productTypeName}</span>
+					</div>
+				</c:forEach>
 			</div>
 			<div class="productNumber">
-				<span>数量&nbsp;</span> <span> <span class="productNumberSettingSpan">
-						<input type="text" id="number" value="1"
-						class="productNumberSetting">
+				<span>数量&nbsp;</span> <span> <span
+					class="productNumberSettingSpan"> <input type="text"
+						id="number" value="1" class="productNumberSetting">
 				</span> <span class="arrow"> <a class="increaseNumber"
 						href="#nowhere"> <span class="updown"> <img
-								src="/Shopping/img/fore/increase.png">
+								src="${ctx}/img/fore/increase.png">
 						</span>
 					</a> <span class="updownMiddle"> </span> <a class="decreaseNumber"
 						href="#nowhere"> <span class="updown"> <img
-								src="/Shopping/img/fore/decrease.png">
+								src="${ctx}/img/fore/decrease.png">
 						</span>
 					</a>
 				</span> 件
 				</span> <span>库存${defaultProduct.restQuantity}件</span>
 			</div>
-			
+
 			<div class="serviceCommitment">
 				<span class="serviceCommitmentDesc">服务承诺</span> <span
 					class="serviceCommitmentLink"> <a href="#nowhere">正品保证</a> <a
@@ -564,15 +595,15 @@ button.addCartButton span.glyphicon {
 	<div class="productParamterPart">
 		<div class="productParamter">产品参数：</div>
 		<div class="productParamterList">
-            <c:forEach items="${propertyValues}" var="pvs">
-                <span>${pvs.productProperty.productPropertyName}:${pvs.productPropertyValueName}</span>
-            </c:forEach>
+			<c:forEach items="${defaultProduct.productPropertyValues}" var="pvs">
+				<span>${pvs.productProperty.productPropertyName}:${pvs.productPropertyValueName}</span>
+			</c:forEach>
 		</div>
 		<div style="clear: both"></div>
 	</div>
 	<div class="productDetailImagesPart">
-		<c:forEach items="${productDetailImages}" var="img">
-		<img src="/Shopping${img.productDetailImagePath}">
+		<c:forEach items="${defaultProduct.productDetailImages}" var="img">
+			<img src="${ctx}${img.productDetailImagePath}">
 		</c:forEach>
 	</div>
 </div>
@@ -587,6 +618,7 @@ button.addCartButton span.glyphicon {
 		</div>
 		<div class="productReviewContentPart">
 			<%--
+			评论区
             <c:forEach items="${reviews}" var="r">
                 <div class="productReviewItem">
                     <div class="productReviewItemDesc">
@@ -607,5 +639,4 @@ button.addCartButton span.glyphicon {
 </div>
 
 <%--<%@include file="productDetail.jsp" %>--%>
-
 <%@include file="include/footer.jsp"%>

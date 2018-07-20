@@ -16,10 +16,10 @@ public class ProductDetailImageServiceImpl implements ProductDetailImageService 
 	private ProductDetailImageDao pdiDao;
 
 	@Override
-	public List<ProductDetailImage> getImagesByProductId(Long id) {
+	public List<ProductDetailImage> getDetailImagesByProductId(Long id) {
 		if (id == null) {
 			return null;
 		}
-		return pdiDao.getImagesByProductId(id);
+		return pdiDao.getDetailImagesByProductId(id);
 	}
 }

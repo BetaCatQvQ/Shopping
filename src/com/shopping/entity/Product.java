@@ -21,11 +21,6 @@ public class Product {
 	 * 产品上架日期
 	 */
 	private Date productCreateDate;
-	
-	/**
-	 * 类型列表
-	 */
-	private List<ProductType> productTypes;
 
 	// getter --- setter
 	public BigInteger getProductId() {
@@ -59,14 +54,4 @@ public class Product {
 	public void setProductCreateDate(Date productCreateDate) {
 		this.productCreateDate = productCreateDate;
 	}
-
-	public List<ProductType> getProductTypes() {
-		return productTypes;
-	}
-
-	public void setProductTypes(List<ProductType> productTypes) {
-		this.productTypes = productTypes;
-	}
-
-
 }

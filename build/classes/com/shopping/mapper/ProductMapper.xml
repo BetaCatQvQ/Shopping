@@ -38,7 +38,7 @@
 			INNER JOIN `product` AS p ON p.`categoryThreeId` = cth.`categoryThreeId`
 			INNER JOIN `producttype` AS pt ON p.`productId` = pt.`productId`
 			INNER JOIN `orderitem` AS oi ON pt.`productTypeId` = oi.`productTypeId`
-			WHERE oi.`status` > 1 AND co.`categoryOneId` = #{coId}
+			WHERE oi.`status` >= 1 AND co.`categoryOneId` = #{coId}
 			GROUP BY p.`productId`
 			ORDER BY COUNT(*) DESC
 		)LIMIT 0,5
@@ -49,4 +49,32 @@
 		inner join producttype as pt on p.productId = pt.productId
 		where p.productId = #{id}
 	</select>
+	
+	<select id="getProductListByCategoryThreeId" resultType="Map">
+		SELECT `p`.`categoryThreeId`,`p`.`productName`,`pi`.`productImagePath`,COUNT(*) AS `salesVolume`,`minPriceTable`.`minPrice`,`minPriceTable`.`productTypeId`
+		FROM `product` AS `p`
+		INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
+		INNER JOIN (
+			SELECT MIN(`pi`.`productImageId`) AS `productImageId` FROM `product` AS `p`
+			INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
+			WHERE `p`.`categoryThreeId` = 1
+			GROUP BY `p`.`productId`
+			ORDER BY `pi`.`productImageId`
+		)  AS `c`ON `pi`.`productImageId` = `c`.`productImageId`
+		INNER JOIN `producttype` AS `pt` ON `p`.`productId` = `pt`.`productId`
+		INNER JOIN `orderitem` AS `oi` ON `oi`.`productTypeId` = `pt`.`productTypeId`
+		INNER JOIN (
+			SELECT `pt`.`productId`,MIN(`pt`.`productTypeId`) AS `productTypeId`,MIN(`pt`.`salePrice`) AS `minPrice` FROM `producttype` AS `pt`
+			GROUP BY `pt`.`productId`
+		) AS `minPriceTable` ON `p`.`productId` = `minPriceTable`.`productId`
+		where `oi`.`status` >= 1
+		<if test="cthId != null">
+			AND `p`.`categoryThreeId` = #{cthId}
+		</if>
+		
+		GROUP BY `p`.`productId`
+		ORDER BY `p`.`productCreateDate` DESC
+		LIMIT #{page.startRow},#{page.pageCount}
+	</select>
+	
 </mapper>

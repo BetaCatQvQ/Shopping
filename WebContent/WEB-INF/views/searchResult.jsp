@@ -41,107 +41,7 @@
     }
 </style>
 
-<div class="workArea">
-    <div class="searchProducts">
-        <div class="filter">
-            <a class="fSort"
-               <c:if test="${'all'==param.sort||empty param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=all&keyword=${param.keyword}">综合</a>
-            <a class="fSort"
-               <c:if test="${'reviewCount'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=reviewCount&keyword=${param.keyword}">人气</a>
-            <a class="fSort"
-               <c:if test="${'date'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=date&keyword=${param.keyword}">新品</a>
-            <a class="fSort"
-               <c:if test="${'sale'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=sale&keyword=${param.keyword}">销量</a>
-            <a class="fSort"
-               <c:if test="${'price'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
-        </div>
-        <div style="clear: both;"></div>
-
-
-        <%--<style>--%>
-        <%--.grid {--%>
-        <%--margin-left: 13px;--%>
-        <%--text-align: center;--%>
-        <%--}--%>
-
-        <%--.productItem {--%>
-        <%--display: block;--%>
-        <%--float: left;--%>
-        <%--width: 233px;--%>
-        <%--height: 300px;--%>
-        <%--border: 1px solid #FFFFFF;--%>
-        <%--}--%>
-
-        <%--.productItem:hover {--%>
-        <%--border: 1px solid #FF0036;--%>
-        <%--}--%>
-
-        <%--.floor-item-img {--%>
-        <%--margin-top: 20px;--%>
-        <%--position: relative;--%>
-        <%--width: 185px;--%>
-        <%--height: 185px;--%>
-        <%--}--%>
-
-        <%--.floor-item-title {--%>
-        <%--width: 135px;--%>
-        <%--height: 40px;--%>
-        <%--font-size: 14px;--%>
-        <%--color: #333333;--%>
-        <%--line-height: 20px;--%>
-        <%--overflow: hidden;--%>
-        <%--margin: 8px auto;--%>
-        <%--}--%>
-
-        <%--.floor-price {--%>
-        <%--font-size: 18px;--%>
-        <%--color: #FF0036;--%>
-        <%--line-height: 18px;--%>
-        <%--margin: 10px auto;--%>
-        <%--}--%>
-        <%--</style>--%>
-        <%--<c:forEach items="${products}" var="p" varStatus="st">--%>
-        <%--<c:if test="${st.count<=5}">--%>
-        <%--<a class="grid" href="showProduct?product_id=${p.id}">--%>
-        <%--<div class="productItem">--%>
-        <%--<img class="floor-item-img" src="img/product/${p.id}/1.jpg">--%>
-        <%--<div class="floor-item-title">${p.name}</div>--%>
-        <%--<div class="floor-price">${p.price}</div>--%>
-        <%--</div>--%>
-        <%--</a>--%>
-        <%--</c:if>--%>
-        <%--</c:forEach>--%>
-
-
-        <%--<c:forEach items="${products}" var="p">--%>
-        <%--<div class="productUnit" price="${p.price}">--%>
-        <%--<a href="foreproduct?pid=${p.id}">--%>
-        <%--<img class="productImage" src="img/product/${p.id}/1.jpg">--%>
-        <%--</a>--%>
-        <%--<span class="productPrice">¥<fmt:formatNumber type="number" value="${p.price}"--%>
-        <%--minFractionDigits="2"/></span>--%>
-        <%--<a class="productLink" href="foreproduct?pid=${p.id}">--%>
-        <%--${fn:substring(p.name, 0, 50)}--%>
-        <%--</a>--%>
-
-        <%--<a class="tmallLink" href="foreproduct?pid=${p.id}">天猫专卖</a>--%>
-
-        <%--<div class="productInfo">--%>
-        <%--<span class="monthDeal ">月成交 <span class="productDealNumber">${p.sale}笔</span></span>--%>
-        <%--<span class="productReview">评价<span class="productReviewNumber">${p.reviewCount}</span></span>--%>
-        <%--<span class="wangwang"><img src="img/site/wangwang.png"></span>--%>
-        <%--</div>--%>
-
-        <%--</div>--%>
-        <%--</c:forEach>--%>
-
-
-        <style>
+<style>
             .product {
                 margin-top: 40px;
                 margin-right: 20px;
@@ -299,28 +199,48 @@
             }
         </style>
 
-
-        <c:forEach items="${products}" var="p">
+<div class="workArea">
+    <div class="searchProducts">
+        <div class="filter">
+            <a class="fSort"
+               <c:if test="${'all'==param.sort||empty param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=all&keyword=${param.keyword}">综合</a>
+            <a class="fSort"
+               <c:if test="${'reviewCount'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=reviewCount&keyword=${param.keyword}">人气</a>
+            <a class="fSort"
+               <c:if test="${'date'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=date&keyword=${param.keyword}">新品</a>
+            <a class="fSort"
+               <c:if test="${'sale'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=sale&keyword=${param.keyword}">销量</a>
+            <a class="fSort"
+               <c:if test="${'price'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
+        </div>
+        <div style="clear: both;"></div>
+        
+        <c:forEach items="${requestScope.page.data}" var="p">
             <div class="product">
                 <div class="product-iWrap">
                     <div class="productImg-wrap">
-                        <a class="productImg" href="/showProduct?product_id=${p.id}">
-                            <img src="/img/product/${p.id}/1.jpg">
+                        <a class="productImg" href="/showProduct?product_id=${p.productTypeId}">
+                            <img src="${pageContext.request.contextPath }${p.productImagePath}">
                         </a>
                     </div>
                     <div style="clear: both;"></div>
                     <p class="productPrice">
-                        <em title="${p.price}">
-                            <b>￥</b>${p.price}
+                        <em title="${p.minPrice}">
+                            <b>￥</b>${p.minPrice}
                         </em>
                     </p>
                     <div style="clear: both;"></div>
                     <p class="productTitle">
-                        <a href="/showProduct?product_id=${p.id}">${p.name}</a>
+                        <a href="/showProduct?product_id=${p.productTypeId}">${p.productName}</a>
                     </p>
                     <p class="productStatus">
-                        <span>销量<em>${p.sale}</em></span>
-                        <span>评价<a href="#nowhere">${p.reviewCount}</a></span>
+                        <span>销量<em>${p.salesVolume}</em></span>
+                        <span>评价<a href="#nowhere">///</a></span>
                         <span class="ww-light"><a></a></span>
                     </p>
                 </div>
@@ -341,7 +261,7 @@
             }
         </style>
 
-        <c:if test="${empty products}">
+        <c:if test="${empty requestScope.page.data}">
             <div class="nrt">
                 <p>
                     喵~没找到与
