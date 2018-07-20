@@ -8,18 +8,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dao.ProductDao;
-<<<<<<< HEAD
 import com.shopping.entity.Page;
 import com.shopping.entity.Product;
-=======
->>>>>>> 1a6d4b613a004b006ced670703298587adc2d9ea
 import com.shopping.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	@Resource
 	private ProductDao pDao;
-<<<<<<< HEAD
 
 	@Override
 	public Product getProductById(Long id) {
@@ -38,9 +34,4 @@ public class ProductServiceImpl implements ProductService {
 		page.setData(products);
 		return page;
 	}
-
-=======
-	
-	
->>>>>>> 1a6d4b613a004b006ced670703298587adc2d9ea
 }

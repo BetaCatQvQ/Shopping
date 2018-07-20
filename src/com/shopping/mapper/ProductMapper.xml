@@ -21,7 +21,6 @@
 		<association property="categoryThree"
 			resultMap="com.shopping.dao.CategoryThreeDao.SuperResultMap" />
 	</resultMap>
-<<<<<<< HEAD
 	
 	<resultMap type="Product" id="SuperFullResultMap"
 		extends="BaseResultMap">
@@ -78,7 +77,6 @@
 		LIMIT #{page.startRow},#{page.pageCount}
 	</select>
 	
-=======
 	<select id="getProductListByCategoryOneId"
 		resultMap="BaseResultMap">
 		SELECT * FROM `product`
@@ -103,5 +101,5 @@
 		ORDER BY COUNT(*) DESC
 		)LIMIT 0,5
 	</select>
->>>>>>> 1a6d4b613a004b006ced670703298587adc2d9ea
+	
 </mapper>

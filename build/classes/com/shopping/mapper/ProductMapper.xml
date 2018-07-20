@@ -77,4 +77,29 @@
 		LIMIT #{page.startRow},#{page.pageCount}
 	</select>
 	
+	<select id="getProductListByCategoryOneId"
+		resultMap="BaseResultMap">
+		SELECT * FROM `product`
+		WHERE `productId` IN (
+		SELECT
+		p.`productId`
+		FROM `categoryone` AS co
+		INNER JOIN `categorytwo` AS ct ON
+		co.`categoryOneId` = ct.`categoryOneId`
+		INNER JOIN `categorythree` AS
+		cth ON ct.`categoryTwoId` =
+		cth.`categoryTwoId`
+		INNER JOIN `product` AS
+		p ON p.`categoryThreeId` = cth.`categoryThreeId`
+		INNER JOIN
+		`producttype` AS pt ON p.`productId` = pt.`productId`
+		INNER JOIN
+		`orderitem` AS oi ON pt.`productTypeId` = oi.`productTypeId`
+		WHERE
+		oi.`status` > 1 AND co.`categoryOneId` = #{coId}
+		GROUP BY p.`productId`
+		ORDER BY COUNT(*) DESC
+		)LIMIT 0,5
+	</select>
+	
 </mapper>

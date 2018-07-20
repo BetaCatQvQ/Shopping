@@ -24,7 +24,6 @@ public interface ProductDao {
 	 *            产品 Id
 	 * @return 产品
 	 */
-<<<<<<< HEAD
 	Product getProductById(Long id);
 
 	/**
@@ -35,7 +34,6 @@ public interface ProductDao {
 	 */
 	public List<Map<String, Object>> getProductListByCategoryThreeId(@Param("cthId") Integer categoryThreeId,
 			@Param("page") Page<Map<String, Object>> page);
-=======
+
 	Product getProductById(@Param("id") Long id);
->>>>>>> 1a6d4b613a004b006ced670703298587adc2d9ea
 }

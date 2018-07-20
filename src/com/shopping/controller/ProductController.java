@@ -8,15 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-<<<<<<< HEAD
 import com.shopping.service.ProductDetailImageService;
 import com.shopping.service.ProductPropertyValueService;
 import com.shopping.service.ProductService;
-=======
 import com.shopping.entity.ProductType;
 import com.shopping.service.ProductTypeService;
->>>>>>> 1a6d4b613a004b006ced670703298587adc2d9ea
+import com.shopping.entity.ProductType;
+import com.shopping.service.ProductTypeService;
 
 @Controller
 @RequestMapping("/product/{id}")
