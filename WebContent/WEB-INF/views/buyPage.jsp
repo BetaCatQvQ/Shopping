@@ -259,7 +259,7 @@
         });
 
         $("span.leaveMessageTextareaSpan").hide();
-        $("img.leaveMessageImg").click(function () {
+        $("${ctx}/img.leaveMessageImg").click(function () {
 
             $(this).hide();
             $("span.leaveMessageTextareaSpan").show();
@@ -284,8 +284,8 @@
     <form action="createOrder" method="post">
 
         <div class="buyFlow">
-            <img class="pull-left" src="img/fore/simpleLogo.png">
-            <img class="pull-right" src="img/fore/buyflow.png">
+            <img class="pull-left" src="${ctx}/img/fore/simpleLogo.png">
+            <img class="pull-right" src="${ctx}/img/fore/buyflow.png">
             <div style="clear:both"></div>
         </div>
         <div class="address">
@@ -323,7 +323,7 @@
                 <thead>
                 <tr>
                     <th colspan="2" class="productListTableFirstColumn">
-                        <img class="tmallbuy" src="img/fore/tmallbuy.png">
+                        <img class="tmallbuy" src="${ctx}/img/fore/tmallbuy.png">
                         <a class="marketLink" href="#nowhere">店铺：天猫店铺</a>
                         <a class="wangwanglink" href="#nowhere"> <span class="wangwangGif"></span></a>
                     </th>
@@ -343,16 +343,16 @@
                 <tbody class="productListTableTbody">
                 <c:forEach items="${orderItems}" var="oi" varStatus="st">
                     <tr class="orderItemTR">
-                        <td class="orderItemFirstTD"><img class="orderItemImg" src="img/product/${oi.product_id}/1.jpg">
+                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}/img/product/${oi.product_id}/1.jpg">
                         </td>
                         <td class="orderItemProductInfo">
                             <a href="foreproduct?pid=${oi.product_id}" class="orderItemProductLink">
                                     ${oi.product.name}
                             </a>
 
-                            <img src="img/fore/creditcard.png" title="支持信用卡支付">
-                            <img src="img/fore/7day.png" title="消费者保障服务,承诺7天退货">
-                            <img src="img/fore/promise.png" title="消费者保障服务,承诺如实描述">
+                            <img src="${ctx}/img/fore/creditcard.png" title="支持信用卡支付">
+                            <img src="${ctx}/img/fore/7day.png" title="消费者保障服务,承诺7天退货">
+                            <img src="${ctx}/img/fore/promise.png" title="消费者保障服务,承诺如实描述">
 
                         </td>
                         <td>
@@ -396,7 +396,7 @@
                 <div class="pull-left">
                     <span class="leaveMessageText">给卖家留言:</span>
                     <span>
-                        <img class="leaveMessageImg" src="img/fore/leaveMessage.png">
+                        <img class="leaveMessageImg" src="${ctx}/img/fore/leaveMessage.png">
                     </span>
                     <span class="leaveMessageTextareaSpan">
 					<textarea name="user_message" class="leaveMessageTextarea"></textarea>
