@@ -564,8 +564,8 @@ div.selected_item {
                 <%--});--%>
 
                 function buyLink() {
-                    window.location = "/buyone?product_id="+${product.productId}+
-                    "&number=" + $("#number").val();
+                    window.location = "${ctx}/buy/one/"+${defaultProduct.productTypeId}+
+                    "/" + $("#number").val()+".action";
                 }
             </script>
 			<div class="buyDiv">
