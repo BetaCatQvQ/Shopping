@@ -237,7 +237,7 @@ div.floor-line-con i {
 					<c:forEach
 						items="${requestScope.categoriesAndProduct.productes[key]}"
 						var="p">
-						<a class="grid" href="showProduct?product_id=${p.productId}">
+						<a class="grid" href="product/${p.productId}.action">
 							<div class="productItem">
 								<!-- <img class="floor-item-img" src="img/product/p.productId}/1.jpg"> -->
 								<div class="floor-item-title">${p.productName}</div>
