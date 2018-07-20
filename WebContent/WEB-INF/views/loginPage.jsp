@@ -37,6 +37,13 @@
 
 
 <style>
+*{
+margin:0;
+padding:0;
+}
+    input:focus{
+        outline:none;
+    }
     .content {
         position: relative;
         width: 100%;
@@ -93,6 +100,7 @@
         width: 40px;
         height: 40px;
         display: inline-block;
+        position: relative;
     }
 
     span.loginInputIcon span.glyphicon {
@@ -106,11 +114,11 @@
     div.field input {
         display: inline-block;
         border: 0px solid transparent;
-        width: 244px;
-        height: 30px;
+        width: 251px;
+        height: 40px;
         position: relative;
-        left: 6px;
-        top: 6px;
+        left: 2px;
+        top: 1px;
     }
 
     button.redButton {
@@ -169,18 +177,18 @@
                     </div>
                 </div>
                 <div class="login-title">密码登录</div>
-                <form action="${ctx }/login" class="loginForm" method="post">
+                <form action="${ctx }/user/login.action" class="loginForm" method="post">
                     <div class="field">
                         <span class="loginInputIcon">
 					        <span class=" glyphicon glyphicon-user"></span>
 				        </span>
-                        <input id="name" name="name" placeholder="手机/会员名/邮箱" type="text">
+                        <input id="name" name="userName" placeholder="手机/会员名/邮箱" type="text">
                     </div>
                     <div class="field">
                         <span class="loginInputIcon ">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input id="password" name="password" type="password" placeholder="密码" type="text">
+                        <input id="password" name="userPwd" type="password" placeholder="密码" type="text">
                     </div>
 
                     <span class="text-danger">不要输入真实的天猫账号密码</span><br><br>
@@ -191,7 +199,7 @@
 
                     <div style="margin-top: 20px;">
                         <a class="notImplementLink" href="#nowhere">忘记登录密码</a>
-                        <a href="registerPage" class="pull-right">免费注册</a>
+                        <a href="${ctx }/user/register.action" class="pull-right">免费注册</a>
                     </div>
                 </form>
             </div>
