@@ -66,4 +66,10 @@ public class User {
 		this.userCreateDate = userCreateDate;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", role=" + role
+				+ ", userCreateDate=" + userCreateDate + "]";
+	}
+
 }
