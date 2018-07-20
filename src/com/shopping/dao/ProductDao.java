@@ -24,7 +24,7 @@ public interface ProductDao {
 	 *            产品 Id
 	 * @return 产品
 	 */
-	Product getProductById(Long id);
+	Product getProductById(@Param("id") Long id);
 
 	/**
 	 * 通过三级分类编号查询商品
@@ -34,6 +34,4 @@ public interface ProductDao {
 	 */
 	public List<Map<String, Object>> getProductListByCategoryThreeId(@Param("cthId") Integer categoryThreeId,
 			@Param("page") Page<Map<String, Object>> page);
-
-	Product getProductById(@Param("id") Long id);
 }
