@@ -41,21 +41,42 @@ div.searchProducts {
 }
 </style>
 
-<style>
-.product {
-	margin-top: 40px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	width: 220px;
-	height: 290px;
-	position: relative;
-	float: left;
-	padding: 0;
-	/*margin: 0 0 20px;*/
-	line-height: 1.5;
-	overflow: visible;
-	z-index: 1;
-}
+<div class="workArea">
+    <div class="searchProducts">
+        <div class="filter">
+            <a class="fSort"
+               <c:if test="${'all'==param.sort||empty param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=all&keyword=${param.keyword}">综合</a>
+            <a class="fSort"
+               <c:if test="${'reviewCount'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=reviewCount&keyword=${param.keyword}">人气</a>
+            <a class="fSort"
+               <c:if test="${'date'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=date&keyword=${param.keyword}">新品</a>
+            <a class="fSort"
+               <c:if test="${'sale'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=sale&keyword=${param.keyword}">销量</a>
+            <a class="fSort"
+               <c:if test="${'price'==param.sort}">class="fSort-cur"</c:if>
+               href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
+        </div>
+        <div style="clear: both;"></div>
+
+        <style>
+            .product {
+                margin-top: 40px;
+                margin-right: 20px;
+                margin-bottom: 20px;
+                width: 220px;
+                height: 290px;
+                position: relative;
+                float: left;
+                padding: 0;
+                /*margin: 0 0 20px;*/
+                line-height: 1.5;
+                overflow: visible;
+                z-index: 1;
+            }
 
 .product-hover .product-iWrap, .product:hover .product-iWrap {
 	height: auto;
@@ -219,6 +240,32 @@ em {
 				href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
 		</div>
 		<div style="clear: both;"></div>
+        <c:forEach items="${products}" var="p">
+            <div class="product">
+                <div class="product-iWrap">
+                    <div class="productImg-wrap">
+                        <a class="productImg" href="/showProduct?product_id=${p.id}">
+                            <img src="/img/product/${p.id}/1.jpg">
+                        </a>
+                    </div>
+                    <div style="clear: both;"></div>
+                    <p class="productPrice">
+                        <em title="${p.price}">
+                            <b>￥</b>${p.price}
+                        </em>
+                    </p>
+                    <div style="clear: both;"></div>
+                    <p class="productTitle">
+                        <a href="/showProduct?product_id=${p.id}">${p.name}</a>
+                    </p>
+                    <p class="productStatus">
+                        <span>销量<em>${p.sale}</em></span>
+                        <span>评价<a href="#nowhere">${p.reviewCount}</a></span>
+                        <span class="ww-light"><a></a></span>
+                    </p>
+                </div>
+            </div>
+        </c:forEach>
 
 		<c:forEach items="${requestScope.page.data}" var="p">
 			<div class="product">
@@ -245,7 +292,6 @@ em {
 				</div>
 			</div>
 		</c:forEach>
-
 
 		<style>
 .nrt {

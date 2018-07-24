@@ -1,10 +1,17 @@
 package com.shopping.controller;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shopping.entity.User;
 import com.shopping.service.ShoppingCartService;
@@ -16,7 +23,7 @@ import com.shopping.util.HttpVal;
 public class UserController {
 	@Resource
 	private UserService uService;
-
+	
 	@Resource
 	private ShoppingCartService scService;
 
@@ -40,10 +47,18 @@ public class UserController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		// 删除用户
-		session.removeAttribute(HttpVal.SESSION_COMMON_USER_KEY);
-		// 删除购物车信息
-		session.removeAttribute(HttpVal.SHOPPING_CAR_COUNT_KEY);
+		session.invalidate();
 		return "redirect:/home.action";
+	}
+	
+	@GetMapping(value = "/register")
+	public String gotoRegister() {
+		return "registerPage";
+	}
+	
+	@PostMapping(value = "/register")
+	public String register(User user,HttpSession session) {
+		session.setAttribute(HttpVal.SESSION_COMMON_USER_KEY, uService.register(user));
+		return "registerSuccessPage";
 	}
 }

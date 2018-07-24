@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false" %>
-<%@include file="include/header.jsp" %>
 
+<%@include file="include/header.jsp" %>
+<%@include file="include/top.jsp" %>
+<%@include file="include/mini-search.jsp" %>
 <style>
     .page {
         width: 990px;
@@ -137,16 +139,16 @@
     </div>
 
     <div class="content">
-        <form action="/register" method="post" class="registerFrom">
+        <form action="${ctx }/user/register.action" method="post" class="registerFrom">
             <div class="form-list form-main-list">
                 <div class="form-group">
                     <div class="form-item">
                         <span class="form-label tsl">用户账号</span>
-                        <input type="text" id="name" name="name" value="${username}" placeholder="请在这里输入用户名">
+                        <input type="text" id="name" name="userName" placeholder="请在这里输入用户名">
                     </div>
                     <div class="form-item">
                         <span class="form-label tsl">用户密码</span>
-                        <input type="password" id="password" name="password">
+                        <input type="password" id="password" name="userPwd">
                     </div>
                     <div class="form-item">
                         <span class="form-label tsl">确认密码</span>
@@ -167,7 +169,7 @@
     </div>
 
 </div>
-
+<%@include file="include/footer.jsp"%>
 
 </body>
 </html>

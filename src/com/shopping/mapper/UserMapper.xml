@@ -19,6 +19,10 @@
 	</resultMap>
 
 	<select id="commonUserLogin" resultMap="BaseResultMap">
-		SELECT * FROM `user` AS u WHERE u.`userName` = #{username} AND u.`userPwd` = #{pwd} AND u.`role` = 0;
+		SELECT * FROM `user` AS u WHERE u.`userName` = #{username} AND u.`userPwd` = #{pwd} <!-- AND u.`role` = 0; -->
 	</select>
+	
+	<insert id="createUser">
+	    insert into `user` values(#{userId},#{userName},#{userPwd},#{role},#{userCreateDate})
+	</insert>
 </mapper>

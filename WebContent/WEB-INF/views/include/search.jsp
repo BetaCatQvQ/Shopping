@@ -4,14 +4,12 @@
 <%-- 首页搜索栏和Tmall图标 --%>
 <div class="header">
 	<div class="headerLayout workArea">
-
-		<%-- 图片logo --%>
-		<div class="logo">
-			<a href="${ctx}/home.action"> <img
-				src="/Shopping/img/fore/tmall-logo.png">
-			</a>
-		</div>
-
+        <%-- 图片logo --%>
+        <div class="logo">
+            <a href="${context}">
+                <img src="${ctx}/img/fore/tmall-logo.png">
+            </a>
+        </div>
 		<%-- 搜索框 --%>
 		<form class="mallSearch-input" action="${ctx}/search.action">
 			<input name="keywords" type="text" placeholder="搜索 天猫 商品/品牌/店铺">
@@ -35,16 +33,21 @@
 
 <%-- 分类信息栏 --%>
 <div class="main-nav">
-	<div class="workArea">
-		<span class="category-type"> <span
-			class="glyphicon glyphicon-th-list category-type-icon"></span> <span
-			class="category-type-text">商品分类</span>
-		</span> <span> <a href=""> <img
-				src="/Shopping/img/fore/tmall-shop.png">
-		</a> <a href=""> <img src="/Shopping/img/fore/tmall-international.png">
-		</a> <c:forEach items="${links}" var="link">
-				<a href="${link.link}">${link.text}</a>
-			</c:forEach>
-		</span>
-	</div>
+    <div class="workArea">
+        <span class="category-type">
+            <span class="glyphicon glyphicon-th-list category-type-icon"></span>
+            <span class="category-type-text">商品分类</span>
+        </span>
+        <span>
+            <a href="">
+                <img src="${ctx}/img/fore/tmall-shop.png">
+            </a>
+            <a href="">
+                <img src="${ctx}/img/fore/tmall-international.png">
+            </a>
+            <c:forEach items="${links}" var="link">
+                <a href="${link.link}">${link.text}</a>
+            </c:forEach>
+        </span>
+    </div>
 </div>

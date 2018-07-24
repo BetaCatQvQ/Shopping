@@ -1,5 +1,6 @@
 package com.shopping.service;
 
+<<<<<<< HEAD
 import java.util.Map;
 
 import com.shopping.entity.Page;
@@ -24,4 +25,5 @@ public interface ProductService {
 	 * @return 返回的是map集合
 	 */
 	public Page<Map<String, Object>> getProductListByCondition(SearchCondition sc);
+
 }

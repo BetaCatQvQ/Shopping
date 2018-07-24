@@ -11,7 +11,7 @@ import com.shopping.service.CategoryOneService;
 @Controller
 public class HomeController {
 	@Resource
-	private CategoryOneService coService;
+	CategoryOneService coService;
 
 	@RequestMapping("/home")
 	public String home(Model model) {

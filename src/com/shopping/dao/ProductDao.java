@@ -1,11 +1,9 @@
 package com.shopping.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.shopping.entity.Page;
 import com.shopping.entity.Product;
 import com.shopping.entity.SearchCondition;
 
@@ -20,9 +18,7 @@ public interface ProductDao {
 
 	/**
 	 * 根据id获取产品
-	 * 
-	 * @param id
-	 *            产品 Id
+	 * @param id 产品 Id
 	 * @return 产品
 	 */
 	Product getProductById(@Param("id") Long id);

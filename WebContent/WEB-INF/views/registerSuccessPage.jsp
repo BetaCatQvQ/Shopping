@@ -60,7 +60,10 @@
 <div class="registerSuccessMessage">
     <div class="alert alert-success">
         <span class="glyphicon glyphicon-ok-sign"></span>
-        恭喜注册成功
+        恭喜注册成功,正在跳转至首页,请稍候...
+        <script type="text/javascript">
+            window.location = "${ctx}/"
+        </script>
     </div>
 </div>
 <%@include file="include/footer.jsp" %>

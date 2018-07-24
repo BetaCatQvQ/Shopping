@@ -207,7 +207,10 @@
 div.productNumber {
 	color: #999999;
 }
-
+.productNumberSetting[disabled]{
+    opacity:1;
+    background: #fff;
+}
 span.productNumberSettingSpan {
 	border: 1px solid #999;
 	display: inline-block;
@@ -255,9 +258,19 @@ div.productNumber span.arrow {
 <script>
     var deleteOrder = false;
     var deleteOrderid = 0;
-
+    
     $(function () {
     	
+    	function change(oid,num,price){
+    		$("div[data-oid-total="+oid+"]").text("￥"+(num * price));
+    	}
+    	
+    	$(".productNumberSetting").on("change",function (){
+    		const oid = $(this).attr("data-oid");
+    		const num = $(this).val();
+    		const price = parseInt($("div[data-oid-price="+oid+"]").text().replace("￥",""));
+    		change(oid,num,price);
+    	});
     	
         $(".productNumberSetting").keyup(function () {
         	var stock = parseInt($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div").children(1).children(0).text());
@@ -269,7 +282,7 @@ div.productNumber span.arrow {
                 num = 1;
             if (num > stock)
                 num = stock;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val(num);
+            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
         });
         
         $(".increaseNumber").click(function () {
@@ -279,7 +292,7 @@ div.productNumber span.arrow {
             num++;
             if (num > stock)
                 num = stock;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num);
+            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
         });
        
        
@@ -290,7 +303,8 @@ div.productNumber span.arrow {
             --num;
             if (num <= 0)
                 num = 1;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num);
+            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
+ 
         });
     	
     	
@@ -409,7 +423,7 @@ div.productNumber span.arrow {
                         </td>
                         <td class="orderItemProductInfoPartTD">
                             <div class="orderListItemProductLinkOutDiv">
-                                <a href="foreproduct?pid=${oi.productType.product.productId}">${oi.productType.productTypeName}</a>
+                                <a href="/Shopping/product/${oi.productType.productTypeId}.action">${oi.productType.productTypeName}</a>
                                 <div class="orderListItemProductLinkInnerDiv">
                                     <img src="${ctx}/img/fore/creditcard.png" title="支持信用卡支付">
                                     <img src="${ctx}/img/fore/7day.png" title="消费者保障服务,承诺7天退货">
@@ -420,17 +434,17 @@ div.productNumber span.arrow {
                         <td valign="middle" class="orderItemProductInfoPartTD" width="100px">
 
                             <div class="orderListItemProductOriginalPrice">￥${oi.productType.price}</div>
-                            <div class="orderListItemProductPrice">￥${oi.productType.salePrice}</div>
+                            <div class="orderListItemProductPrice" data-oid-price="${oi.orderItemId }">￥${oi.productType.salePrice}</div>
 
                         </td>
                             <td valign="middle" class="orderListItemNumberTD orderItemOrderInfoPartTD" width="100px">
                                 <!-- 显示数量 -->
                                 <div class="productNumber" style="margin-top:20px;">
                                     <span data-p="p">
-                                        <span class="productNumberSettingSpan">
-                                            <input type="text" value="${oi.quantity }" class="productNumberSetting">
+                                        <span class="productNumberSettingSpan" >
+                                            <input type="text"  <c:if test="${oi.status !='0' }"> disabled </c:if> data-oid="${oi.orderItemId }" value="${oi.quantity }" class="productNumberSetting">
                                         </span>
-                                        <c:if test="${'0'=='0' }">
+                                        <c:if test="${oi.status=='0' }">
 	                                        <span class="arrow">
 	                                            <a class="increaseNumber" href="#nowhere">
 	                                                <span class="updown">
@@ -446,11 +460,11 @@ div.productNumber span.arrow {
 	                                        </span>
                                         </c:if>
                                     </span>
-                                    <span>库存:<span class="restQuantity">${oi.productType.restQuantity }</span></span>
+                                    <span><br>库存:<span class="restQuantity">${oi.productType.restQuantity }</span></span>
                                 </div>
                             </td>
                             <td valign="middle" width="120px" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD">
-                                <div class="orderListItemProductRealPrice">￥${oi.productType.salePrice * oi.quantity }</div>
+                                <div class="orderListItemProductRealPrice" data-oid-total="${oi.orderItemId }" >￥${oi.productType.salePrice * oi.quantity }</div>
                                 <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                             </td>
                             <td valign="middle" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">

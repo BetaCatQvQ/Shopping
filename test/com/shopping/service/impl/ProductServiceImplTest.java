@@ -6,11 +6,13 @@ import org.junit.Test;
 
 import com.shopping.entity.Page;
 import com.shopping.entity.SearchCondition;
+
 import com.shopping.service.ProductService;
 import com.shopping.util.SpringTool;
 
 public class ProductServiceImplTest {
 	private ProductService userService = SpringTool.getBean(ProductServiceImpl.class);
+
 
 	@Test
 	public void getProductListByCategoryThreeIdTest() {
