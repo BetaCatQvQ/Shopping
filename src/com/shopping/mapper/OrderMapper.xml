@@ -29,4 +29,7 @@
 	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
 	    where userId = #{id}
 	</select>
+	<insert id="createOrder">
+	    insert into Order values(#{orderId},#{user.userId},#{orderCreateDate})
+	</insert>
 </mapper>
