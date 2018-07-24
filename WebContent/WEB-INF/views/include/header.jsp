@@ -7,10 +7,10 @@
     <title>模仿天猫-前端</title>
 
     <%-- 引入JQ和Bootstrap--%>
-    <script src="/Shopping/js/jquery/2.0.0/jquery.min.js"></script>
-    <link href="/Shopping/assets/css/bootstrap.css" rel="stylesheet">
-    <script src="/Shopping/js/bootstrap/3.3.6/bootstrap.min.js"></script>
-    <link href="/Shopping/css/fore/style.css" rel="stylesheet">
+    <script src="${ctx}/js/jquery/2.0.0/jquery.min.js"></script>
+    <link href="${ctx}/assets/css/bootstrap.css" rel="stylesheet">
+    <script src="${ctx}/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+    <link href="${ctx}/css/fore/style.css" rel="stylesheet">
 
 </head>
 <body>

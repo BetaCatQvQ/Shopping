@@ -101,7 +101,7 @@
     <div class="headerCon">
         <div class="logo">
             <a href="${ctx }/home.action">
-                <img src="/Shopping/img/fore/tmallLogo.png" id="logo">
+                <img src="${ctx}/img/fore/tmallLogo.png" id="logo">
             </a>
         </div>
         <div class="fullSearchDiv">

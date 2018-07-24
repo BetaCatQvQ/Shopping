@@ -259,7 +259,7 @@
         });
 
         $("span.leaveMessageTextareaSpan").hide();
-        $("${ctx}/img.leaveMessageImg").click(function () {
+        $("img.leaveMessageImg").click(function () {
 
             $(this).hide();
             $("span.leaveMessageTextareaSpan").show();
@@ -281,7 +281,7 @@
 
 </script>
 <div class="buyPageDiv">
-    <form action="createOrder" method="post">
+    <form action="${ctx }/order/createOrder.action" method="post">
 
         <div class="buyFlow">
             <img class="pull-left" src="${ctx}/img/fore/simpleLogo.png">
@@ -296,11 +296,11 @@
                     <tr>
                         <td class="firstColumn">详细地址<span class="redStar">*</span></td>
 
-                        <td><textarea name="address" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌好吗，楼层和房间号等信息"></textarea></td>
+                        <td><textarea name="address" style="margin: 0px 0px 10px; width: 378px; height: 99px;" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌好吗，楼层和房间号等信息"></textarea></td>
                     </tr>
                     <tr>
                         <td>邮政编码</td>
-                        <td><input name="post" placeholder="如果您不清楚邮递区号，请填写000000" type="text"></td>
+                        <td><input name="post" placeholder="如果您不清楚邮递区号,请填写000000" type="text"></td>
                     </tr>
                     <tr>
                         <td>收货人姓名<span class="redStar">*</span></td>
@@ -317,8 +317,7 @@
         </div>
         <div class="productList">
             <div class="productListTip">确认订单信息</div>
-
-
+            <h3 style="color:red;">${msg }</h3>
             <table class="productListTable">
                 <thead>
                 <tr>
@@ -341,13 +340,14 @@
                 </tr>
                 </thead>
                 <tbody class="productListTableTbody">
-                <c:forEach items="${orderItems}" var="oi" varStatus="st">
-                    <tr class="orderItemTR">
-                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}/img/product/${oi.product_id}/1.jpg">
+                
+                <c:if test="${!empty item }">
+                     <tr class="orderItemTR">
+                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}${item.productTypeImagePath }">
                         </td>
                         <td class="orderItemProductInfo">
-                            <a href="foreproduct?pid=${oi.product_id}" class="orderItemProductLink">
-                                    ${oi.product.name}
+                            <a href="${ctx }/product/${item.productTypeId}.action" class="orderItemProductLink">
+                                    ${item.productTypeName}
                             </a>
 
                             <img src="${ctx}/img/fore/creditcard.png" title="支持信用卡支付">
@@ -360,19 +360,20 @@
                                 <%--<span class="orderItemProductPrice">￥<fmt:formatNumber type="number"--%>
                                 <%--value="${oi.product.price}"--%>
                                 <%--minFractionDigits="2"/></span>--%>
-                            <span>${oi.product.price}</span>
+                            <span>￥${item.salePrice}</span>
                         </td>
                         <td>
-                            <span class="orderItemProductNumber">${oi.number}</span>
+                            <span class="orderItemProductNumber" name="number">${number}</span>
+                            <input hidden value="${item.productTypeId }" name="productTypeId" />
+                            <input hidden value="${number }" name="number" />
                         </td>
                         <td>
                                 <%--<span class="orderItemUnitSum">--%>
                                 <%--￥<fmt:formatNumber type="number" value="${oi.product.price*oi.number}"--%>
                                 <%--minFractionDigits="2"/>--%>
                                 <%--</span>--%>
-                            <span>${oi.product.price*oi.number}</span>
+                            <span>${item.salePrice * number}</span>
                         </td>
-                        <c:if test="${st.count==1}">
                             <td rowspan="5" class="orderItemLastTD">
                                 <label class="orderItemDeliveryLabel">
                                     <input type="radio" value="" checked="checked">
@@ -384,11 +385,58 @@
                                 </select>
 
                             </td>
-                        </c:if>
+
+                    </tr>
+                </c:if>
+                
+                <c:if test="${!empty items}">
+                <c:forEach items="${items}" var="item" varStatus="st">
+                   <tr class="orderItemTR">
+                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}${item.productType.productTypeImagePath }">
+                        </td>
+                        <td class="orderItemProductInfo">
+                            <a href="${ctx }/product/${item.productType.productTypeId}.action" class="orderItemProductLink">
+                                    ${item.productType.productTypeName}
+                            </a>
+
+                            <img src="${ctx}/img/fore/creditcard.png" title="支持信用卡支付">
+                            <img src="${ctx}/img/fore/7day.png" title="消费者保障服务,承诺7天退货">
+                            <img src="${ctx}/img/fore/promise.png" title="消费者保障服务,承诺如实描述">
+
+                        </td>
+                        <td>
+
+                                <%--<span class="orderItemProductPrice">￥<fmt:formatNumber type="number"--%>
+                                <%--value="${oi.product.price}"--%>
+                                <%--minFractionDigits="2"/></span>--%>
+                            <span>${item.productType.price}</span>
+                        </td>
+                        <td>
+                            <span class="orderItemProductNumber">${item.quantity}</span>
+                        </td>
+                        <td>
+                                <%--<span class="orderItemUnitSum">--%>
+                                <%--￥<fmt:formatNumber type="number" value="${oi.product.price*oi.number}"--%>
+                                <%--minFractionDigits="2"/>--%>
+                                <%--</span>--%>
+                            <span>${item.productType.price * item.quantity}</span>
+                        </td>
+                            <td rowspan="5" class="orderItemLastTD">
+                                <label class="orderItemDeliveryLabel">
+                                    <input type="radio" value="" checked="checked">
+                                    普通配送
+                                </label>
+
+                                <select class="orderItemDeliverySelect" class="form-control">
+                                    <option>快递 免邮费</option>
+                                </select>
+
+                            </td>
 
                     </tr>
                 </c:forEach>
-
+                </c:if>
+                
                 </tbody>
 
             </table>
@@ -401,7 +449,7 @@
                     <span class="leaveMessageTextareaSpan">
 					<textarea name="user_message" class="leaveMessageTextarea"></textarea>
 					<div>
-						<span>还可以输入200个字符</span>
+						<span>最多可输入200个字符</span>
 					</div>
 				</span>
                 </div>

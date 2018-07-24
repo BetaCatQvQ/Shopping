@@ -22,6 +22,10 @@ public class Order {
 	 * Order item list 
 	 */
 	private List<OrderItem> orderItems;
+	/**
+	 * Total price 
+	 */
+	private Float total;
 
 	// getter --- setter
 	public BigInteger getOrderId() {
@@ -54,6 +58,14 @@ public class Order {
 
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
+	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
 	}
 
 }

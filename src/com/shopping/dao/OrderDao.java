@@ -10,5 +10,8 @@ import com.shopping.entity.Order;
 public interface OrderDao {
 	
 	List<Order> findOrderByUserId(@Param("id") BigInteger id);
+
+	Order findOrderById(BigInteger oId);
 	
+	Order createOrder(Order order);
 }

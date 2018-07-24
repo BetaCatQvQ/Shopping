@@ -108,10 +108,10 @@
     <div class="workArea">
         <div class="tmall-ensure">
             <a href="#nowhere">
-                <img src="/Shopping/img/fore/footer1.png">
-                <img src="/Shopping/img/fore/footer2.png">
-                <img src="/Shopping/img/fore/footer3.png">
-                <img src="/Shopping/img/fore/footer4.png">
+                <img src="${ctx}/img/fore/footer1.png">
+                <img src="${ctx}/img/fore/footer2.png">
+                <img src="${ctx}/img/fore/footer3.png">
+                <img src="${ctx}/img/fore/footer4.png">
             </a>
         </div>
 
@@ -148,7 +148,7 @@
             </dl>
             <dl>
                 <dt><span>手机天猫</span></dt>
-                <dd><a href="#nowhere"><img src="/Shopping/img/fore/qr-code.png"></a></dd>
+                <dd><a href="#nowhere"><img src="${ctx}/img/fore/qr-code.png"></a></dd>
             </dl>
         </div>
 
@@ -156,7 +156,7 @@
     </div>
 
     <div class="workArea">
-        <img src="/Shopping/img/fore/tmall-cat.png" class="tmall-cat">
+        <img src="${ctx}/img/fore/tmall-cat.png" class="tmall-cat">
     </div>
     <div class="tmall-copyright">
         <div class="workArea">
@@ -204,12 +204,12 @@
                     <span>互联网违法和不良信息举报电话：0571-81683755 blxxjb@alibaba-inc.com</span>
                     <br/>
                     互联网药品信息服务资质证书编号：<a href="#nowhere">浙-（经营性）-2017-0005</a>
-                    <a href="#nowhere"><img src="/Shopping/img/fore/police-icon.png">浙公网安备 33010002000120号</a>
+                    <a href="#nowhere"><img src="${ctx}/img/fore/police-icon.png">浙公网安备 33010002000120号</a>
                     <span>（浙）网械平台备字[2018]第00002号</span>
                     <div class="copyRightYear">© 2003-2018 TMALL.COM 版权所有</div>
                     <div>
-                        <img src="/Shopping/img/fore/copyRight1.jpg">
-                        <img src="/Shopping/img/fore/copyRight2.jpg">
+                        <img src="${ctx}/img/fore/copyRight1.jpg">
+                        <img src="${ctx}/img/fore/copyRight2.jpg">
                     </div>
                 </div>
             </div>

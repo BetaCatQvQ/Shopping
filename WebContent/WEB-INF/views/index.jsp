@@ -22,7 +22,7 @@
 .nav-item {
 	padding-left: 30px;
 	positon: relative;
-	line-height: 31.2px;
+	line-height: 36px;
 	width: 200px;
 	color: #FFFFFF;
 	font-size: 14px;
