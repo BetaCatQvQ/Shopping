@@ -226,7 +226,7 @@
             </tr>
             <tr>
                 <td>收货信息：</td>
-                <%--<td>${order.address}，${order.receiver}， ${order.mobile}，${order.post} </td> --%>
+                <td>${address.address}，${address.userName}， ${address.phone}，${address.postalcode} </td>
             </tr>
             <tr>
                 <td>成交时间：</td>
