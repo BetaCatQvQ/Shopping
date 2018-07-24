@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" isELIgnored="false" %>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 
 
 <%-- 顶部导航栏 --%>
 <nav id="site-nav" role="navigation">
-    <div class="workArea">
+	<div class="workArea">
 
-        <%-- 导航栏左半部分
+		<%-- 导航栏左半部分
          如果取不到用户信息则显示如下： --%>
         <c:if test="${empty sessionScope.common_user}">
             <span>喵，欢迎来天猫</span>
@@ -21,8 +21,9 @@
         </c:if>
 
 
-        <%-- 导航栏右半部分：
+		<%-- 导航栏右半部分：
              使用Bootstrap的pull-right类 --%>
+<<<<<<< HEAD
         <span class="pull-right">
             <a href="${ctx }/order.action">我的订单</a>
             <a href="cart">
@@ -31,4 +32,13 @@
             </a>
         </span>
     </div>
+=======
+		<span class="pull-right"> <a href="${ctx }/common/order.action">我的订单</a> <a
+			href="${ctx }/sc/common/cart.action"> <span
+				class="glyphicon glyphicon-shopping-cart redColor"></span> 购物车<strong
+				id="cartTotalItemNumber" style="color: #ff0036;">${shoppingCarNum}</strong>件
+		</a>
+		</span>
+	</div>
+>>>>>>> 321d01f818697788897939feda38b5d813fff1b5
 </nav>

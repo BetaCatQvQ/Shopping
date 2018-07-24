@@ -177,7 +177,7 @@ padding:0;
                     </div>
                 </div>
                 <div class="login-title">密码登录</div>
-                <form action="${ctx }/user/login.action" class="loginForm" method="post">
+                <form action="${ctx }/user/beginLogin.action" class="loginForm" method="post">
                     <div class="field">
                         <span class="loginInputIcon">
 					        <span class=" glyphicon glyphicon-user"></span>

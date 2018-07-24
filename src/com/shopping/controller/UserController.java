@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shopping.entity.User;
+import com.shopping.service.ShoppingCartService;
 import com.shopping.service.UserService;
 import com.shopping.util.HttpVal;
 
@@ -21,38 +22,41 @@ public class UserController {
 	@Resource
 	private UserService uService;
 	
+	@Resource
+	private ShoppingCartService scService;
 
-	@GetMapping(value = "/login")
-	public String gotoLogin() {
+	@RequestMapping("/login")
+	public String login() {
 		return "loginPage";
+	}
+
+	@RequestMapping("/beginLogin")
+	public String commonLogin(HttpSession session, User user) {
+		// 查询用户放入session
+		User newUser = uService.commonUserLogin(user.getUserName(), user.getUserPwd());
+		session.setAttribute(HttpVal.SESSION_COMMON_USER_KEY, newUser);
+		// 查询购物车里的商品项的数量，然后放入session
+		if (newUser != null) {
+			Integer shoppingCarNum = scService.getUserShoppingCarCount(newUser.getUserId());
+			session.setAttribute(HttpVal.SHOPPING_CAR_COUNT_KEY, shoppingCarNum);
+		}
+		return "redirect:/home.action";
+	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/home.action";
 	}
 	
 	@GetMapping(value = "/register")
 	public String gotoRegister() {
 		return "registerPage";
 	}
-
-	@PostMapping(value = "/login")
-	public String commonLogin(HttpSession session,User user,Model model) {
-		Optional<User> userOpt = Optional.ofNullable(uService.commonUserLogin(user.getUserName(), user.getUserPwd()));
-		userOpt.ifPresent(userItem ->{
-			session.setAttribute(HttpVal.SESSION_COMMON_USER_KEY, userItem);
-		});
-		if (!userOpt.isPresent()) {
-			model.addAttribute("msg", "用户名或密码不正确");
-		}
-		return userOpt.isPresent()?"redirect:/home.action":"loginPage";
-	}
 	
 	@PostMapping(value = "/register")
 	public String register(User user,HttpSession session) {
 		session.setAttribute(HttpVal.SESSION_COMMON_USER_KEY, uService.register(user));
 		return "registerSuccessPage";
-	}
-	
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
 	}
 }

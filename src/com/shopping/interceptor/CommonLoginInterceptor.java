@@ -18,12 +18,13 @@ public class CommonLoginInterceptor extends HandlerInterceptorAdapter {
 		response.setContentType("text/html;utf-8");
 		response.setCharacterEncoding("utf-8");
 		User userInfo = (User) request.getSession().getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
-		
+
 		if (userInfo == null) {
+			String objectName = request.getServletContext().getContextPath();
 			PrintWriter out = response.getWriter();
 			out.print("<script type=\"text/javascript\">");
 			out.print("alert('ÇëµÇÂ¼£¡');");
-			out.print("location.href='../../userInfo/goLogin.action';");
+			out.print("location.href='" + objectName + "/user/login.action';");
 			out.print("</script>");
 			closeWriter(out);
 			return false;
