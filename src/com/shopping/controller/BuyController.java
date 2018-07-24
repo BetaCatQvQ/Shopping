@@ -28,8 +28,6 @@ public class BuyController {
 	@Resource
 	OrderItemService oiService;
 
-
-
 	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
 			             @PathVariable("number") Integer number,
@@ -38,7 +36,7 @@ public class BuyController {
 		if (ptOptional.isPresent()) {
 			model.addAttribute("item", ptOptional.get());
 			if (ptOptional.get().getRestQuantity() < number) {
-				model.addAttribute("msg", "ÉÌÆ·ÊýÁ¿³¬³ö¿â´æ,ÇëÖØÐÂÑ¡Ôñ!");
+				model.addAttribute("msg", "ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½!");
 				number = 1;
 			}
 			model.addAttribute("number", number);
