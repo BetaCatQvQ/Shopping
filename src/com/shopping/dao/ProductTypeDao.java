@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import com.shopping.entity.ProductType;
 
 public interface ProductTypeDao {
-
-
 	ProductType findById(@Param("id") Long id);
 
 	List<ProductType> findByProductId(@Param("id") BigInteger id);

@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 			total += item.getProductType().getSalePrice() * item.getQuantity();
 		}
 		order.setTotal(total);
-		//oDao.createOrder(order);
+		oDao.createOrder(order);
 		return order;
 	}
 	
