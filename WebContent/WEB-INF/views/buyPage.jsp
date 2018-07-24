@@ -281,7 +281,7 @@
 
 </script>
 <div class="buyPageDiv">
-    <form action="${ctx }/order/createOrder.action" method="post">
+    <form action="${ctx }/common/order/createOrder.action" method="post">
 
         <div class="buyFlow">
             <img class="pull-left" src="${ctx}/img/fore/simpleLogo.png">

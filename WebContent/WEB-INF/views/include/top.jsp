@@ -23,7 +23,7 @@
 
 		<%-- 导航栏右半部分：
              使用Bootstrap的pull-right类 --%>
-		<span class="pull-right"> <a href="${ctx }/order.action">我的订单</a> <a
+		<span class="pull-right"> <a href="${ctx }/common/order.action">我的订单</a> <a
 			href="${ctx }/sc/common/cart.action"> <span
 				class="glyphicon glyphicon-shopping-cart redColor"></span> 购物车<strong
 				id="cartTotalItemNumber" style="color: #ff0036;">${shoppingCarNum}</strong>件

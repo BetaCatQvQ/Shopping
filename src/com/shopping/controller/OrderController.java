@@ -22,7 +22,7 @@ import com.shopping.service.ProductTypeService;
 import com.shopping.util.HttpVal;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/common/order")
 public class OrderController {
 	
 	@Resource
