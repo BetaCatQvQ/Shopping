@@ -58,7 +58,7 @@ public class OrderController {
 		item.setProductType(ptService.findById(productTypeId));
 		item.setQuantity(number);
 		item.setStatus(0);
-		item.setRemark(message);
+		item.setRemark(message==null?"":message);
 		List<OrderItem> items = new ArrayList<>();
 		items.add(item);
 		model.addAttribute("order", oService.createOrder(user, items));

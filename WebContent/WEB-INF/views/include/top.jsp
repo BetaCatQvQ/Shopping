@@ -23,22 +23,11 @@
 
 		<%-- 导航栏右半部分：
              使用Bootstrap的pull-right类 --%>
-<<<<<<< HEAD
-        <span class="pull-right">
-            <a href="${ctx }/order.action">我的订单</a>
-            <a href="cart">
-                <span class="glyphicon glyphicon-shopping-cart redColor"></span>
-                购物车<strong id="cartTotalItemNumber">${cartTotalItemNumber}</strong>件
-            </a>
-        </span>
-    </div>
-=======
 		<span class="pull-right"> <a href="${ctx }/common/order.action">我的订单</a> <a
-			href="${ctx }/sc/common/cart.action"> <span
+			href="${ctx }/order.action"> <span
 				class="glyphicon glyphicon-shopping-cart redColor"></span> 购物车<strong
 				id="cartTotalItemNumber" style="color: #ff0036;">${shoppingCarNum}</strong>件
 		</a>
 		</span>
 	</div>
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
 </nav>

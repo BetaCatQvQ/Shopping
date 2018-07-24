@@ -41,9 +41,6 @@ div.searchProducts {
 }
 </style>
 
-<<<<<<< HEAD
-<style>
-=======
 <div class="workArea">
     <div class="searchProducts">
         <div class="filter">
@@ -66,7 +63,6 @@ div.searchProducts {
         <div style="clear: both;"></div>
 
         <style>
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
             .product {
                 margin-top: 40px;
                 margin-right: 20px;
@@ -82,172 +78,6 @@ div.searchProducts {
                 z-index: 1;
             }
 
-<<<<<<< HEAD
-            .product-hover .product-iWrap, .product:hover .product-iWrap {
-                height: auto;
-                margin: -3px;
-                border: 4px solid #ff0036;
-                border-radius: 0;
-                -webkit-transition: border-color .2s ease-in;
-                -moz-transition: border-color .2s ease-in;
-                -ms-transition: border-color .2s ease-in;
-                -o-transition: border-color .2s ease-in;
-                transition: border-color .2s ease-in;
-            }
-
-            .product:hover {
-                overflow: visible;
-                z-index: 3;
-                background: #fff;
-            }
-
-            .product-iWrap {
-                min-height: 98%;
-                width: 210px;
-                position: absolute;
-                background-color: #fff;
-                margin: 0;
-                padding: 4px 4px 0;
-                font-size: 12px;
-                border: 1px solid #f5f5f5;
-                border-radius: 3px;
-            }
-
-            .productImg-wrap a, .productImg-wrap img {
-                max-width: 100%;
-                max-height: 210px;
-            }
-
-            .productPrice {
-                font-family: arial, verdana, sans-serif !important;
-                color: #ff0036;
-                font-size: 14px;
-                height: 30px;
-                line-height: 30px;
-                margin: 0 0 5px;
-                letter-spacing: normal;
-                overflow: inherit !important;
-                white-space: nowrap;
-            }
-
-            .productPrice em {
-                float: left;
-                font-family: arial;
-                font-weight: 400;
-                font-size: 20px;
-                color: #ff0036;
-            }
-
-            .productPrice em b {
-                margin-right: 2px;
-                font-weight: 700;
-                font-size: 14px;
-                vertical-align: middle;
-            }
-
-            .productTitle {
-                display: block;
-                color: #666;
-                height: 14px;
-                line-height: 12px;
-                margin-bottom: 3px;
-                word-break: break-all;
-                position: relative;
-                overflow: hidden;
-
-            }
-
-            .productTitle a {
-                color: #333;
-                font-family: 微软雅黑;
-                line-height: 14px;
-                font-size: 12px;
-            }
-
-            .productStatus {
-                position: relative;
-                height: 33px;
-                border: none;
-                border-top: 1px solid #eee;
-                margin-bottom: 0;
-                color: #999;
-                display: block;
-                overflow: hidden;
-            }
-
-            .productStatus em {
-                color: #b57c5b;
-            }
-
-            .productStatus a, .productStatus em {
-                margin-top: -8px;
-                font-family: arial;
-                font-size: 12px;
-                font-weight: 700;
-            }
-
-            em {
-                font-style: normal;
-            }
-
-            .productStatus span {
-                float: left;
-                display: inline-block;
-                border-right: 1px solid #eee;
-                width: 39%;
-                padding: 10px 1px;
-                margin-right: 6px;
-                line-height: 12px;
-                text-align: left;
-                white-space: nowrap;
-            }
-
-            .productStatus a {
-                color: #38b;
-            }
-
-            .productStatus .ww-light {
-                border-right: none;
-                width: 11%;
-                text-align: center;
-            }
-
-            .productStatus .ww-light a {
-                background: url(/img/fore/ww-online.png) center center no-repeat !important;
-                background-size: 16px !important;
-                position: relative;
-                width: 16px;
-                height: 16px;
-                margin-top: -3px;
-                overflow: hidden;
-                display: inline-block;
-                vertical-align: text-bottom;
-            }
-        </style>
-
-<div class="workArea">
-    <div class="searchProducts">
-        <div class="filter">
-            <a class="fSort"
-               <c:if test="${'all'==param.sort||empty param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=all&keyword=${param.keyword}">综合</a>
-            <a class="fSort"
-               <c:if test="${'reviewCount'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=reviewCount&keyword=${param.keyword}">人气</a>
-            <a class="fSort"
-               <c:if test="${'date'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=date&keyword=${param.keyword}">新品</a>
-            <a class="fSort"
-               <c:if test="${'sale'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=sale&keyword=${param.keyword}">销量</a>
-            <a class="fSort"
-               <c:if test="${'price'==param.sort}">class="fSort-cur"</c:if>
-               href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
-        </div>
-        <div style="clear: both;"></div>
-        
-        <c:forEach items="${requestScope.page.data}" var="p">
-=======
 .product-hover .product-iWrap, .product:hover .product-iWrap {
 	height: auto;
 	margin: -3px;
@@ -411,7 +241,6 @@ em {
 		</div>
 		<div style="clear: both;"></div>
         <c:forEach items="${products}" var="p">
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
             <div class="product">
                 <div class="product-iWrap">
                     <div class="productImg-wrap">
@@ -477,32 +306,6 @@ em {
 }
 </style>
 
-<<<<<<< HEAD
-        <style>
-            .nrt {
-                background: url(/img/fore/no-product.png) 35px center no-repeat #fff8f6;
-                color: #595959;
-                margin-bottom: 10px;
-                padding: 20px 0 20px 123px;
-                line-height: 27px;
-                font-size: 14px;
-                border: 1px solid #F7EAE7;
-                margin-top: 25px;
-            }
-        </style>
-
-        <c:if test="${empty requestScope.page.data}">
-            <div class="nrt">
-                <p>
-                    喵~没找到与
-                    <em>" ${param.keyword} "</em>
-                    相关的商品哦。
-                </p>
-            </div>
-        </c:if>
-        <div style="clear:both"></div>
-    </div>
-=======
 		<c:if test="${empty requestScope.page.data}">
 			<div class="nrt">
 				<p>
@@ -512,7 +315,6 @@ em {
 		</c:if>
 		<div style="clear: both"></div>
 	</div>
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
 </div>
 
 <%@include file="include/footer.jsp"%>

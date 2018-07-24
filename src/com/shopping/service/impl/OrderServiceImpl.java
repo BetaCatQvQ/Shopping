@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dao.OrderDao;
+import com.shopping.dao.OrderItemDao;
 import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
 import com.shopping.entity.User;
@@ -20,6 +21,9 @@ import com.shopping.util.SnowFlake;
 public class OrderServiceImpl implements OrderService {
 	@Resource
 	private OrderDao oDao;
+	
+	@Resource
+	private OrderItemDao oiDao;
 
 	@Override
 	public List<Order> findOrderByUserId(BigInteger id) {
@@ -44,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		order.setTotal(total);
 		oDao.createOrder(order);
+		orderItems.forEach(item ->{
+			oiDao.createOrderItem(order.getOrderId().longValue(), item, 0);
+		});
 		return order;
 	}
 	

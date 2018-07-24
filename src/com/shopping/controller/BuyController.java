@@ -11,15 +11,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shopping.entity.ProductType;
+import com.shopping.service.OrderItemService;
+import com.shopping.service.OrderService;
 import com.shopping.service.ProductTypeService;
 
 @Controller
 @RequestMapping("/buy")
 public class BuyController {
-	
+
 	@Resource
 	ProductTypeService ptService;
-	
+
+	@Resource
+	OrderService oService;
+
+	@Resource
+	OrderItemService oiService;
+
+
+
 	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
 			             @PathVariable("number") Integer number,
@@ -36,10 +46,12 @@ public class BuyController {
 		}
 		return "buyPage";
 	}
-	
+
 	@GetMapping("/comfirmed")
 	public String comfirmed(Long orderId) {
-		
+		if (orderId != null) {
+
+		}
 		return null;
 	}
 }

@@ -12,11 +12,7 @@ public class Page<T> {
 	 */
 	private Integer pageCount = 30;
 	/**
-<<<<<<< HEAD
-	 * 查询开始行
-=======
 	 * 查询起始行
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
 	 */
 	private Integer startRow;
 	/**
@@ -55,17 +51,14 @@ public class Page<T> {
 	}
 
 	/**
-	 * 
-	 * @param pageNo页号
+	 *
+	 * @param pageNo页锟斤拷
 	 */
 	public Page(Integer pageNo) {
 		super();
-<<<<<<< HEAD
-=======
 		if (pageNo == null) {
 			pageNo = 1;
 		}
->>>>>>> 321d01f818697788897939feda38b5d813fff1b5
 		this.pageNo = pageNo;
 		this.startRow = (pageNo - 1) * pageCount;
 	}

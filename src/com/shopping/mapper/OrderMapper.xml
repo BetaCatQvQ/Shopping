@@ -30,6 +30,6 @@
 	    where userId = #{id}
 	</select>
 	<insert id="createOrder">
-	    insert into Order values(#{orderId},#{user.userId},#{orderCreateDate})
+	    insert into `order` values(#{orderId},#{user.userId},#{orderCreateDate})
 	</insert>
 </mapper>
