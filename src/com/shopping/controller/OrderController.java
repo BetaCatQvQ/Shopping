@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shopping.entity.OrderItem;
+import com.shopping.entity.ShippingAddress;
 import com.shopping.entity.User;
 import com.shopping.service.OrderService;
 import com.shopping.service.ProductTypeService;
 import com.shopping.util.HttpVal;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/common/order")
 public class OrderController {
 	
 	@Resource
@@ -44,8 +45,9 @@ public class OrderController {
 	
 	@PostMapping("/createOrder")
 	public String createOrder(String message,
-						      BigInteger productTypeId, 
+						      Long productTypeId, 
 							  Integer number,
+							  ShippingAddress address,
 							  HttpSession session,
 							  Model model) {
 		User user = (User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
@@ -53,13 +55,14 @@ public class OrderController {
 			return "redirect:/user/login.action";
 		}
 		OrderItem item = new OrderItem();
-		item.setProductType(ptService.findById(productTypeId.longValue()));
+		item.setProductType(ptService.findById(productTypeId));
 		item.setQuantity(number);
 		item.setStatus(0);
-		item.setRemark(message);
+		item.setRemark(message==null?"":message);
 		List<OrderItem> items = new ArrayList<>();
 		items.add(item);
 		model.addAttribute("order", oService.createOrder(user, items));
+		model.addAttribute("address", address);
 		return "confirmPay";
 	}
 	

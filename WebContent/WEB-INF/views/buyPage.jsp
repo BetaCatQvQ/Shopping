@@ -281,7 +281,7 @@
 
 </script>
 <div class="buyPageDiv">
-    <form action="${ctx }/order/createOrder.action" method="post">
+    <form action="${ctx }/common/order/createOrder.action" method="post">
 
         <div class="buyFlow">
             <img class="pull-left" src="${ctx}/img/fore/simpleLogo.png">
@@ -296,19 +296,19 @@
                     <tr>
                         <td class="firstColumn">详细地址<span class="redStar">*</span></td>
 
-                        <td><textarea name="address" style="margin: 0px 0px 10px; width: 378px; height: 99px;" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌好吗，楼层和房间号等信息"></textarea></td>
+                        <td><textarea name="address" style="margin: 0px 0px 10px; width: 378px; height: 99px;" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌号码，楼层和房间号等信息"></textarea></td>
                     </tr>
                     <tr>
                         <td>邮政编码</td>
-                        <td><input name="post" placeholder="如果您不清楚邮递区号,请填写000000" type="text"></td>
+                        <td><input name="postalcode" placeholder="如果您不清楚邮递区号,请填写000000" type="text"></td>
                     </tr>
                     <tr>
                         <td>收货人姓名<span class="redStar">*</span></td>
-                        <td><input name="receiver" placeholder="长度不超过25个字符" type="text"></td>
+                        <td><input name="userName" placeholder="长度不超过25个字符" type="text"></td>
                     </tr>
                     <tr>
                         <td>手机号码 <span class="redStar">*</span></td>
-                        <td><input name="mobile" placeholder="请输入11位手机号码" type="text"></td>
+                        <td><input name="phone" placeholder="请输入11位手机号码" type="text"></td>
                     </tr>
                 </table>
 
@@ -372,7 +372,7 @@
                                 <%--￥<fmt:formatNumber type="number" value="${oi.product.price*oi.number}"--%>
                                 <%--minFractionDigits="2"/>--%>
                                 <%--</span>--%>
-                            <span>${item.salePrice * number}</span>
+                            <span>￥${item.salePrice * number}</span>
                         </td>
                             <td rowspan="5" class="orderItemLastTD">
                                 <label class="orderItemDeliveryLabel">

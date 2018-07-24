@@ -13,5 +13,5 @@ public interface OrderDao {
 
 	Order findOrderById(BigInteger oId);
 	
-	Order createOrder(Order order);
+	void createOrder(Order order);
 }
