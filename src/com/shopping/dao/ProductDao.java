@@ -1,9 +1,11 @@
 package com.shopping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.shopping.entity.Page;
 import com.shopping.entity.Product;
 import com.shopping.entity.SearchCondition;
 

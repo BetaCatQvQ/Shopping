@@ -1,6 +1,5 @@
 package com.shopping.service;
 
-<<<<<<< HEAD
 import java.util.Map;
 
 import com.shopping.entity.Page;
