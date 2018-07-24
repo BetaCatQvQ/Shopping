@@ -20,4 +20,19 @@
 		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
 	</resultMap>
 	
+	<select id="getUserShoppingCarCount" resultType="Integer">
+		SELECT COUNT(*) AS `shoppingCarNum` FROM `shoppingcart`
+		WHERE `userId` = #{userId}
+	</select>
+	
+	<select id="getUserShoppingCar" resultMap="FullResultMap">
+		SELECT * FROM `shoppingcart` AS sc
+		INNER JOIN `producttype` AS pt ON sc.`productTypeId` = pt.`productTypeId`
+		WHERE `userId` = #{userId}
+	</select>
+	
+	<delete id="delShoppingCart">
+		DELETE FROM `shoppingcart` WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
+	</delete>
+	
 </mapper>

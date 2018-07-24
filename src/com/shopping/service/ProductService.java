@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.shopping.entity.Page;
 import com.shopping.entity.Product;
+import com.shopping.entity.SearchCondition;
 
 public interface ProductService {
 
@@ -22,5 +23,5 @@ public interface ProductService {
 	 * @param cthId
 	 * @return 返回的是map集合
 	 */
-	public Page<Map<String, Object>> getProductListByCategoryThreeId(Integer cthId, Page<Map<String, Object>> page);
+	public Page<Map<String, Object>> getProductListByCondition(SearchCondition sc);
 }

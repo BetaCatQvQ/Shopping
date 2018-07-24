@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.shopping.entity.Page;
 import com.shopping.entity.Product;
+import com.shopping.entity.SearchCondition;
 
 public interface ProductDao {
 	/**
@@ -15,7 +16,7 @@ public interface ProductDao {
 	 * @param categoryOneId
 	 * @return 产品列表
 	 */
-	public List<Product> getProductListByCategoryOneId(@Param("coId") Integer categoryOneId);
+	public List<Map<String,Object>> getProductListByCategoryOneId(@Param("coId") Integer categoryOneId);
 
 	/**
 	 * 根据id获取产品
@@ -27,11 +28,12 @@ public interface ProductDao {
 	Product getProductById(@Param("id") Long id);
 
 	/**
-	 * 通过三级分类编号查询商品
+	 * 通过条件查询商品
 	 * 
-	 * @param categoryOneId
-	 * @return 产品列表
+	 * @param categoryThreeId
+	 * @param page
+	 * @return
 	 */
-	public List<Map<String, Object>> getProductListByCategoryThreeId(@Param("cthId") Integer categoryThreeId,
+	public List<Map<String, Object>> getProductListByCondition(@Param("sc") SearchCondition sc,
 			@Param("page") Page<Map<String, Object>> page);
 }

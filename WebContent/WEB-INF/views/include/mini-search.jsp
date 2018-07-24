@@ -100,13 +100,13 @@
 <div class="workArea">
     <div class="headerCon">
         <div class="logo">
-            <a href="/home">
+            <a href="${ctx}/home.action">
                 <img src="/Shopping/img/fore/tmallLogo.png" id="logo">
             </a>
         </div>
         <div class="fullSearchDiv">
-            <form class="searchFrom" action="searchProduct">
-                <input type="text" value="${param.keyword}" placeholder="搜索 天猫 商品/品牌/店铺" name="keyword">
+            <form class="searchFrom" action="${ctx}/search.action">
+                <input type="text" value="${param.keywords}" placeholder="搜索 天猫 商品/品牌/店铺" name="keywords">
                 <button class="searchButton" type="submit">搜天猫</button>
             </form>
             <div>

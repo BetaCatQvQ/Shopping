@@ -10,11 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.shopping.entity.Order;
 import com.shopping.entity.User;
 import com.shopping.service.OrderService;
 import com.shopping.util.HttpVal;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 @Controller
 @RequestMapping("/order")

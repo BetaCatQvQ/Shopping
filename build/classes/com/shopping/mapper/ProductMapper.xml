@@ -28,9 +28,12 @@
 			resultMap="com.shopping.dao.ProductTypeDao.BaseResultMap" />
 	</resultMap>
 	
-	<select id="getProductListByCategoryOneId" resultMap="BaseResultMap">
-		SELECT * FROM `product` 
-		WHERE `productId`  IN (
+	<select id="getProductListByCategoryOneId" resultType="Map">
+		SELECT pt.`productTypeId`,p.`productName`,MIN(pt.`price`) AS price , MIN(pimg.`productImagePath`) AS productImagePath
+		FROM `product` AS p
+		INNER JOIN `productimage` AS pimg ON p.`productId` = pimg.`productId`
+		INNER JOIN `producttype` AS pt ON p.`productId` = pt.`productId`
+		WHERE p.`productId`  IN (
 			SELECT p.`productId`
 			FROM `categoryone` AS co
 			INNER JOIN `categorytwo` AS ct ON co.`categoryOneId` = ct.`categoryOneId`
@@ -41,7 +44,10 @@
 			WHERE oi.`status` >= 1 AND co.`categoryOneId` = #{coId}
 			GROUP BY p.`productId`
 			ORDER BY COUNT(*) DESC
-		)LIMIT 0,5
+		)
+		GROUP BY p.`productId`
+		ORDER BY p.`productId`
+		LIMIT 0,5
 	</select>
 
 	<select id="getProductById" resultMap="SuperFullResultMap">
@@ -50,7 +56,7 @@
 		where p.productId = #{id}
 	</select>
 	
-	<select id="getProductListByCategoryThreeId" resultType="Map">
+	<select id="getProductListByCondition" resultType="Map">
 		SELECT `p`.`categoryThreeId`,`p`.`productName`,`pi`.`productImagePath`,COUNT(*) AS `salesVolume`,`minPriceTable`.`minPrice`,`minPriceTable`.`productTypeId`
 		FROM `product` AS `p`
 		INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
@@ -68,8 +74,11 @@
 			GROUP BY `pt`.`productId`
 		) AS `minPriceTable` ON `p`.`productId` = `minPriceTable`.`productId`
 		where `oi`.`status` >= 1
-		<if test="cthId != null">
-			AND `p`.`categoryThreeId` = #{cthId}
+		<if test="sc.cthId != -1">
+			AND `p`.`categoryThreeId` = #{sc.cthId}
+		</if>
+		<if test="sc.keywords != ''">
+			AND `p`.`productName` LIKE #{sc.keywords}
 		</if>
 		
 		GROUP BY `p`.`productId`

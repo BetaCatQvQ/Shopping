@@ -222,12 +222,12 @@
         $("img.cartProductItemIfSelected").click(function () {
             var selectit = $(this).attr("selectit")
             if ("selectit" == selectit) {
-                $(this).attr("src", "img/fore/cartNotSelected.png");
+                $(this).attr("src", "${ctx}/img/fore/cartNotSelected.png");
                 $(this).attr("selectit", "false")
                 $(this).parents("tr.cartProductItemTR").css("background-color", "#fff");
             }
             else {
-                $(this).attr("src", "img/fore/cartSelected.png");
+                $(this).attr("src", "${ctx}/img/fore/cartSelected.png");
                 $(this).attr("selectit", "selectit")
                 $(this).parents("tr.cartProductItemTR").css("background-color", "#FFF8E1");
             }
@@ -238,19 +238,19 @@
         $("img.selectAllItem").click(function () {
             var selectit = $(this).attr("selectit")
             if ("selectit" == selectit) {
-                $("img.selectAllItem").attr("src", "img/fore/cartNotSelected.png");
+                $("img.selectAllItem").attr("src", "${ctx}/img/fore/cartNotSelected.png");
                 $("img.selectAllItem").attr("selectit", "false")
                 $(".cartProductItemIfSelected").each(function () {
-                    $(this).attr("src", "img/fore/cartNotSelected.png");
+                    $(this).attr("src", "${ctx}/img/fore/cartNotSelected.png");
                     $(this).attr("selectit", "false");
                     $(this).parents("tr.cartProductItemTR").css("background-color", "#fff");
                 });
             }
             else {
-                $("img.selectAllItem").attr("src", "img/fore/cartSelected.png");
+                $("img.selectAllItem").attr("src", "${ctx}/img/fore/cartSelected.png");
                 $("img.selectAllItem").attr("selectit", "selectit")
                 $(".cartProductItemIfSelected").each(function () {
-                    $(this).attr("src", "img/fore/cartSelected.png");
+                    $(this).attr("src", "${ctx}/img/fore/cartSelected.png");
                     $(this).attr("selectit", "selectit");
                     $(this).parents("tr.cartProductItemTR").css("background-color", "#FFF8E1");
                 });
@@ -343,9 +343,9 @@
         });
 
         if (selectAll)
-            $("img.selectAllItem").attr("src", "img/fore/cartSelected.png");
+            $("img.selectAllItem").attr("src", "${ctx}/img/fore/cartSelected.png");
         else
-            $("img.selectAllItem").attr("src", "img/fore/cartNotSelected.png");
+            $("img.selectAllItem").attr("src", "${ctx}/img/fore/cartNotSelected.png");
 
     }
 
@@ -401,7 +401,7 @@
             <thead>
             <tr>
                 <th class="selectAndImage">
-                    <img selectit="false" class="selectAllItem" src="img/fore/cartNotSelected.png">
+                    <img selectit="false" class="selectAllItem" src="${ctx}/img/fore/cartNotSelected.png">
                     全选
 
                 </th>
@@ -413,54 +413,54 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${orderItems}" var="oi">
-                <tr orderItemId="${oi.id}" class="cartProductItemTR">
+            <c:forEach items="${requestScope.shoppingCarList}" var="sc">
+                <tr orderItemId="${sc.shoppingCartId}" class="cartProductItemTR">
                     <td>
-                        <img selectit="false" orderItemId="${oi.id}" class="cartProductItemIfSelected"
-                             src="img/fore/cartNotSelected.png">
-                        <a style="display:none" href="#nowhere"><img src="img/fore/cartSelected.png"></a>
+                        <img selectit="false" orderItemId="${sc.shoppingCartId}" class="cartProductItemIfSelected"
+                             src="${ctx}/img/fore/cartNotSelected.png">
+                        <a style="display:none" href="#nowhere"><img src="${ctx}/img/fore/cartSelected.png"></a>
                         <img class="cartProductImg"
-                             src="img/product/${oi.product.id}/1.jpg">
+                             src="${ctx}${sc.productType.productTypeImagePath}">
                     </td>
                     <td>
                         <div class="cartProductLinkOutDiv">
-                            <a href="/showProduct?product_id=${oi.product.id}"
-                               class="cartProductLink">${oi.product.name}</a>
+                            <a href="/showProduct?product_id=${sc.productType.productTypeId}"
+                               class="cartProductLink">${sc.productType.productTypeName}</a>
                             <div class="cartProductLinkInnerDiv">
-                                <img src="img/fore/creditcard.png" title="支持信用卡支付">
-                                <img src="img/fore/7day.png" title="消费者保障服务,承诺7天退货">
-                                <img src="img/fore/promise.png" title="消费者保障服务,承诺如实描述">
+                                <img src="${ctx}/img/fore/creditcard.png" title="支持信用卡支付">
+                                <img src="${ctx}/img/fore/7day.png" title="消费者保障服务,承诺7天退货">
+                                <img src="${ctx}/img/fore/promise.png" title="消费者保障服务,承诺如实描述">
                             </div>
                         </div>
 
                     </td>
                     <td>
-                        <span class="cartProductItemOringalPrice">￥${oi.product.price}</span>
-                        <span class="cartProductItemPromotionPrice">￥${oi.product.price}</span>
+                        <span class="cartProductItemOringalPrice">￥${sc.productType.price}</span>
+                        <span class="cartProductItemPromotionPrice">￥${sc.productType.price}</span>
 
                     </td>
                     <td>
 
                         <div class="cartProductChangeNumberDiv">
-                            <span class="hidden orderItemStock " product_id="${oi.product.id}">${oi.product.stock}</span>
+                            <span class="hidden orderItemStock " product_id="${sc.productType.productTypeId}">${sc.productType.restQuantity}</span>
                             <span class="hidden orderItemPromotePrice "
-                                  product_id="${oi.product.id}">${oi.product.price}</span>
-                            <a product_id="${oi.product.id}" class="numberMinus" href="#nowhere">-</a>
-                            <input product_id="${oi.product.id}" orderItemId="${oi.id}" class="orderItemNumberSetting"
-                                   autocomplete="off" value="${oi.number}">
-                            <a stock="${oi.product.stock}" product_id="${oi.product.id}" class="numberPlus"
+                                  product_id="${sc.productType.productTypeId}">${sc.productType.price}</span>
+                            <a product_id="${sc.productType.productTypeId}" class="numberMinus" href="#nowhere">-</a>
+                            <input product_id="${sc.productType.productTypeId}" orderItemId="${sc.shoppingCartId}" class="orderItemNumberSetting"
+                                   autocomplete="off" value="${sc.quantity}">
+                            <a stock="${sc.productType.restQuantity}" product_id="${sc.productType.productTypeId}" class="numberPlus"
                                href="#nowhere">+</a>
                         </div>
 
                     </td>
                     <td>
-                            <span class="cartProductItemSmallSumPrice" orderItemId="${oi.id}" product_id="${oi.product.id}">
-                                    ${oi.product.price*oi.number}
+                            <span class="cartProductItemSmallSumPrice" orderItemId="${sc.shoppingCartId}" product_id="${sc.productType.productTypeId}">
+                                    ${sc.productType.price*sc.quantity}
                             </span>
 
                     </td>
                     <td>
-                        <a class="deleteOrderItem" orderItemId="${oi.id}" href="#nowhere">删除</a>
+                        <a class="deleteOrderItem" orderItemId="${sc.shoppingCartId}" href="#nowhere">删除</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -470,7 +470,7 @@
     </div>
 
     <div class="cartFoot">
-        <img selectit="false" class="selectAllItem" src="img/fore/cartNotSelected.png">
+        <img selectit="false" class="selectAllItem" src="${ctx}/img/fore/cartNotSelected.png">
         <span>全选</span>
         <!--         <a href="#">删除</a> -->
 

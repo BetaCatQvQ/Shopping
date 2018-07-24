@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.shopping.dao.ProductDao;
 import com.shopping.entity.Page;
 import com.shopping.entity.Product;
+import com.shopping.entity.SearchCondition;
 import com.shopping.service.ProductService;
 
 @Service
@@ -29,8 +30,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Page<Map<String, Object>> getProductListByCategoryThreeId(Integer cthId, Page<Map<String, Object>> page) {
-		List<Map<String, Object>> products = pDao.getProductListByCategoryThreeId(cthId, page);
+	public Page<Map<String, Object>> getProductListByCondition(SearchCondition sc) {
+		Page<Map<String, Object>> page = new Page<>(sc.getPageNo());
+		sc.setKeywords("%" + sc.getKeywords() + "%");
+		List<Map<String, Object>> products = pDao.getProductListByCondition(sc, page);
 		page.setData(products);
 		return page;
 	}

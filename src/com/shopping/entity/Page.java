@@ -12,7 +12,7 @@ public class Page<T> {
 	 */
 	private Integer pageCount = 30;
 	/**
-	 * 查询开始行
+	 * 查询起始行
 	 */
 	private Integer startRow;
 	/**
@@ -56,6 +56,9 @@ public class Page<T> {
 	 */
 	public Page(Integer pageNo) {
 		super();
+		if (pageNo == null) {
+			pageNo = 1;
+		}
 		this.pageNo = pageNo;
 		this.startRow = (pageNo - 1) * pageCount;
 	}

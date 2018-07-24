@@ -5,6 +5,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.shopping.entity.Page;
+import com.shopping.entity.SearchCondition;
 import com.shopping.service.ProductService;
 import com.shopping.util.SpringTool;
 
@@ -13,8 +14,10 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void getProductListByCategoryThreeIdTest() {
-		Page<Map<String, Object>> page = new Page<>(1);
-		page = userService.getProductListByCategoryThreeId(1, page);
+		SearchCondition sc = new SearchCondition();
+		sc.setPageNo(1);
+		sc.setKeywords("È«Ãæ");
+		Page<Map<String, Object>> page = userService.getProductListByCondition(sc);
 		System.out.println("-----------testList-----------");
 	}
 }
