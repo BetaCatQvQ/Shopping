@@ -7,5 +7,5 @@ import com.shopping.entity.User;
 public interface UserDao {
 	public User commonUserLogin(@Param("username") String username, @Param("pwd") String pwd);
 
-	public User createUser(User user);
+	public void createUser(User user);
 }

@@ -29,6 +29,13 @@
 	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
 	    where userId = #{id}
 	</select>
+	<select id="findOrderById" resultMap="SuperFullResultMap">
+	    select * from `order` as o
+	    inner join orderitem as oi on o.orderId = oi.orderId
+	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
+	    where o.orderId = #{oId}
+	</select>
+	
 	<insert id="createOrder">
 	    insert into `order` values(#{orderId},#{user.userId},#{orderCreateDate})
 	</insert>

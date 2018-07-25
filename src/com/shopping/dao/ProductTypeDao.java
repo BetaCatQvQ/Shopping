@@ -11,4 +11,6 @@ public interface ProductTypeDao {
 	ProductType findById(@Param("id") Long id);
 
 	List<ProductType> findByProductId(@Param("id") BigInteger id);
+	
+	void setProductTypeStock(@Param("id") Long productTypeId,@Param("number") Long number);
 }

@@ -16,7 +16,7 @@ import com.shopping.service.OrderService;
 import com.shopping.service.ProductTypeService;
 
 @Controller
-@RequestMapping("/buy")
+@RequestMapping("/common/buy")
 public class BuyController {
 
 	@Resource
@@ -36,7 +36,7 @@ public class BuyController {
 		if (ptOptional.isPresent()) {
 			model.addAttribute("item", ptOptional.get());
 			if (ptOptional.get().getRestQuantity() < number) {
-				model.addAttribute("msg", "ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½!");
+				model.addAttribute("msg", "³¬³ö¿â´æ,ÇëÖØÐÂÑ¡ÔñÊýÁ¿!");
 				number = 1;
 			}
 			model.addAttribute("number", number);
@@ -45,11 +45,11 @@ public class BuyController {
 		return "buyPage";
 	}
 
-	@GetMapping("/comfirmed")
-	public String comfirmed(Long orderId) {
+	@GetMapping("/confirmed/{orderId}")
+	public String comfirmed(@PathVariable("orderId") Long orderId) {
 		if (orderId != null) {
-
+			oiService.changeOrderStatus(1, orderId);
 		}
-		return null;
+		return "orderConfirmedPage";
 	}
 }

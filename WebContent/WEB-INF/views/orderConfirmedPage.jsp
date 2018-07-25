@@ -23,8 +23,13 @@
 
 <div class="orderFinishDiv">
     <div class="orderFinishTextDiv">
-        <img src="img/fore/orderFinish.png">
+        <img src="${ctx }/img/fore/orderFinish.png">
         <span>交易已经成功，卖家将收到您的货款。</span>
+        <script type="text/javascript">
+        setTimeout(function() {
+			window.location = "${ctx}";
+		},2500);
+        </script>
     </div>
 </div>
 

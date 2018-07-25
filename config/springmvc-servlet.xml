@@ -43,7 +43,7 @@
 	<!-- 配置截拦器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**/common/*" />
+			<mvc:mapping path="/common/**" />
 			<bean class="com.shopping.interceptor.CommonLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>

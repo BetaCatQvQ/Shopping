@@ -42,6 +42,9 @@
 		inner join productpropertyvalue as pv on pv.productId = p.productId
 		inner join productproperty as p2 on pv.productPropertyId = p2.productPropertyId
 		inner join product p3  on p.productId = p3.productId
-		where p.productTypeId = #{id};
+		where p.productTypeId = #{id}
 	</select>
+	<update id="setProductTypeStock">
+	    update producttype set restQuantity = #{number} where productTypeId = #{id}
+	</update>
 </mapper>

@@ -19,4 +19,12 @@
 		<association property="user" resultMap="com.shopping.dao.UserDao.SuperResultMap" />
 		<association property="orderItem" resultMap="com.shopping.dao.OrderItemDao.SuperResultMap" />
 	</resultMap>
+	
+	<select id="findReviewByProdyctTypeId" resultMap="SuperResultMap">
+	    select * from review as r 
+	    inner join user as u on u.userId = r.userId  
+	    inner join orderitem as oi on oi.orderItemId = r.orderItemId 
+	    inner join producttype as pt on pt.productTypeId = oi.productTypeId 
+	    where pt.productTypeId = #{id}
+	</select>
 </mapper>
