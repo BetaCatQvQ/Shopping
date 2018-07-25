@@ -1,18 +1,31 @@
 package com.shopping.service.impl;
 
+import java.math.BigInteger;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.shopping.dao.OrderDao;
 import com.shopping.dao.OrderItemDao;
+import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
 import com.shopping.service.OrderItemService;
+import com.shopping.service.ProductTypeService;
+import com.sun.javafx.scene.layout.region.Margins.Converter;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 	@Resource
 	private OrderItemDao oiDao;
-
+	
+	@Resource
+	private OrderDao oDao;
+	
+	@Resource
+	private ProductTypeService ptService;
+	
+	
 	/**
 	 * 创建一个订单项
 	 * @param orderId
@@ -31,6 +44,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 	 */
 	@Override
 	public void changeOrderStatus(Integer status, Long orderId) {
+		Order order = oDao.findOrderById(new BigInteger(orderId.toString()));
+		order.getOrderItems().forEach(item ->{
+			ptService.changeStock(item.getProductType().getProductTypeId().longValue(),item.getQuantity().longValue());
+		});
 		oiDao.changeOrderStatus(status, orderId);
 	}
 

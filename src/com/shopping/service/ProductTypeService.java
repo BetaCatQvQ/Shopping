@@ -17,4 +17,6 @@ public interface ProductTypeService {
 	ProductType findById(Long id);
 
 	List<ProductType> findByProductId(@Param("id") BigInteger id);
+	
+	boolean changeStock(Long productTypeId,Long minusStock);
 }

@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.shopping.entity.OrderItem;
 import com.shopping.entity.ShippingAddress;
@@ -46,13 +48,9 @@ public class OrderController {
 	public String createOrder(String message,
 						      Long productTypeId, 
 							  Integer number,
-							  ShippingAddress address,
-							  HttpSession session,
+							  @ModelAttribute("address") ShippingAddress address,
+							  @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
 							  Model model) {
-		User user = (User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
-		if (Objects.isNull(user)) {
-			return "redirect:/user/login.action";
-		}
 		OrderItem item = new OrderItem();
 		item.setProductType(ptService.findById(productTypeId));
 		item.setQuantity(number);
@@ -61,7 +59,7 @@ public class OrderController {
 		List<OrderItem> items = new ArrayList<>();
 		items.add(item);
 		model.addAttribute("order", oService.createOrder(user, items));
-		model.addAttribute("address", address);
+		//model.addAttribute("address", address);
 		return "confirmPay";
 	}
 	

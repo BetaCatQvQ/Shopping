@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.shopping.dao.ProductTypeDao;
 import com.shopping.entity.ProductType;
 import com.shopping.service.ProductTypeService;
+import com.sun.org.apache.regexp.internal.recompile;
 
 @Service
 public class ProductTypeServiceImpl implements ProductTypeService {
@@ -28,6 +29,19 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 	@Override
 	public List<ProductType> findByProductId(BigInteger id) {
 		return ptDao.findByProductId(id);
+	}
+
+	
+	@Override 
+	public boolean changeStock(Long productTypeId, Long minusStock) {
+		ProductType productType = findById(productTypeId);
+		if (Objects.nonNull(productType)) {
+			if (productType.getRestQuantity() >= minusStock) {
+				ptDao.setProductTypeStock(productTypeId,(productType.getRestQuantity() - minusStock));
+				return true;
+			}
+		}
+		return false;
 	}
 
 	

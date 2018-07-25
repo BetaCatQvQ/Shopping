@@ -515,10 +515,10 @@ div.selected_item {
 
 			<div class="productSaleAndReviewNumber">
 				<div>
-					销量<span class="redColor boldWord">100</span>
+					销量<span class="redColor boldWord">${salesVolume }</span>
 				</div>
 				<div>
-					累计评价<span class="redColor boldWord">100</span>
+					累计评价<span class="redColor boldWord">${reviews.size() }</span>
 				</div>
 			</div>
 			<div style="color: #999;">
@@ -570,13 +570,23 @@ div.selected_item {
             </script>
 			<div class="buyDiv">
 				<%--<c:set var="number" scope="page" value="${('#number').val()}"--%>
-				<a onclick="javascript:buyLink()" class="buyLink">
-					<button class="buyButton">立即购买</button>
-				</a> <a class="addCartLink" href="#nowhere">
+				<c:if test="${!(defaultProduct.restQuantity eq 0) }">
+					<a onclick="javascript:buyLink()" class="buyLink">
+						<button class="buyButton">立即购买</button>
+					</a> 
+					<a class="addCartLink" href="#nowhere">
 					<button class="addCartButton">
 						<span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
 					</button>
 				</a>
+				</c:if>
+				<c:if test="${defaultProduct.restQuantity eq 0 }">
+					<a class="buyLink">
+						<button class="buyButton">暂时无货</button>
+					</a> 
+				</c:if>
+				
+				
 			</div>
 		</div>
 		<div style="clear: both"></div>
@@ -588,7 +598,7 @@ div.selected_item {
 	<div class="productDetailTopPart">
 		<a class="productDetailTopPartSelectedLink selected" href="#nowhere">商品详情</a>
 		<a class="productDetailTopReviewLink" href="#nowhere">累计评价 <span
-			class="productDetailTopReviewLinkNumber">100</span>
+			class="productDetailTopReviewLinkNumber">${reviews.size()}</span>
 		</a>
 	</div>
 
@@ -613,27 +623,29 @@ div.selected_item {
 		<div class="productReviewTopPart">
 			<a class="productReviewTopPartSelectedLink" href="#nowhere">商品详情</a>
 			<a class="selected" href="#nowhere">累计评价 <span
-				class="productReviewTopReviewLinkNumber">100</span>
+				class="productReviewTopReviewLinkNumber">${reviews.size()}</span>
 			</a>
 		</div>
 		<div class="productReviewContentPart">
-			<%--
-			评论区
+            <c:if test="${!(reviews.size() eq 0)}">
             <c:forEach items="${reviews}" var="r">
                 <div class="productReviewItem">
                     <div class="productReviewItemDesc">
                         <div class="productReviewItemContent">
                                 ${r.content}
                         </div>
-                        <div class="productReviewItemDate">${r.createDate}</div>
+                        <div class="productReviewItemDate">${r.reviewCreateDate}&nbsp;${r.orderItem.productType.productTypeName }</div>
                     </div>
                     <div class="productReviewItemUserInfo">
-                            ${r.user.anonymousName}<span class="userInfoGrayPart">（匿名）</span>
+                            ${r.user.userName.charAt(0)}***<span class="userInfoGrayPart">（匿名）</span>
                     </div>
                     <div style="clear:both"></div>
                 </div>
             </c:forEach>
-         --%>
+            </c:if>
+            <c:if test="${reviews.size() eq 0}">
+                    <center>暂无评价</center>
+            </c:if>
 		</div>
 	</div>
 </div>
