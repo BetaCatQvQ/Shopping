@@ -1,15 +1,15 @@
 package com.shopping.interceptor;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.shopping.entity.User;
 import com.shopping.util.HttpVal;
 
+@Component
 public class CommonLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -20,21 +20,9 @@ public class CommonLoginInterceptor extends HandlerInterceptorAdapter {
 		User userInfo = (User) request.getSession().getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
 
 		if (userInfo == null) {
-			String objectName = request.getServletContext().getContextPath();
-			PrintWriter out = response.getWriter();
-			out.print("<script type=\"text/javascript\">");
-			out.print("alert('ÇëµÇÂ¼£¡');");
-			out.print("location.href='" + objectName + "/user/login.action';");
-			out.print("</script>");
-			closeWriter(out);
+			request.getRequestDispatcher("/user/login.action").forward(request, response);
 			return false;
 		}
 		return true;
-	}
-
-	public void closeWriter(PrintWriter out) {
-		if (out != null) {
-			out.close();
-		}
 	}
 }

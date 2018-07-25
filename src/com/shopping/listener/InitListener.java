@@ -14,7 +14,6 @@ public class InitListener implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent arg0) {
 		ServletContext context = arg0.getServletContext();
 		context.setAttribute("ctx", context.getContextPath());
-		System.out.println(context.getAttribute("ctx"));
 	}
 
 }
