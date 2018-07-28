@@ -8,19 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.SessionAttribute;
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 
 import com.shopping.entity.User;
 import com.shopping.service.ShoppingCartService;
 import com.shopping.service.UserService;
 import com.shopping.util.HttpVal;
-import com.shopping.util.HttpVal.LoginStatus;
 
 @Controller
 @RequestMapping("/user")
@@ -30,14 +22,7 @@ public class UserController {
 
 	@Resource
 	private ShoppingCartService scService;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-	@GetMapping("/login")
-	public String gotoLogin() {
-=======
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
+	
 	/**
 	 * 跳转至登录页面
 	 * 
@@ -45,7 +30,6 @@ public class UserController {
 	 */
 	@RequestMapping("/login")
 	public String login() {
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 		return "loginPage";
 	}
 
@@ -66,9 +50,7 @@ public class UserController {
 		}
 		return "redirect:/home.action";
 	}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
+	
 	@PostMapping("/login")
 	public @ResponseBody String login(HttpSession session, User user) {
 		User newUser = uService.commonUserLogin(user.getUserName(), user.getUserPwd());
@@ -81,19 +63,12 @@ public class UserController {
 		return String.format(HttpVal.LoginStatus.LOGIN_STATUS_FAILED_MSG,"鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 	}
 	
-=======
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 	/**
 	 * 登出
 	 * 
 	 * @param session
 	 * @return
 	 */
-<<<<<<< HEAD
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
