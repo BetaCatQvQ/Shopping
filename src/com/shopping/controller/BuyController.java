@@ -28,17 +28,17 @@ public class BuyController {
 	@Resource
 	OrderItemService oiService;
 
-	@GetMapping("/common/one/{productTypeId}-{number}")
+	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
 			             @PathVariable("number") Integer number,
 			             Model model) {
 		Optional<ProductType> ptOptional = Optional.ofNullable(ptService.findById(productTypeId));
 		if (ptOptional.isPresent()) {
-			model.addAttribute("item", ptOptional.get());
 			if (ptOptional.get().getRestQuantity() < number) {
-				model.addAttribute("msg", "超出库存,请重新选择数量!");
+				model.addAttribute("msg", "Exceeding stock please to re-select!");
 				number = 1;
 			}
+			model.addAttribute("item", ptOptional.get());
 			model.addAttribute("number", number);
 			model.addAttribute("total", number * ptOptional.get().getSalePrice());
 		}

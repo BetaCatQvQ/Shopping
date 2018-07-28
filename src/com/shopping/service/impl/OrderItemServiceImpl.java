@@ -12,7 +12,6 @@ import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
 import com.shopping.service.OrderItemService;
 import com.shopping.service.ProductTypeService;
-import com.sun.javafx.scene.layout.region.Margins.Converter;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
@@ -27,7 +26,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 	
 	
 	/**
-	 * ´´½¨Ò»¸ö¶©µ¥Ïî
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param orderId
 	 * @param item
 	 * @param status
@@ -38,7 +37,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 	}
 
 	/**
-	 * ÐÞ¸Ä¶©µ¥×´Ì¬
+	 * ï¿½Þ¸Ä¶ï¿½ï¿½ï¿½×´Ì¬
 	 * @param status
 	 * @param orderId
 	 */
@@ -52,7 +51,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 	}
 
 	/**
-	 * ¸ù¾Ý¶©µ¥ÏîÐÞ¸Ä×´Ì¬
+	 * ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½×´Ì¬
 	 * @param status
 	 * @param orderId
 	 * @param orderItemId
