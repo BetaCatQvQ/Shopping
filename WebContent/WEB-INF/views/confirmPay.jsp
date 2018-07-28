@@ -198,7 +198,7 @@
                 <tr>
                     <td><img width="50px" src="${ctx }/${oi.productType.productTypeImagePath}"></td>
                     <td class="confirmPayOrderItemProductLink">
-                        <a href="#nowhere">${oi.productType.productTypeName}</a>
+                        <a href="${ctx }/product/${oi.productType.productTypeId}.action">${oi.productType.productTypeName}</a>
                     </td>
                     <td>￥${oi.productType.salePrice}</td>
                     <td>${oi.quantity }</td>
@@ -207,7 +207,7 @@
                 </tr>
             </c:forEach>
         </table>
-
+	
         <div class="confirmPayOrderItemText pull-right">
             实付款： <span class="confirmPayOrderItemSumPrice">￥${order.total}</span>
         </div>

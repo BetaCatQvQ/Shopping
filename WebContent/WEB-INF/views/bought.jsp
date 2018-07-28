@@ -6,6 +6,9 @@
 <%@include file="include/mini-search.jsp" %>
 
 <style>
+    table{
+        border-collapse: unset;
+    }
     div.boughtDiv {
         max-width: 1013px;
         margin: 10px auto;
@@ -77,7 +80,7 @@
     }
 
     table.orderListItemTable:hover {
-        border: 2px solid #aaa !important;
+        border: 2px solid #aaa;
     }
 
     table.orderListItemTable td {
@@ -262,19 +265,21 @@ div.productNumber span.arrow {
     $(function () {
     	
     	function change(oid,num,price){
+    		num = parseFloat(num);
+    		price = parseFloat(price);
     		$("div[data-oid-total="+oid+"]").text("￥"+(num * price));
     	}
     	
     	$(".productNumberSetting").on("change",function (){
     		const oid = $(this).attr("data-oid");
     		const num = $(this).val();
-    		const price = parseInt($("div[data-oid-price="+oid+"]").text().replace("￥",""));
+    		const price = eval($("div[data-oid-price="+oid+"]").text().replace("￥",""));
     		change(oid,num,price);
     	});
     	
         $(".productNumberSetting").keyup(function () {
-        	var stock = parseInt($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div").children(1).children(0).text());
-        	var num = $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val();
+        	var stock = parseInt($(this).parents("tr").find("span.restQuantity").text());
+            var num = $(this).parents("tr").find(".productNumberSetting").val();
             num = parseInt(num);
             if (isNaN(num))
                 num = 1;
@@ -282,28 +287,28 @@ div.productNumber span.arrow {
                 num = 1;
             if (num > stock)
                 num = stock;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
+            $(this).parents("tr").find(".productNumberSetting").val(num).change();
         });
         
         $(".increaseNumber").click(function () {
-        	var stock = parseInt($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div").children(1).children(0).text());
-            var num = $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val();
+        	var stock = parseInt($(this).parents("tr").find("span.restQuantity").text());
+            var num = $(this).parents("tr").find(".productNumberSetting").val();
             parseInt(num);
             num++;
             if (num > stock)
                 num = stock;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
+            $(this).parents("tr").find(".productNumberSetting").val(num).change();
         });
        
        
         $(".decreaseNumber").click(function () {
-        	var stock = parseInt($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div").children(1).children(0).text());
-            var num = $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div > span:nth-child(1)").children(0).get(0)).children(0).val();
+        	var stock = parseInt($(this).parents("tr").find("span.restQuantity").text());
+            var num = $(this).parents("tr").find(".productNumberSetting").val();
             parseInt(num);
             --num;
             if (num <= 0)
                 num = 1;
-            $($(this).parents("td.orderListItemNumberTD.orderItemOrderInfoPartTD > div  > span:nth-child(1)").children(0).get(0)).children(0).val(num).change();
+            $(this).parents("tr").find(".productNumberSetting").val(num).change();
  
         });
     	
@@ -311,11 +316,11 @@ div.productNumber span.arrow {
         $("a[orderStatus]").click(function () {
             var orderStatus = $(this).attr("orderStatus");
             if ('all' == orderStatus) {
-                $("tr[orderStatus]").show();
+                $("table[orderStatus]").show();
             }
             else {
-                $("tr[orderStatus]").hide();
-                $("tr[orderStatus=" + orderStatus + "]").show();
+                $("table[orderStatus]").hide();
+                $("table[orderStatus=" + orderStatus + "]").show();
             }
 
             $("div.orderType div").removeClass("selectedOrderType");
@@ -374,11 +379,12 @@ div.productNumber span.arrow {
         <div><a orderStatus="1" href="#nowhere">待发货</a></div>
         <div><a orderStatus="2" href="#nowhere">待收货</a></div>
          <div><a orderStatus="3" href="#nowhere">派送中</a></div>
-        <div><a orderStatus="4" href="#nowhere" class="noRightborder">待评价</a></div>
-         <div><a orderStatus="5" href="#nowhere">已完成</a></div>
+        <div><a orderStatus="4" href="#nowhere">待评价</a></div>
+         <div><a orderStatus="5" href="#nowhere" class="noRightborder">已完成</a></div>
         <div class="orderTypeLastOne"><a class="noRightborder"> </a></div>
     </div>
     <div style="clear:both"></div>
+    
     <div class="orderListTitle">
         <table class="orderListTitleTable">
             <tr>
@@ -393,8 +399,8 @@ div.productNumber span.arrow {
     </div>
 
     <div class="orderListItem">
-        <c:forEach items="${orders}" var="o">
-            <table class="orderListItemTable"  oid="${o.orderId}" >
+        <c:forEach items="${orders}" var="o" varStatus="i">
+            <table class="orderListItemTable"  oid="${o.orderId}"  orderStatus="${o.orderItems.get(0).status }" >
                 <tr class="orderListItemFirstTR">
                     <td colspan="2">
                         <b>${order.orderCreateDate}</b>
@@ -408,15 +414,17 @@ div.productNumber span.arrow {
                         </a>
 
                     </td>
-                    <td class="orderItemDeleteTD">
-                        <a class="deleteOrderLink" oid="${o.orderId}" href="#nowhere">
-                            <span class="orderListItemDelete glyphicon glyphicon-trash"></span>
-                        </a>
-
+                        <td class="orderItemEditTD" style="float:right;">
+	                   <c:if test="${o.orderItems.get(0).status == 0 }">
+							<a class="deleteOrderLink" oid="${o.orderId}">
+	                            <span class="orderListItemDelete glyphicon glyphicon-trash"></span>
+	                        </a>
+	
+	                   </c:if>
                     </td>
                 </tr>
                 <c:forEach items="${o.orderItems}" var="oi" varStatus="st">
-                    <tr class="orderItemProductInfoPartTR" orderStatus="${oi.status }">
+                    <tr class="orderItemProductInfoPartTR">
                         <td class="orderItemProductInfoPartTD">
                         <img width="80" height="80" 
                         src="${ctx}/${oi.productType.productTypeImagePath}">
@@ -467,36 +475,43 @@ div.productNumber span.arrow {
                                 <div class="orderListItemProductRealPrice" data-oid-total="${oi.orderItemId }" >￥${oi.productType.salePrice * oi.quantity }</div>
                                 <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                             </td>
-                            <td valign="middle" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
-                               <c:if test="${oi.status=='0' }">
-                                    <a href="alipay.jsp?order_id=${o.orderId}&total=o.total">
-                                        <button class="orderListItemConfirm">付款</button>
-                                    </a>
-                                </c:if>
-                                <c:if test="${oi.status=='1' }">
-                                    <span>待发货</span>
-                                    <%--
-                                    <button class="btn btn-info btn-sm ask2delivery" 
-                                    link="admin_order_delivery?id=${o.orderId}">催卖家发货</button> 
-                                    --%>
-                                </c:if>
-                                <c:if test="${oi.status=='2' }">
-                                    <a href="confirmPay?order_id=${o.orderId}">
-                                        <button class="orderListItemConfirm">确认收货</button>
-                                    </a>
-                                </c:if>
-                                <c:if test="${oi.status=='3' }">
-                                    <span>派送中</span>
-                                </c:if>
-                                <c:if test="${oi.status=='4' }">
-                                    <a href="review?order_id=${o.orderId}">
-                                        <button class="orderListItemReview">评价</button>
-                                    </a>
-                                </c:if>
-                                <c:if test="${oi.status=='5' }">
-                                    <span>已完成</span>
-                                </c:if>
-                            </td>
+	                           <c:if test="${st.index == 0 }">
+		                            <td valign="middle" class="orderListItemButtonTD orderItemOrderInfoPartTD" style="width: 160px;" rowspan=${st.index } >
+				                            <c:choose>
+						                            <c:when test="${oi.productType.restQuantity eq 0 && oi.status eq 0}">
+						                                    <span>暂时无货</span>
+						                                </c:when>
+						                               <c:when test="${oi.status eq 0 }">
+						                                    <a href="${ctx }/common/order/payOrder/${o.orderId}.action">
+						                                        <button class="orderListItemConfirm">付款</button>
+						                                    </a>
+						                                </c:when>
+						                                <c:when test="${oi.status eq 1 }">
+						                                    <span>待发货</span>
+						                                    <%--
+						                                    <button class="btn btn-info btn-sm ask2delivery" 
+						                                    link="admin_order_delivery?id=${o.orderId}">催卖家发货</button> 
+						                                    --%>
+						                                </c:when>
+						                                <c:when test="${oi.status eq 2 }">
+						                                    <a href="confirmPay?order_id=${o.orderId}">
+						                                        <button class="orderListItemConfirm">确认收货</button>
+						                                    </a>
+						                                </c:when>
+						                                <c:when test="${oi.status eq 3 }">
+						                                    <span>派送中</span>
+						                                </c:when>
+						                                <c:when test="${oi.status eq 4 }">
+						                                    <a href="review?order_id=${o.orderId}">
+						                                        <button class="orderListItemReview">评价</button>
+						                                    </a>
+						                                </c:when>
+						                                <c:when test="${oi.status eq 5 }">
+						                                    <span>已完成</span>
+						                                </c:when>
+				                            </c:choose>
+		                            </td>
+	                           </c:if>
                     </tr>
                 </c:forEach>
 

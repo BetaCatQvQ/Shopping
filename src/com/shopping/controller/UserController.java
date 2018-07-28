@@ -8,19 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.SessionAttribute;
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 
 import com.shopping.entity.User;
 import com.shopping.service.ShoppingCartService;
 import com.shopping.service.UserService;
 import com.shopping.util.HttpVal;
-import com.shopping.util.HttpVal.LoginStatus;
 
 @Controller
 @RequestMapping("/user")
@@ -31,26 +23,19 @@ public class UserController {
 	@Resource
 	private ShoppingCartService scService;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	@GetMapping("/login")
-	public String gotoLogin() {
-=======
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
+
 	/**
-	 * Ìø×ªÖÁµÇÂ¼Ò³Ãæ
+	 * ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/login")
 	public String login() {
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 		return "loginPage";
 	}
 
 	/**
-	 * µÇÂ¼
+	 * ï¿½ï¿½Â¼
 	 * 
 	 * @param session
 	 * @param user
@@ -66,9 +51,6 @@ public class UserController {
 		}
 		return "redirect:/home.action";
 	}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@PostMapping("/login")
 	public @ResponseBody String login(HttpSession session, User user) {
 		User newUser = uService.commonUserLogin(user.getUserName(), user.getUserPwd());
@@ -80,28 +62,14 @@ public class UserController {
 		}
 		return String.format(HttpVal.LoginStatus.LOGIN_STATUS_FAILED_MSG,"ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
 	}
-	
-=======
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-	/**
-	 * µÇ³ö
-	 * 
-	 * @param session
-	 * @return
-	 */
-<<<<<<< HEAD
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-	@RequestMapping("/logout")
+    @RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home.action";
 	}
 
 	/**
-	 * Ìø×ªÖÁ×¢²áÒ³Ãæ
+	 * ï¿½ï¿½×ªï¿½ï¿½×¢ï¿½ï¿½Ò³ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -111,7 +79,7 @@ public class UserController {
 	}
 
 	/**
-	 * ×¢²á
+	 * ×¢ï¿½ï¿½
 	 * 
 	 * @param user
 	 * @param session
@@ -124,7 +92,7 @@ public class UserController {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñµÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Â¼
 	 * 
 	 * @param session
 	 * @return
