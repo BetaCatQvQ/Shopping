@@ -47,4 +47,9 @@
 	<update id="setProductTypeStock">
 	    update producttype set restQuantity = #{number} where productTypeId = #{id}
 	</update>
+	
+	<select id="getRestQuantity" resultType="Integer">
+		SELECT `restQuantity` FROM `producttype`
+		WHERE `productTypeId` = #{ptId}
+	</select>
 </mapper>

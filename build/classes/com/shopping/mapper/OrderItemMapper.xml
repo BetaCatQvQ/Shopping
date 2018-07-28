@@ -25,16 +25,16 @@
 		<collection ofType="ProductType" property="productType" resultMap="com.shopping.dao.ProductTypeDao.SuperFullResultMap" />
 	</resultMap>
 	<insert id="createOrderItem">
-	    insert into orderItem 
-	    values(#{item.orderItemId},#{item.productType.productTypeId},#{orderId},#{item.quantity},#{itme.remark},#{status})
+	    insert into orderitem 
+	    values(#{item.orderItemId},#{item.productType.productTypeId},#{orderId},#{item.quantity},#{item.remark},#{status})
 	</insert>
 	<update id="changeOrderStatus">
-	    update orderItem 
+	    update orderitem 
 	    set status = #{status}
 	    where orderId = #{orderId}
 	</update>
 	<update id="changeOrderStatusForItem">
-	    update orderItem 
+	    update orderitem 
 	    set status = #{status}
 	    where orderId = #{orderId}
 	    and orderItemId = #{orderItemId}

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.shopping.dao.ProductTypeDao;
 import com.shopping.entity.ProductType;
 import com.shopping.service.ProductTypeService;
-import com.sun.org.apache.regexp.internal.recompile;
 
 @Service
 public class ProductTypeServiceImpl implements ProductTypeService {

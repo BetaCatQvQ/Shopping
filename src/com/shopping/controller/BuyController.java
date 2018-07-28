@@ -28,7 +28,7 @@ public class BuyController {
 	@Resource
 	OrderItemService oiService;
 
-	@GetMapping("/common/one/{productTypeId}-{number}")
+	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
 			             @PathVariable("number") Integer number,
 			             Model model) {

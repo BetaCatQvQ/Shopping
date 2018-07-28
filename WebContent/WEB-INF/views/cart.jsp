@@ -188,38 +188,22 @@ span.cartSumPrice {
 	var deleteOrderItem = false;
 	var deleteOrderItemid = 0;
 	$(function() {
-
-		$("a.deleteOrderItem").click(function() {
-			deleteOrderItem = false;
-			var orderItemId = $(this).attr("orderItemId")
-			deleteOrderItemid = orderItemId;
-			$("#deleteConfirmModal").modal('show');
-		});
-		$("button.deleteConfirmButton").click(function() {
-			deleteOrderItem = true;
-			$("#deleteConfirmModal").modal('hide');
-		});
-
-		$('#deleteConfirmModal').on(
-				'hidden.bs.modal',
-				function(e) {
-					if (deleteOrderItem) {
-						var page = "deleteOrderItem";
-						$.post(page, {
-							"orderItemId" : deleteOrderItemid
-						}, function(result) {
-							if ("success" == result) {
-								$(
-										"tr.cartProductItemTR[orderItemId="
-												+ deleteOrderItemid + "]")
-										.hide();
-							} else {
-								location.href = "loginPage";
-							}
-						});
-
+		//删除购物车项
+		$(".deleteOrderItem").click(function() {
+			var delFlag = window.confirm("确认删除？");
+			if (delFlag) {
+				var sCartId = $(this).attr("orderitemid");
+				$.post("${ctx}/sc/common/del.action", {
+					"sCartId" : sCartId
+				}, function(count) {
+					if (count == 1) {
+						location.reload();
+					} else {
+						window.alert("删除失败");
 					}
-				})
+				}, "json");
+			}
+		});
 
 		$("img.cartProductItemIfSelected")
 				.click(
@@ -319,39 +303,53 @@ span.cartSumPrice {
 		$(".numberPlus").click(
 				function() {
 
-					var product_id = $(this).attr("product_id");
-					var stock = $(
-							"span.orderItemStock[product_id=" + product_id
-									+ "]").text();
+					var scId = $(this).attr("scId");
+					var stock = $("span.orderItemStock[scId=" + scId + "]")
+							.text();
 					var price = $(
-							"span.orderItemPromotePrice[product_id="
-									+ product_id + "]").text();
+							"span.orderItemPromotePrice[scId=" + scId + "]")
+							.text();
 					var num = $(
-							".orderItemNumberSetting[product_id=" + product_id
-									+ "]").val();
+							".orderItemNumberSetting[scId=" + scId + "]")
+							.val();
 
 					num++;
 					if (num > stock)
 						num = stock;
-					syncPrice(product_id, num, price);
+
+					var page = "${ctx}/sc/common/plus.action";
+					$.post(page, {
+						"sCartId" : scId
+					}, function(count) {
+						if (count > 0) {
+							syncPrice(scId, num, price);
+						}
+					});
 				});
 		$(".numberMinus").click(
 				function() {
-					var product_id = $(this).attr("product_id");
+					var scId = $(this).attr("scId");
 					var stock = $(
-							"span.orderItemStock[product_id=" + product_id
-									+ "]").text();
+							"span.orderItemStock[scId=" + scId + "]")
+							.text();
 					var price = $(
-							"span.orderItemPromotePrice[product_id="
-									+ product_id + "]").text();
+							"span.orderItemPromotePrice[scId=" + scId
+									+ "]").text();
 
 					var num = $(
-							".orderItemNumberSetting[product_id=" + product_id
-									+ "]").val();
+							".orderItemNumberSetting[scId=" + scId + "]")
+							.val();
 					--num;
 					if (num <= 0)
 						num = 1;
-					syncPrice(product_id, num, price);
+					var page = "${ctx}/sc/common/minus.action";
+					$.post(page, {
+						"sCartId" : scId
+					}, function(count) {
+						if (count > 0) {
+							syncPrice(scId, num, price);
+						}
+					});
 				});
 
 		$("button.createOrderButton").click(function() {
@@ -428,22 +426,12 @@ span.cartSumPrice {
 		$("span.cartSumNumber").html(totalNumber);
 	}
 
-	function syncPrice(product_id, num, price) {
-		$(".orderItemNumberSetting[product_id=" + product_id + "]").val(num);
+	function syncPrice(scId, num, price) {
+		$(".orderItemNumberSetting[scId=" + scId + "]").val(num);
 		var cartProductItemSmallSumPrice = formatMoney(num * price);
-		$(".cartProductItemSmallSumPrice[product_id=" + product_id + "]").html(
+		$(".cartProductItemSmallSumPrice[scId=" + scId + "]").html(
 				"￥" + cartProductItemSmallSumPrice);
 		calcCartSumPriceAndNumber();
-
-		var page = "changeOrderItem";
-		$.post(page, {
-			"product_id" : product_id,
-			"number" : num
-		}, function(result) {
-			if ("success" != result) {
-				location.href = "login.jsp";
-			}
-		});
 	}
 </script>
 
@@ -498,25 +486,22 @@ span.cartSumPrice {
 						<td>
 
 							<div class="cartProductChangeNumberDiv">
-								<span class="hidden orderItemStock "
-									product_id="${sc.productType.productTypeId}">${sc.productType.restQuantity}</span>
+								<span class="hidden orderItemStock " scId="${sc.shoppingCartId}">${sc.productType.restQuantity}</span>
 								<span class="hidden orderItemPromotePrice "
-									product_id="${sc.productType.productTypeId}">${sc.productType.salePrice}</span>
-								<a product_id="${sc.productType.productTypeId}"
-									class="numberMinus" href="#nowhere">-</a> <input
-									product_id="${sc.productType.productTypeId}"
+									scId="${sc.shoppingCartId}">${sc.productType.salePrice}</span>
+								<a scId="${sc.shoppingCartId}" class="numberMinus"
+									href="#nowhere">-</a> <input scId="${sc.shoppingCartId}"
 									orderItemId="${sc.shoppingCartId}"
 									class="orderItemNumberSetting" autocomplete="off"
 									value="${sc.quantity}"> <a
 									stock="${sc.productType.restQuantity}"
-									product_id="${sc.productType.productTypeId}" class="numberPlus"
-									href="#nowhere">+</a>
+									scId="${sc.shoppingCartId}" class="numberPlus" href="#nowhere">+</a>
 							</div>
 
 						</td>
 						<td><span class="cartProductItemSmallSumPrice"
 							orderItemId="${sc.shoppingCartId}"
-							product_id="${sc.productType.productTypeId}">
+							scId="${sc.shoppingCartId}">
 								${sc.productType.salePrice*sc.quantity} </span></td>
 						<td><a class="deleteOrderItem"
 							orderItemId="${sc.shoppingCartId}" href="#nowhere">删除</a></td>
