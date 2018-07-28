@@ -244,7 +244,7 @@ div.infoInimgAndInfo span.promotionPriceDesc {
 	color: #999999;
 	display: inline-block;
 	width: 68px;
-    /*
+	/*
     position: relative;
 	left: 0px;
 	top: -10px;
@@ -431,39 +431,38 @@ div.selected_item {
             $("div.productDetailDiv").show();
         });
 
-
-        $(".addCartLink").click(function () {
-            var page = "checkLogin";
-            $.get(
-                page,
-                function (result) {
-                    if ("success" == result) {
-                        var product_id = ${product.productId};
-                        var num = $(".productNumberSetting").val();
-                        var addCartpage = "/addCart";
-                        $.get(
-                            addCartpage,
-                            {"product_id": product_id, "num": num},
-                            function (result) {
-                                if ("success" == result) {
-                                    $(".addCartButton").html("已加入购物车");
-                                    $(".addCartButton").attr("disabled", "disabled");
-                                    $(".addCartButton").css("background-color", "lightgray");
-                                    $(".addCartButton").css("border-color", "lightgray");
-                                    $(".addCartButton").css("color", "black");
-                                }
-                                else {
-                                }
-                            }
-                        );
+		/*
+		添加商品至购物车
+		*/
+        function addCart() {
+        	var product_id = ${defaultProduct.productTypeId};
+            var num = $(".productNumberSetting").val();
+            var addCartpage = "${ctx}/sc/common/addsc.action";
+            $.post(addCartpage, {"ptId": product_id, "quantity": num ,"ajax":""},
+            	function (data) {
+                	if (data > 0) {
+                    	$(".addCartButton").html("已加入购物车");
+                        $(".addCartButton").attr("disabled", "disabled");
+                        $(".addCartButton").css("background-color", "lightgray");
+                        $(".addCartButton").css("border-color", "lightgray");
+                        $(".addCartButton").css("color", "black");
                     }
                     else {
-                        $("#loginModal").modal('show');
                     }
                 }
-            );
+             );
             return false;
-        });
+        }
+        
+        $(".addCartLink").click(function () {
+        	$.post("${ctx}/user/checkLogin.action",function(data){
+        		if(data > 0){
+        			addCart();
+        		}else{
+        			location.href="${ctx}/user/login.action";
+        		}
+        	});
+		});
     });
 
 </script>
@@ -500,14 +499,12 @@ div.selected_item {
 						<span class="promotionPriceYuan">¥</span> 
 						<span class="promotionPrice">${defaultProduct.salePrice}</span>
 					 -->
-						<p style="margin:0px;">
-							<span class="promotionPriceDesc">价格</span> 
-							<span>¥</span> <span>${defaultProduct.price}</span> 
+						<p style="margin: 0px;">
+							<span class="promotionPriceDesc">价格</span> <span>¥</span> <span>${defaultProduct.price}</span>
 						</p>
 						<p>
-						    <span class="promotionPriceDesc">优惠价</span>
-							<span class="promotionPriceYuan">¥</span> 
-							<span class="promotionPrice">${defaultProduct.salePrice}</span>
+							<span class="promotionPriceDesc">优惠价</span> <span
+								class="promotionPriceYuan">¥</span> <span class="promotionPrice">${defaultProduct.salePrice}</span>
 						</p>
 					</div>
 				</div>
@@ -564,7 +561,7 @@ div.selected_item {
                 <%--});--%>
 
                 function buyLink() {
-                    window.location = "${ctx}/buy/common/one/"+${defaultProduct.productTypeId}+
+                    window.location = "${ctx}/common/buy/one/"+${defaultProduct.productTypeId}+
                     "-" + $("#number").val()+".action";
                 }
             </script>
@@ -573,20 +570,20 @@ div.selected_item {
 				<c:if test="${!(defaultProduct.restQuantity eq 0) }">
 					<a onclick="javascript:buyLink()" class="buyLink">
 						<button class="buyButton">立即购买</button>
-					</a> 
+					</a>
 					<a class="addCartLink" href="#nowhere">
-					<button class="addCartButton">
-						<span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
-					</button>
-				</a>
+						<button class="addCartButton">
+							<span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
+						</button>
+					</a>
 				</c:if>
 				<c:if test="${defaultProduct.restQuantity eq 0 }">
 					<a class="buyLink">
 						<button class="buyButton">暂时无货</button>
-					</a> 
+					</a>
 				</c:if>
-				
-				
+
+
 			</div>
 		</div>
 		<div style="clear: both"></div>
@@ -627,7 +624,8 @@ div.selected_item {
 			</a>
 		</div>
 		<div class="productReviewContentPart">
-            <c:if test="${!(reviews.size() eq 0)}">
+<<<<<<< HEAD
+            <c:if test="${reviews.size() != 0}">
             <c:forEach items="${reviews}" var="r">
                 <div class="productReviewItem">
                     <div class="productReviewItemDesc">
@@ -646,6 +644,25 @@ div.selected_item {
             <c:if test="${reviews.size() eq 0}">
                     <center>暂无评价</center>
             </c:if>
+=======
+			<c:if test="${reviews.size() != 0}">
+				<c:forEach items="${reviews}" var="r">
+					<div class="productReviewItem">
+						<div class="productReviewItemDesc">
+							<div class="productReviewItemContent">${r.content}</div>
+							<div class="productReviewItemDate">${r.reviewCreateDate}&nbsp;${r.orderItem.productType.productTypeName }</div>
+						</div>
+						<div class="productReviewItemUserInfo">
+							${r.user.userName.charAt(0)}***<span class="userInfoGrayPart">（匿名）</span>
+						</div>
+						<div style="clear: both"></div>
+					</div>
+				</c:forEach>
+			</c:if>
+			<c:if test="${reviews.size() eq 0}">
+				<center>暂无评价</center>
+			</c:if>
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 		</div>
 	</div>
 </div>

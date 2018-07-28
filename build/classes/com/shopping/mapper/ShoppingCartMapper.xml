@@ -35,4 +35,28 @@
 		DELETE FROM `shoppingcart` WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
 	</delete>
 	
+	<update id="changeQuantity">
+		UPDATE `shoppingcart` SET `quantity` = #{quantity}
+		WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
+	</update>
+	
+	<select id="getQuantity" resultType="Integer">
+		SELECT `quantity` FROM `shoppingcart`
+		WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
+	</select>
+	
+	<select id="getQuantityAndProductRestQuantity" resultType="Map">
+		SELECT sc.`quantity`, pt.`restQuantity` FROM `shoppingcart` AS sc
+		INNER JOIN `producttype` AS pt ON sc.`productTypeId` = pt.`productTypeId`
+		WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
+	</select>
+	
+	<insert id="addShoppingCart">
+		INSERT INTO `shoppingcart` VALUES(NULL,#{ptId},#{userId},#{quantity},DEFAULT)
+	</insert>
+	
+	<select id="getByUserIdAndProductTypeId" resultMap="BaseResultMap">
+		SELECT `shoppingCartId` FROM `shoppingcart`
+		WHERE `productTypeId` = #{ptId} AND `userId` = #{userId}
+	</select>
 </mapper>
