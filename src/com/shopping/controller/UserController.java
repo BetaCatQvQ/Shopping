@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.SessionAttribute;
+=======
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 =======
 >>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 
@@ -29,9 +32,12 @@ public class UserController {
 	private ShoppingCartService scService;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@GetMapping("/login")
 	public String gotoLogin() {
 =======
+=======
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 	/**
 	 * 跳转至登录页面
 	 * 
@@ -62,6 +68,7 @@ public class UserController {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@PostMapping("/login")
 	public @ResponseBody String login(HttpSession session, User user) {
 		User newUser = uService.commonUserLogin(user.getUserName(), user.getUserPwd());
@@ -75,12 +82,17 @@ public class UserController {
 	}
 	
 =======
+=======
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 	/**
 	 * 登出
 	 * 
 	 * @param session
 	 * @return
 	 */
+<<<<<<< HEAD
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
+=======
 >>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {

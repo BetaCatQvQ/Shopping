@@ -625,6 +625,7 @@ div.selected_item {
 		</div>
 		<div class="productReviewContentPart">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <c:if test="${reviews.size() != 0}">
             <c:forEach items="${reviews}" var="r">
                 <div class="productReviewItem">
@@ -645,6 +646,8 @@ div.selected_item {
                     <center>暂无评价</center>
             </c:if>
 =======
+=======
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 			<c:if test="${reviews.size() != 0}">
 				<c:forEach items="${reviews}" var="r">
 					<div class="productReviewItem">
@@ -662,6 +665,9 @@ div.selected_item {
 			<c:if test="${reviews.size() eq 0}">
 				<center>暂无评价</center>
 			</c:if>
+<<<<<<< HEAD
+>>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
+=======
 >>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 		</div>
 	</div>
