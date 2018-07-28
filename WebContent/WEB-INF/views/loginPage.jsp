@@ -140,11 +140,7 @@ padding:0;
 <script>
     $(function(){
 
-        <c:if test="${!empty msg}">
-        $("span.errorMessage").html("${msg}");
-        $("div.loginErrorMessageDiv").show();
-        </c:if>
-
+      
         $("form.loginForm").submit(function(){
             if(0==$("#name").val().length||0==$("#password").val().length){
                 $("span.errorMessage").html("请输入账号密码");
@@ -156,6 +152,28 @@ padding:0;
 
         $("form.loginForm input").keyup(function(){
             $("div.loginErrorMessageDiv").hide();
+        });
+        $("#login_form").on('submit',null,function(){
+        	var user = $(this).serialize();
+        	console.log(user);
+        	$.post('${ctx}/user/login.action',user,function(data){
+        		  console.log(data,'--result');
+            		console.log(document.referrer,'--ref')
+        		if(eval(data) == 1){
+					if(document.referrer != window.location.href){
+						window.location.href = document.referrer;
+        			}
+        			if(window.location.pathname == '/Shopping/user/login.action'){
+        				window.location.href = 'http://localhost:8080/Shopping/';
+        			}else{
+        			    window.location = window.location.href;        				
+        			}
+        		} else{
+        			  $("span.errorMessage").html(eval(data));
+        		      $("div.loginErrorMessageDiv").show();
+        		}
+        	})
+        	return false;
         });
     })
 </script>
@@ -176,7 +194,7 @@ padding:0;
                     </div>
                 </div>
                 <div class="login-title">密码登录</div>
-                <form action="${ctx }/user/beginLogin.action" class="loginForm" method="post">
+                <form action="${ctx }/user/beginLogin.action" id="login_form" class="loginForm" method="post">
                     <div class="field">
                         <span class="loginInputIcon">
 					        <span class=" glyphicon glyphicon-user"></span>
