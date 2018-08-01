@@ -72,13 +72,14 @@ public class OrderServiceImpl implements OrderService {
 				for(Order item : oList) {
 					if (orderId == item.getOrderId()) {
 						oDao.delOrder(orderId);
+						return HttpVal.OrderStatus.ORDER_STATUS_SUCCESS;
 					}
 				}
 			}
 		} catch (Exception e) {
-			return HttpVal.OrderStatus.ORDER_DEL_STATUS_FAILED;
+			return HttpVal.OrderStatus.ORDER_STATUS_FAILED;
 		}
-		return HttpVal.OrderStatus.ORDER_DEL_STATUS_SUCCESS;
+		return HttpVal.OrderStatus.ORDER_STATUS_SUCCESS;
 	}
 	
 	

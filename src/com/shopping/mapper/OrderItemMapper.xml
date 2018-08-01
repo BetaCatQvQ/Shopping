@@ -39,4 +39,12 @@
 	    where orderId = #{orderId}
 	    and orderItemId = #{orderItemId}
 	</update>
+	<update id="changeOrderItemQuantity">
+	    update orderitem set quantity = #{quantity} where orderId = #{orderId} and orderItemId = #{orderItemId}
+	</update>
+	<select id="findItemByOrderIdAndItemId" resultMap="BaseResultMap">
+	    select * from orderitem 
+	    where orderId = #{orderId}
+	    and orderItemId = #{orderItemId}
+	</select>
 </mapper>
