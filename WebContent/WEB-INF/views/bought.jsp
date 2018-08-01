@@ -264,17 +264,30 @@ div.productNumber span.arrow {
     
     $(function () {
     	
-    	function change(oid,num,price){
+    	function change(oiid,num,price){
     		num = parseFloat(num);
     		price = parseFloat(price);
-    		$("div[data-oid-total="+oid+"]").text("￥"+(num * price));
+    		$("div[data-oiid-total="+oiid+"]").text("￥"+(num * price));
+    		console.log('-----------change');
+    	}
+    	
+    	function change_quantity(oid,oiid,num){
+    		$.post("${ctx}/orderItem/change.action",{
+    			orderId:oid,
+    			orderItemId:oiid,
+    			quantity:num
+    		},function(data){
+    			console.log(data);
+    		},'JSON')
     	}
     	
     	$(".productNumberSetting").on("change",function (){
-    		const oid = $(this).attr("data-oid");
+    		const oiid = $(this).attr("data-oiid");
+    		const oid = $(this).parents("table").attr("oid");
     		const num = $(this).val();
-    		const price = eval($("div[data-oid-price="+oid+"]").text().replace("￥",""));
-    		change(oid,num,price);
+    		const price = eval($("div[data-oiid-price="+oiid+"]").text().replace("￥",""));
+    		change(oiid,num,price);
+    		change_quantity(oid,oiid,num);
     	});
     	
         $(".productNumberSetting").keyup(function () {
@@ -312,9 +325,15 @@ div.productNumber span.arrow {
  
         });
     	
-    	
+
+        if('' != '${param.orderStatus}'){
+        	changeStatus($("a[orderStatus=${param.orderStatus}]"));
+        }
         $("a[orderStatus]").click(function () {
-            var orderStatus = $(this).attr("orderStatus");
+        	changeStatus(this);
+        });
+        function changeStatus(self){
+        	var orderStatus = $(self).attr("orderStatus");
             if ('all' == orderStatus) {
                 $("table[orderStatus]").show();
             }
@@ -324,8 +343,8 @@ div.productNumber span.arrow {
             }
 
             $("div.orderType div").removeClass("selectedOrderType");
-            $(this).parent("div").addClass("selectedOrderType");
-        });
+            $(self).parent("div").addClass("selectedOrderType");
+        }
 
         $("a.deleteOrderLink").click(function () {
             deleteOrderid = $(this).attr("oid");
@@ -370,17 +389,16 @@ div.productNumber span.arrow {
 
         });
     });
-
 </script>
 <div class="boughtDiv">
     <div class="orderType">
-        <div class="selectedOrderType"><a orderStatus="all" href="#nowhere">所有订单</a></div>
-        <div><a orderStatus="0" href="#nowhere">待付款</a></div>
-        <div><a orderStatus="1" href="#nowhere">待发货</a></div>
-        <div><a orderStatus="2" href="#nowhere">待收货</a></div>
-         <div><a orderStatus="3" href="#nowhere">派送中</a></div>
-        <div><a orderStatus="4" href="#nowhere">待评价</a></div>
-         <div><a orderStatus="5" href="#nowhere" class="noRightborder">已完成</a></div>
+        <div class="selectedOrderType"><a orderStatus="all" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=all">所有订单</a></div>
+        <div><a orderStatus="0" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=0">待付款</a></div>
+        <div><a orderStatus="1" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=1">待发货</a></div>
+        <div><a orderStatus="2" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=2">待收货</a></div>
+         <div><a orderStatus="3" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=3">派送中</a></div>
+        <div><a orderStatus="4" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=4">待评价</a></div>
+         <div><a orderStatus="5" href="${ctx }/common/order.action?pageNo=${param.pageNo}&orderStatus=5" class="noRightborder">已完成</a></div>
         <div class="orderTypeLastOne"><a class="noRightborder"> </a></div>
     </div>
     <div style="clear:both"></div>
@@ -442,7 +460,7 @@ div.productNumber span.arrow {
                         <td valign="middle" class="orderItemProductInfoPartTD" width="100px">
 
                             <div class="orderListItemProductOriginalPrice">￥${oi.productType.price}</div>
-                            <div class="orderListItemProductPrice" data-oid-price="${oi.orderItemId }">￥${oi.productType.salePrice}</div>
+                            <div class="orderListItemProductPrice" data-oiid-price="${oi.orderItemId }">￥${oi.productType.salePrice}</div>
 
                         </td>
                             <td valign="middle" class="orderListItemNumberTD orderItemOrderInfoPartTD" width="100px">
@@ -450,7 +468,7 @@ div.productNumber span.arrow {
                                 <div class="productNumber" style="margin-top:20px;">
                                     <span data-p="p">
                                         <span class="productNumberSettingSpan" >
-                                            <input type="text"  <c:if test="${oi.status !='0' }"> disabled </c:if> data-oid="${oi.orderItemId }" value="${oi.quantity }" class="productNumberSetting">
+                                            <input type="text"  <c:if test="${oi.status !='0' }"> disabled </c:if> data-oiid="${oi.orderItemId }" value="${oi.quantity }" class="productNumberSetting">
                                         </span>
                                         <c:if test="${oi.status=='0' }">
 	                                        <span class="arrow">
@@ -472,7 +490,7 @@ div.productNumber span.arrow {
                                 </div>
                             </td>
                             <td valign="middle" width="120px" class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD">
-                                <div class="orderListItemProductRealPrice" data-oid-total="${oi.orderItemId }" >￥${oi.productType.salePrice * oi.quantity }</div>
+                                <div class="orderListItemProductRealPrice" data-oiid-total="${oi.orderItemId }" >￥${oi.productType.salePrice * oi.quantity }</div>
                                 <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                             </td>
 	                           <c:if test="${st.index == 0 }">
