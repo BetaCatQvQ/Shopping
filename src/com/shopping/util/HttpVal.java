@@ -6,19 +6,19 @@ public class HttpVal {
 	public static final String SHOPPING_CAR_COUNT_KEY = "shoppingCarNum";
 	public static final String SHOPPING_CAR_LIST_KEY = "shoppingCarList";
 	
-	public interface LoginStatus{
+	public static interface LoginStatus{
 		String LOGIN_STATUS_SUCCESS = "{status:1}";
 		String LOGIN_STATUS_FAILED = "{status:0}";
 		String LOGIN_STATUS_FAILED_MSG = "{msg:'%s'}";
 	}
 	
-	public interface OrderStatus{
+	public static interface OrderStatus{
 		/*
 		 * -------------Delete status--------------
 		 */
-		String ORDER_DEL_STATUS_SUCCESS = "{status:1}";
-		String ORDER_DEL_STATUS_FAILED = "{status:0}";
-		String ORDER_DEL_STATUS_FAILED_MSG = "{status:0,msg:'%s'}";
+		String ORDER_STATUS_SUCCESS = "{status:1}";
+		String ORDER_STATUS_FAILED = "{status:0}";
+		String ORDER_STATUS_FAILED_MSG = "{status:0,msg:'%s'}";
 		
 	}
 }

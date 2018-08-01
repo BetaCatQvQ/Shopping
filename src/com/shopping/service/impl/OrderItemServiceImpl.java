@@ -1,6 +1,8 @@
 package com.shopping.service.impl;
 
 import java.math.BigInteger;
+import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -59,5 +61,15 @@ public class OrderItemServiceImpl implements OrderItemService {
 	@Override
 	public void changeOrderStatusForItem(Integer status, Long orderId, Long orderItemId) {
 		oiDao.changeOrderStatusForItem(status, orderId, orderItemId);
+	}
+
+
+	@Override
+	public Boolean changeOrderItemQuantity(BigInteger orderId, BigInteger orderItemId, Integer quantity) {
+		Optional<OrderItem> opt = Optional.ofNullable(oiDao.findItemByOrderIdAndItemId(orderId, orderItemId));
+		opt.ifPresent(item ->{
+			oiDao.changeOrderItemQuantity(orderId, orderItemId, quantity);
+		});
+		return opt.isPresent();
 	}
 }

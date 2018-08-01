@@ -38,7 +38,6 @@ public class OrderController {
 
 	@RequestMapping
 	public String order(HttpSession session, Integer pageNo, Model model) {
-		System.out.println(pageNo);
 		Optional<User> userOpt = Optional.ofNullable((User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY));
 		userOpt.ifPresent(user -> {
 			Page<Order> page = new Page<Order>(pageNo);
@@ -68,13 +67,13 @@ public class OrderController {
 	public String payOrder(@PathVariable("orderId") BigInteger orderid,
 			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
 		Order order = oService.findOrderById(orderid);
-		order.setUser(user);
-		model.addAttribute("order", order);
 		float sum = 0.0F;
 		for (OrderItem item : order.getOrderItems()) {
 			sum = (float) (sum + (item.getProductType().getSalePrice() * item.getQuantity()));
 		}
+		order.setUser(user);
 		order.setTotal(sum);
+		model.addAttribute("order", order);
 		return "confirmPay";
 	}
 
@@ -83,4 +82,6 @@ public class OrderController {
 			@PathVariable("orderid") BigInteger orderId) {
 		return oService.delOrder(user, orderId);
 	}
+	
+	
 }
