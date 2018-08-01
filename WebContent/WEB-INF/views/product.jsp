@@ -378,14 +378,14 @@ div.selected_item {
 </style>
 <script>
     $(function () {
-    	
+
     	$("div.product_type").click(function(){
     		if($(this).hasClass("selected_item"))return;
     		$(this).siblings().removeClass("selected_item");
     		$(this).addClass("selected_item");
     		window.location = $(this).attr("data-id")+".action";
     	});
-    	
+
         $("img.smallImg").mouseenter(function () {
             var bigImgURL = $(this).attr("bigImgURL");
             $("img.bigImg").attr("src", bigImgURL);
@@ -403,7 +403,7 @@ div.selected_item {
                 num = stock;
             $(".productNumberSetting").val(num);
         });
-        
+
         $(".increaseNumber").click(function () {
             var num = $(".productNumberSetting").val();
             num++;
@@ -411,8 +411,8 @@ div.selected_item {
                 num = stock;
             $(".productNumberSetting").val(num);
         });
-       
-       
+
+
         $(".decreaseNumber").click(function () {
             var num = $(".productNumberSetting").val();
             --num;
@@ -453,7 +453,7 @@ div.selected_item {
              );
             return false;
         }
-        
+
         $(".addCartLink").click(function () {
         	$.post("${ctx}/user/checkLogin.action",function(data){
         		if(data > 0){
@@ -492,11 +492,11 @@ div.selected_item {
 					</div>
 
 					<div class="promotionDiv">
-						<!-- 
-						<span class="promotionPriceDesc" style="margin-top:10px;">价格</span> 
+						<!--
+						<span class="promotionPriceDesc" style="margin-top:10px;">价格</span>
 						<span style="margin-top:-10px;">¥</span> <span style="margin-top:10px;">${defaultProduct.price}</span><br>
 						<span class="promotionPriceDesc">优惠价</span>
-						<span class="promotionPriceYuan">¥</span> 
+						<span class="promotionPriceYuan">¥</span>
 						<span class="promotionPrice">${defaultProduct.salePrice}</span>
 					 -->
 						<p style="margin: 0px;">
@@ -624,30 +624,6 @@ div.selected_item {
 			</a>
 		</div>
 		<div class="productReviewContentPart">
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <c:if test="${reviews.size() != 0}">
-            <c:forEach items="${reviews}" var="r">
-                <div class="productReviewItem">
-                    <div class="productReviewItemDesc">
-                        <div class="productReviewItemContent">
-                                ${r.content}
-                        </div>
-                        <div class="productReviewItemDate">${r.reviewCreateDate}&nbsp;${r.orderItem.productType.productTypeName }</div>
-                    </div>
-                    <div class="productReviewItemUserInfo">
-                            ${r.user.userName.charAt(0)}***<span class="userInfoGrayPart">（匿名）</span>
-                    </div>
-                    <div style="clear:both"></div>
-                </div>
-            </c:forEach>
-            </c:if>
-            <c:if test="${reviews.size() eq 0}">
-                    <center>暂无评价</center>
-            </c:if>
-=======
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 			<c:if test="${reviews.size() != 0}">
 				<c:forEach items="${reviews}" var="r">
 					<div class="productReviewItem">
@@ -665,10 +641,6 @@ div.selected_item {
 			<c:if test="${reviews.size() eq 0}">
 				<center>暂无评价</center>
 			</c:if>
-<<<<<<< HEAD
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
-=======
->>>>>>> fa4671f8f918c2442df4a4820cf931e890fecf6b
 		</div>
 	</div>
 </div>

@@ -4,27 +4,27 @@ import java.math.BigInteger;
 
 public class OrderItem {
 	/**
-	 * ¶©µ¥Ïî±àºÅ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private BigInteger orderItemId;
 	/**
-	 * ²úÆ·ÀàÐÍ
+	 * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	 */
 	private ProductType productType;
 	/**
-	 * ¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Order order;
 	/**
-	 * ÊýÁ¿
+	 * ï¿½ï¿½ï¿½ï¿½
 	 */
 	private Integer quantity;
 	/**
-	 * ±¸×¢
+	 * ï¿½ï¿½×¢
 	 */
 	private String remark;
 	/**
-	 * ¶©µ¥Ïî×´Ì¬
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	 */
 	private Integer status;
 

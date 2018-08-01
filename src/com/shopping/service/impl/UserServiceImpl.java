@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User register(final User user) {
+	public User register(User user) {
 		Optional<User> optional = Optional.ofNullable(user);
 		optional.ifPresent(item -> {
 			item.setRole(0);

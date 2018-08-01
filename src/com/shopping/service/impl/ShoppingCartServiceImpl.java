@@ -84,7 +84,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			count = scDao.changeQuantity(userId, scCount.getShoppingCartId(), scQuantity + quantity);
 		} else {
 			// 添加商品至购物车
-			count = scDao.addShoppingCart(ptId, userId, restQuantity);
+			count = scDao.addShoppingCart(ptId, userId, quantity);
 		}
 		return count;
 	}

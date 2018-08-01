@@ -24,7 +24,7 @@ public class UserController {
 	private ShoppingCartService scService;
 	
 	/**
-	 * Ìø×ªÖÁµÇÂ¼Ò³Ãæ
+	 * ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼Ò³ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -34,7 +34,7 @@ public class UserController {
 	}
 
 	/**
-	 * µÇÂ¼
+	 * ï¿½ï¿½Â¼
 	 * 
 	 * @param session
 	 * @param user
@@ -69,14 +69,14 @@ public class UserController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/logout")
+    @RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home.action";
 	}
 
 	/**
-	 * Ìø×ªÖÁ×¢²áÒ³Ãæ
+	 * ï¿½ï¿½×ªï¿½ï¿½×¢ï¿½ï¿½Ò³ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -86,7 +86,7 @@ public class UserController {
 	}
 
 	/**
-	 * ×¢²á
+	 * ×¢ï¿½ï¿½
 	 * 
 	 * @param user
 	 * @param session
@@ -99,7 +99,7 @@ public class UserController {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñµÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Â¼
 	 * 
 	 * @param session
 	 * @return

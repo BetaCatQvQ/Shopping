@@ -29,6 +29,7 @@
 		SELECT * FROM `shoppingcart` AS sc
 		INNER JOIN `producttype` AS pt ON sc.`productTypeId` = pt.`productTypeId`
 		WHERE `userId` = #{userId}
+		ORDER BY sc.`shoppingCartCreateDate` DESC
 	</select>
 	
 	<delete id="delShoppingCart">

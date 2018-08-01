@@ -13,8 +13,10 @@ import com.shopping.dao.OrderDao;
 import com.shopping.dao.OrderItemDao;
 import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
+import com.shopping.entity.Page;
 import com.shopping.entity.User;
 import com.shopping.service.OrderService;
+import com.shopping.util.HttpVal;
 import com.shopping.util.SnowFlake;
 
 @Service
@@ -26,8 +28,12 @@ public class OrderServiceImpl implements OrderService {
 	private OrderItemDao oiDao;
 
 	@Override
-	public List<Order> findOrderByUserId(BigInteger id) {
-		return Objects.isNull(id)?null:oDao.findOrderByUserId(id);
+	public Page<Order> findOrderByUserId(BigInteger id,Page<Order> page) {
+		page.setPageCount(5);//Modify pageCount
+		page.setPageNo(page.getPageNo());//Re-count pageNo
+		List<Order> data = Objects.isNull(id)?null:oDao.findOrderByUserId(id,page);
+		page.setData(data);
+		return page;
 	}
 
 	@Override
@@ -52,6 +58,24 @@ public class OrderServiceImpl implements OrderService {
 			oiDao.createOrderItem(order.getOrderId().longValue(), item, 0);
 		});
 		return order;
+	}
+
+	@Override
+	public String delOrder(User user, BigInteger orderId) {
+		try {
+			user = Objects.requireNonNull(user);
+			List<Order> oList = Objects.requireNonNull(oDao.findOrderByUserId(user.getUserId(),new Page<>(1)));
+			if (oList.size() != 0) {
+				for(Order item : oList) {
+					if (orderId == item.getOrderId()) {
+						oDao.delOrder(orderId);
+					}
+				}
+			}
+		} catch (Exception e) {
+			return HttpVal.OrderStatus.ORDER_DEL_STATUS_FAILED;
+		}
+		return HttpVal.OrderStatus.ORDER_DEL_STATUS_SUCCESS;
 	}
 	
 	

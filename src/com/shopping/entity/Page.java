@@ -16,6 +16,14 @@ public class Page<T> {
 	 */
 	private Integer startRow;
 	/**
+	 * 记录总数
+	 */
+	private Integer rowTotal;
+	/**
+	 * 页面总数
+	 */
+	private Integer pageTotal;
+	/**
 	 * 存储查询的数据
 	 */
 	private List<T> data;
@@ -27,7 +35,7 @@ public class Page<T> {
 
 	public void setPageNo(Integer pageNo) {
 		this.pageNo = pageNo;
-		this.startRow = (pageNo - 1) * pageCount;
+		calcStartRow();
 	}
 
 	public Integer getPageCount() {
@@ -36,6 +44,7 @@ public class Page<T> {
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+		calcStartRow();
 	}
 
 	public Integer getStartRow() {
@@ -50,6 +59,19 @@ public class Page<T> {
 		this.data = data;
 	}
 
+	public Integer getRowTotal() {
+		return rowTotal;
+	}
+
+	public void setRowTotal(Integer rowTotal) {
+		this.rowTotal = rowTotal;
+		this.pageTotal = (this.rowTotal - 1) / this.pageCount + 1;
+	}
+
+	public Integer getPageTotal() {
+		return pageTotal;
+	}
+
 	/**
 	 *
 	 * @param pageNo页锟斤拷
@@ -60,6 +82,17 @@ public class Page<T> {
 			pageNo = 1;
 		}
 		this.pageNo = pageNo;
+		calcStartRow();
+	}
+
+	public Page() {
+	}
+
+	// method
+	/**
+	 * calc Start Row
+	 */
+	public void calcStartRow() {
 		this.startRow = (pageNo - 1) * pageCount;
 	}
 
