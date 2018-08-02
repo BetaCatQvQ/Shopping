@@ -1,15 +1,12 @@
 package com.shopping.service.impl;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Resource;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dao.OrderDao;

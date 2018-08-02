@@ -26,6 +26,10 @@ public class Order {
 	 * Total price 
 	 */
 	private Float total;
+	/**
+	 *  ’ªıµÿ÷∑
+	 */
+	private Address address;
 
 	// getter --- setter
 	public BigInteger getOrderId() {
@@ -66,6 +70,14 @@ public class Order {
 
 	public void setTotal(Float total) {
 		this.total = total;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 }

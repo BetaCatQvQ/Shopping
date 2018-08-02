@@ -22,8 +22,7 @@ public class UserController {
 
 	@Resource
 	private ShoppingCartService scService;
-
-
+	
 	/**
 	 * ��ת����¼ҳ��
 	 * 
@@ -51,6 +50,7 @@ public class UserController {
 		}
 		return "redirect:/home.action";
 	}
+	
 	@PostMapping("/login")
 	public @ResponseBody String login(HttpSession session, User user) {
 		User newUser = uService.commonUserLogin(user.getUserName(), user.getUserPwd());
@@ -62,6 +62,13 @@ public class UserController {
 		}
 		return String.format(HttpVal.LoginStatus.LOGIN_STATUS_FAILED_MSG,"用户名或密码错误");
 	}
+	
+	/**
+	 * �ǳ�
+	 * 
+	 * @param session
+	 * @return
+	 */
     @RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

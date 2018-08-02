@@ -12,7 +12,6 @@
 	<resultMap type="Order" id="FullResultMap" extends="BaseResultMap">
 		<association property="user" resultMap="com.shopping.dao.UserDao.BaseResultMap" />
 	</resultMap>
-
 	
 	<resultMap type="Order" id="SuperResultMap" extends="BaseResultMap">
 		<association property="user"  resultMap="com.shopping.dao.UserDao.SuperResultMap" />
@@ -24,10 +23,12 @@
 	
 	
 	<select id="findOrderByUserId" resultMap="SuperFullResultMap">
-	    select * from `order` as o
-	    inner join orderitem as oi on o.orderId = oi.orderId
-	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
-	    where userId = #{id}
+		select * from orderitem as oi
+		inner join producttype as pt on oi.producttypeid = pt.producttypeid
+		inner join (
+		    select * from `order` as o where o.userId = #{id} limit #{page.startRow},#{page.pageCount}
+		    ) as o on o.orderId = oi.orderId;
+		    
 	</select>
 	<select id="findOrderById" resultMap="SuperFullResultMap">
 	    select * from `order` as o

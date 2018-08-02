@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.shopping.entity.Address;
 import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
 import com.shopping.entity.Page;
-import com.shopping.entity.ShippingAddress;
 import com.shopping.entity.User;
 import com.shopping.service.OrderService;
 import com.shopping.service.ProductTypeService;
@@ -51,7 +51,7 @@ public class OrderController {
 
 	@PostMapping("/createOrder")
 	public String createOrder(String message, Long productTypeId, Integer number,
-			@ModelAttribute("address") ShippingAddress address,
+			@ModelAttribute("address") Address address,
 			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
 		OrderItem item = new OrderItem();
 		item.setProductType(ptService.findById(productTypeId));
