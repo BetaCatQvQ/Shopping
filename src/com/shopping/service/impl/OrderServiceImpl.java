@@ -30,13 +30,21 @@ public class OrderServiceImpl implements OrderService {
 	@Resource
 	private OrderItemDao oiDao;
 
-	@Override
-	public Page<Order> findOrderByUserId(BigInteger id,Page<Order> page) {
+	public Page<Order> findOrderByUserId(BigInteger id,Page<Order> page,String status) {
 		page.setPageCount(5);//Modify pageCount
 		page.setPageNo(page.getPageNo());//Re-count pageNo
-		List<Order> data = Objects.isNull(id)?null:oDao.findOrderByUserId(id,page);
+		List<Order> data = Objects.isNull(id)?null:oDao.findOrderByUserId(id,page,status);
 		page.setData(data);
 		return page;
+	}
+	
+	@Override
+	public Page<Order> findOrderByUserId(BigInteger id,Page<Order> page) {
+		return findOrderByUserId(id, page,"");
+	}
+	
+	public List<Order> findOrderByUserId(BigInteger id) {
+		return Objects.isNull(id)?null:oDao.findOrderByUserId(id,null,"");
 	}
 
 	@Override
@@ -67,11 +75,12 @@ public class OrderServiceImpl implements OrderService {
 	public String delOrder(User user, BigInteger orderId) {
 		try {
 			user = Objects.requireNonNull(user);
-			List<Order> oList = Objects.requireNonNull(oDao.findOrderByUserId(user.getUserId(),new Page<>(1)));
+			List<Order> oList = Objects.requireNonNull(findOrderByUserId(user.getUserId()));
 			if (oList.size() != 0) {
 				for(Order item : oList) {
-					if (orderId == item.getOrderId()) {
-						oDao.delOrder(orderId);
+					System.out.println(orderId + "<-->" + item.getOrderId() + " : " + (item.getOrderId().equals(orderId)));
+					if (item.getOrderId().equals(orderId)) {
+						oDao.delOrder(user.getUserId(),orderId);
 						return HttpVal.OrderStatus.ORDER_STATUS_SUCCESS;
 					}
 				}

@@ -4,19 +4,27 @@ import java.util.List;
 
 public class Page<T> {
 	/**
-	 * Òª²éÑ¯µÄÒ³ºÅ£¬Ä¬ÈÏµÚ1Ò³
+	 * è¦æŸ¥è¯¢çš„é¡µå·ï¼Œé»˜è®¤ç¬¬1é¡µ
 	 */
 	private Integer pageNo = 1;
 	/**
-	 * Ã¿Ò³µÄ¼ÇÂ¼Êı£¬Ä¬ÈÏ30Ìõ
+	 * æ¯é¡µçš„è®°å½•æ•°ï¼Œé»˜è®¤30æ¡
 	 */
 	private Integer pageCount = 30;
 	/**
-	 * ²éÑ¯ÆğÊ¼ĞĞ
+	 * æŸ¥è¯¢èµ·å§‹è¡Œ
 	 */
 	private Integer startRow;
 	/**
-	 * ´æ´¢²éÑ¯µÄÊı¾İ
+	 * è®°å½•æ€»æ•°
+	 */
+	private Integer rowTotal;
+	/**
+	 * é¡µé¢æ€»æ•°
+	 */
+	private Integer pageTotal;
+	/**
+	 * å­˜å‚¨æŸ¥è¯¢çš„æ•°æ®
 	 */
 	private List<T> data;
 
@@ -27,7 +35,7 @@ public class Page<T> {
 
 	public void setPageNo(Integer pageNo) {
 		this.pageNo = pageNo;
-		this.startRow = (pageNo - 1) * pageCount;
+		calcStartRow();
 	}
 
 	public Integer getPageCount() {
@@ -36,6 +44,7 @@ public class Page<T> {
 
 	public void setPageCount(Integer pageCount) {
 		this.pageCount = pageCount;
+		calcStartRow();
 	}
 
 	public Integer getStartRow() {
@@ -50,9 +59,22 @@ public class Page<T> {
 		this.data = data;
 	}
 
+	public Integer getRowTotal() {
+		return rowTotal;
+	}
+
+	public void setRowTotal(Integer rowTotal) {
+		this.rowTotal = rowTotal;
+		this.pageTotal = (this.rowTotal - 1) / this.pageCount + 1;
+	}
+
+	public Integer getPageTotal() {
+		return pageTotal;
+	}
+
 	/**
 	 *
-	 * @param pageNoÒ³ï¿½ï¿½
+	 * @param pageNoé¡µé”Ÿæ–¤æ‹·
 	 */
 	public Page(Integer pageNo) {
 		super();
@@ -60,6 +82,17 @@ public class Page<T> {
 			pageNo = 1;
 		}
 		this.pageNo = pageNo;
+		calcStartRow();
+	}
+
+	public Page() {
+	}
+
+	// method
+	/**
+	 * calc Start Row
+	 */
+	public void calcStartRow() {
 		this.startRow = (pageNo - 1) * pageCount;
 	}
 

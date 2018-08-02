@@ -8,7 +8,6 @@ import java.util.Optional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.shopping.entity.Order;
@@ -38,7 +38,7 @@ public class OrderController {
 	ProductTypeService ptService;
 
 	@RequestMapping
-	public String order(HttpSession session, Integer pageNo, Model model) {
+	public String order(HttpSession session, Integer pageNo,String orderStatu, Model model) {
 		Optional<User> userOpt = Optional.ofNullable((User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY));
 		userOpt.ifPresent(user -> {
 			Page<Order> page = new Page<Order>(pageNo);
@@ -79,8 +79,8 @@ public class OrderController {
 	}
 
 	@PostMapping("/delOrder/{orderid}")
-	public String delOrder(@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
-			@PathVariable("orderid") BigInteger orderId) {
+	public @ResponseBody String delOrder(@PathVariable("orderid") BigInteger orderId,HttpSession session) {
+		User user = (User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
 		return oService.delOrder(user, orderId);
 	}
 	
