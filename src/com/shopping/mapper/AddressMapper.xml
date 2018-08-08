@@ -14,4 +14,17 @@
 	<resultMap type="Address" id="FullResultMap" extends="BaseResultMap">
 		<association property="user" resultMap="com.shopping.dao.UserDao.BaseResultMap"/>
 	</resultMap>
+	
+	<select id="getList" resultMap="BaseResultMap">
+		SELECT * FROM `address` WHERE `userId` = #{userId}
+	</select>
+	
+	<update id="update">
+		UPDATE `address` SET `addressName` = #{address.addressName}, `consignee` = #{address.consignee}, `phone` = #{address.phone}
+		WHERE `addressId` = #{address.addressId} AND `userId` = #{address.user.userId}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM `address` WHERE `addressId` = #{addressId} AND `userId` = #{userId}
+	</delete>
 </mapper>

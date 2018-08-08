@@ -90,7 +90,6 @@ div.productParamterList span {
 div.productDetailImagesPart img {
 	display: block;
 	width: 790px;
-	margin: 20px 0px;
 }
 
 div.productReviewDiv {

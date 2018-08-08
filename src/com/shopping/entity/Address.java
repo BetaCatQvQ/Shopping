@@ -1,14 +1,19 @@
 package com.shopping.entity;
 
+import com.shopping.annotation.FK;
+import com.shopping.annotation.ID;
+
 public class Address {
 	/**
 	 * 收货地址编号
 	 */
+	@ID
 	private Integer addressId;
 	/**
 	 * 用户
 	 */
-	private User user;
+	@FK
+	private User user = new User();
 	/**
 	 * 收货地址名称
 	 */
@@ -61,6 +66,13 @@ public class Address {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	
+	// toString
+	@Override
+	public String toString() {
+		return "Address [addressId=" + addressId + ", user=" + user + ", addressName=" + addressName + ", consignee="
+				+ consignee + ", phone=" + phone + "]";
 	}
 
 }
