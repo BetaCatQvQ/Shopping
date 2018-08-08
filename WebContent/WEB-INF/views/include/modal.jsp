@@ -9,6 +9,9 @@
                         class="sr-only">Close</span></button>
                 <h4 class="modal-title">确认删除？</h4>
             </div>
+             <div class="modal-body">
+             <h3>删除后不可恢复！</h3>
+            </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
                 <button class="btn btn-primary deleteConfirmButton" id="submit" type="button">确认</button>

@@ -157,14 +157,11 @@ padding:0;
         	var user = $(this).serialize();
         	console.log(user);
         	$.post('${ctx}/user/login.action',user,function(data){
-        		  console.log(data,'--result');
-            		console.log(document.referrer,'--ref')
         		if(eval(data) == 1){
-					if(document.referrer != window.location.href){
-						window.location.href = document.referrer;
-        			}
-        			if(window.location.pathname == '/Shopping/user/login.action'){
-        				window.location.href = 'http://localhost:8080/Shopping/';
+					if(document.referrer != '' && document.referrer != window.location.href){
+						window.location = document.referrer;
+        			}else if(window.location.pathname == '/Shopping/user/login.action'){
+        				window.location = 'http://localhost:8080/Shopping/';
         			}else{
         			    window.location = window.location.href;        				
         			}

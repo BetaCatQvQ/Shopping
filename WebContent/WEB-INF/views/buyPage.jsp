@@ -245,7 +245,37 @@
         color: white;
         float: right;
     }
-</style>
+    .address_list{
+        padding: 5px;
+    }
+    .address_list > .address_item{
+        float:left;
+        padding: 10px;
+        margin-right: 5px;
+	    max-width: 200px;
+	    border: 2px dashed gray;
+	    overflow: hidden;
+	    box-sizing: border-box;
+	    word-wrap: break-word; 
+	       
+	 }
+	 .address_add{
+	    height: 75px;
+	    width: 100px;
+	    color: black;
+	    line-height: 100%;
+	    text-align: center;
+	    font-size: 52px;
+	 }
+	 .address_add:hover{
+	    cursor: pointer;
+	 }
+	 .address_item > .addressName{
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    white-space: nowrap;
+	 }
+</style>	
 
 <script>
     $(function () {
@@ -277,8 +307,46 @@
         $("a.notImplementLink").click(function () {
             alert("这个功能没做，蛤蛤~");
         });
+        $('body').on('click',"div.address_item[data-addressid]",function(){
+        	$("input[name='addressId']").val($(this).attr('data-addressid'));
+        	$(this).css("border","2px dashed red");
+        	$(this).siblings().css("border","2px dashed gray");
+        });
+        get_address();
     });
-
+let address_list = [];
+const get_address = () => {
+ 	let address_item = '<div class="address_item" data-addressId=\'addr_addressId\'>\
+					        <div class="addressName">\
+					             地址:<span name="addressName">item_name</span>\
+					        </div>\
+					        <div class="consignee">\
+					            收货人:<span name="consignee">item_consignee</span>\
+					        </div>\
+					        <div class="phone">\
+					            手机号:<span name="phone">item_phone</span>\
+					        </div>\
+					    </div>';
+	const url = '${ctx}/address/list.action';
+	$.get(url,{},(data)=>{
+	 data = eval(data);
+	 $(data).each((index,item)=>{
+		 let c_item = address_item.replace(/item_name/,item.addressName);
+		 c_item = c_item.replace(/item_consignee/,item.consignee);
+		 c_item = c_item.replace(/item_phone/,item.phone);
+		 c_item = c_item.replace(/addr_addressId/,item.addressId);
+		 let ele_item;
+		 if(item.addressId == 1){
+			 ele_item = $(c_item).css("border","2px dashed red");
+			 $("input[name='addressId']").val(item.addressId);
+		 }else{
+			 ele_item = $(c_item);
+		 }
+		 $(".address_list").prepend(ele_item);
+		 address_list.push(item);
+	 });
+	},'json');
+}
 </script>
 <div class="buyPageDiv">
     <form action="${ctx }/common/order/createOrder.action" method="post">
@@ -291,26 +359,30 @@
         <div class="address">
             <div class="addressTip">输入收货地址</div>
             <div>
-
+            <div class="address_list">
+                    <div class="address_item address_add">
+                        <span class="icon">+</span>
+                    </div>
+            </div>
+             <input hidden name="addressId" value="" />
+            <div style="clear:both;"></div>
+               <!-- 
                 <table class="addressTable">
                     <tr>
                         <td class="firstColumn">详细地址<span class="redStar">*</span></td>
 
-                        <td><textarea name="address" style="margin: 0px 0px 10px; width: 378px; height: 99px;" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌号码，楼层和房间号等信息"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>邮政编码</td>
-                        <td><input name="postalcode" placeholder="如果您不清楚邮递区号,请填写000000" type="text"></td>
+                        <td><textarea name="addressName" style="margin: 0px 0px 10px; width: 378px; height: 99px;" placeholder="建议您如实填写详细收货地址，例如接到名称，门牌号码，楼层和房间号等信息"></textarea></td>
                     </tr>
                     <tr>
                         <td>收货人姓名<span class="redStar">*</span></td>
-                        <td><input name="userName" placeholder="长度不超过25个字符" type="text"></td>
+                        <td><input name="consignee" placeholder="长度不超过25个字符" type="text"></td>
                     </tr>
                     <tr>
                         <td>手机号码 <span class="redStar">*</span></td>
                         <td><input name="phone" placeholder="请输入11位手机号码" type="text"></td>
                     </tr>
                 </table>
+                -->
 
             </div>
 
