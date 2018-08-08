@@ -46,4 +46,5 @@ public class AddressServiceImpl implements AddressService {
 			return null;
 		}
 		return aDao.findAddressByUser(userId);
+	}
 }
