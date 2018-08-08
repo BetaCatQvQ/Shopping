@@ -3,10 +3,13 @@ package com.shopping.entity;
 import java.math.BigInteger;
 import java.util.Date;
 
+import com.shopping.annotation.ID;
+
 public class User {
 	/**
 	 * 用户编号
 	 */
+	@ID
 	private BigInteger userId;
 	/**
 	 * 用户名

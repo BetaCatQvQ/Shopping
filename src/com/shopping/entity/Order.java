@@ -4,32 +4,38 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+import com.shopping.annotation.FK;
+import com.shopping.annotation.ID;
+
 public class Order {
 	/**
 	 * 订单编号
 	 */
+	@ID
 	private BigInteger orderId;
 	/**
 	 * 用户
 	 */
-	private User user;
+	@FK
+	private User user = new User();
 	/**
 	 * 订单创建时间
 	 */
 	private Date orderCreateDate;
-	
+
 	/**
-	 * Order item list 
+	 * Order item list
 	 */
 	private List<OrderItem> orderItems;
 	/**
-	 * Total price 
+	 * Total price
 	 */
 	private Float total;
 	/**
 	 * 收货地址
 	 */
-	private Address address;
+	@FK
+	private Address address = new Address();
 
 	// getter --- setter
 	public BigInteger getOrderId() {

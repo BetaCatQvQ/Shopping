@@ -1,7 +1,6 @@
 package com.shopping.dao;
 
 import java.math.BigInteger;
-import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 

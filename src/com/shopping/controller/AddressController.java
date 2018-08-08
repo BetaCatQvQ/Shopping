@@ -21,7 +21,7 @@ import com.shopping.util.HttpVal;
 public class AddressController {
 	@Resource
 	private AddressService aService;
-	
+
 	@GetMapping("/list")
 	public @ResponseBody List<Address> list(HttpSession session) {
 		User user = (User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
@@ -30,5 +30,5 @@ public class AddressController {
 		}
 		return aService.findAddressByUser(user.getUserId());
 	}
-	
+
 }
