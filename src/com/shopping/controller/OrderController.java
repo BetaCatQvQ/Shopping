@@ -38,12 +38,12 @@ public class OrderController {
 	ProductTypeService ptService;
 
 	@RequestMapping
-	public String order(HttpSession session, Integer pageNo,String orderStatu, Model model) {
+	public String order(HttpSession session, Integer pageNo,String orderStatus, Model model) {
 		Optional<User> userOpt = Optional.ofNullable((User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY));
 		userOpt.ifPresent(user -> {
 			Page<Order> page = new Page<Order>(pageNo);
-			page = oService.findOrderByUserId(user.getUserId(), page);
-			model.addAttribute("page", page);
+			page = oService.findOrderByUserId(user.getUserId(), page,orderStatus==null?"all":orderStatus);
+			model.addAttribute("page_def", page);
 			model.addAttribute("orders", page.getData());
 		});
 		return "bought";
@@ -51,29 +51,27 @@ public class OrderController {
 
 	@PostMapping("/createOrder")
 	public String createOrder(String message, Long productTypeId, Integer number,
-			@ModelAttribute("address") Address address,
+			Integer addressId,
 			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
 		OrderItem item = new OrderItem();
+		Address address = new Address();
+		address.setAddressId(addressId);
 		item.setProductType(ptService.findById(productTypeId));
 		item.setQuantity(number);
 		item.setStatus(0);
 		item.setRemark(message == null ? "" : message);
 		List<OrderItem> items = new ArrayList<>();
 		items.add(item);
-		model.addAttribute("order", oService.createOrder(user, items));
+		model.addAttribute("order", oService.createOrder(user, items,address));
 		return "confirmPay";
 	}
 
 	@GetMapping("/payOrder/{orderId}")
 	public String payOrder(@PathVariable("orderId") BigInteger orderid,
-			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
-		Order order = oService.findOrderById(orderid);
-		float sum = 0.0F;
-		for (OrderItem item : order.getOrderItems()) {
-			sum = (float) (sum + (item.getProductType().getSalePrice() * item.getQuantity()));
-		}
+						   @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, 
+						   Model model) {
+		Order order = oService.findOrderById(orderid);		
 		order.setUser(user);
-		order.setTotal(sum);
 		model.addAttribute("order", order);
 		return "confirmPay";
 	}

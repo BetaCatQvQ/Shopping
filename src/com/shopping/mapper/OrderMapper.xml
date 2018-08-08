@@ -18,6 +18,7 @@
 	</resultMap>
 	
 	<resultMap type="Order" id="SuperFullResultMap" extends="BaseResultMap">
+		<association property="address"  resultMap="com.shopping.dao.AddressDao.BaseResultMap" />
 		<collection property="orderItems" ofType="OrderItem" resultMap="com.shopping.dao.OrderItemDao.SuperFullResultMap" />
 	</resultMap>
 	
@@ -26,18 +27,46 @@
 		select * from orderitem as oi
 		inner join producttype as pt on oi.producttypeid = pt.producttypeid
 		inner join (
-		    select * from `order` as o where o.userId = #{id} limit #{page.startRow},#{page.pageCount}
-		    ) as o on o.orderId = oi.orderId;
-		    
+		    select * from `order` as o where o.userId = #{id} 
+		    ) as o on o.orderId = oi.orderId
+		    <if test="orderStatus != '' and orderStatus != 'all'">
+		      where oi.status = #{orderStatus}
+		    </if>
+		     <if test="page != null">
+ 		        limit #{page.startRow},#{page.pageCount}
+		    </if>
 	</select>
 	<select id="findOrderById" resultMap="SuperFullResultMap">
 	    select * from `order` as o
 	    inner join orderitem as oi on o.orderId = oi.orderId
 	    inner join producttype as pt on oi.producttypeid = pt.producttypeid
+	    inner join address as a on a.addressId = o.addressId
 	    where o.orderId = #{oId}
 	</select>
 	
 	<insert id="createOrder">
-	    insert into `order` values(#{orderId},#{user.userId},#{orderCreateDate})
+	    insert into `order` values(#{orderId},#{address.addressId},#{user.userId},#{orderCreateDate})
 	</insert>
+	<delete id="delOrder">
+	  	DELETE from orderitem 
+	    where orderId = #{orderId};
+	    DELETE from `order`
+	    where orderId = #{orderId} 
+	    and userId = #{userId}
+	  
+	</delete>
+	<select id="countUserOrderTotal" resultType="java.lang.Integer">
+	    select count(1) as 'count' from `order` as o1
+			inner join (
+			      select o.orderId as ooid
+			      from orderitem as oi1
+			      inner join (
+			          select * from `order` as o2 where o2.userId = #{userId}
+			          ) as o on o.`orderId` = oi1.`orderId`
+			      <if test="status != 'all'">
+			          where oi1.status = #{status}
+			      </if>
+			      	  group by o.orderId
+    	) as oi on oi.ooid = o1.orderId;
+	</select>
 </mapper>

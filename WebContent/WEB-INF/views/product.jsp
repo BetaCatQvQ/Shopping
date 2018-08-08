@@ -519,13 +519,12 @@ div.selected_item {
 				</div>
 			</div>
 			<div style="color: #999;">
-				类型
-				<c:forEach items="${productTypes }" var="item">
-					<div id="${product.productId }" data-id="${item.productTypeId}"
-						class="product_type <c:if test="${item.productTypeId eq defaultProduct.productTypeId}">selected_item</c:if>">
-						<img src="${ctx}${item.productTypeImagePath}" width="30px" /> <span>${item.productTypeName}</span>
-					</div>
-				</c:forEach>
+					<c:forEach items="${productTypes }" var="item">
+						<div id="${product.productId }" data-id="${item.productTypeId}"
+							class="product_type <c:if test="${item.productTypeId eq defaultProduct.productTypeId}">selected_item</c:if>">
+							<img src="${ctx}${item.productTypeImagePath}" width="30px" /> <span>${item.productTypeName}</span>
+						</div>
+					</c:forEach>
 			</div>
 			<div class="productNumber">
 				<span>数量&nbsp;</span> <span> <span
