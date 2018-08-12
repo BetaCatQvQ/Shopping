@@ -88,4 +88,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		}
 		return count;
 	}
+	
+	@Override
+	public List<ShoppingCart> getByUserIdAndShoppingCartIds(Integer[] scIds, BigInteger userId) {
+		return scDao.getByUserIdAndShoppingCartIds(scIds, userId);
+	}
 }

@@ -60,4 +60,16 @@
 		SELECT `shoppingCartId` FROM `shoppingcart`
 		WHERE `productTypeId` = #{ptId} AND `userId` = #{userId}
 	</select>
+	
+	<select id="getByUserIdAndShoppingCartIds" resultMap="FullResultMap">
+		SELECT * FROM `shoppingcart` AS sc
+		INNER JOIN `producttype` AS pt ON pt.`productTypeId` = sc.`productTypeId`
+		WHERE sc.`shoppingCartId`
+		<trim prefix=" IN(" suffix=")" suffixOverrides=",">
+			<foreach collection="scIds" item="scId">
+				#{scId},
+			</foreach>
+		</trim>
+		AND sc.`userId` = 1
+	</select>
 </mapper>

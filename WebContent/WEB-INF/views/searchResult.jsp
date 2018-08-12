@@ -199,22 +199,75 @@ em {
 
 <div class="workArea">
 	<div class="searchProducts">
+		<div id="saveVal">
+			<form action="${ctx }/search.action" method="post"
+				id="conditionSearch">
+				<input id="keywordsInput" type="hidden" name="keywords"
+					value="${param.keywords}" /> <input id="pageNoInput" type="hidden"
+					name="pageNo" value="${requestScope.sc.pageNo }" /> <input
+					id="cthIdInput" type="hidden" name="cthId"
+					value="${requestScope.sc.cthId }" /> <input
+					id="comprehensiveInput" type="hidden" name="comprehensive"
+					value="${requestScope.sc.comprehensive }" /> <input
+					id="newProductInput" type="hidden" name="newProduct"
+					value="${requestScope.sc.newProduct }" /> <input
+					id="salesVolumeInput" type="hidden" name="salesVolume"
+					value="${requestScope.sc.salesVolume }" /> <input id="priceInput"
+					type="hidden" name="price" value="${requestScope.sc.price }" />
+			</form>
+		</div>
 		<div class="filter">
-			<a class="fSort"
-				<c:if test="${'all'==param.sort||empty param.sort}">class="fSort-cur"</c:if>
-				href="/sortProduct?sort=all&keyword=${param.keyword}">综合</a> <a
-				class="fSort"
-				<c:if test="${'reviewCount'==param.sort}">class="fSort-cur"</c:if>
-				href="/sortProduct?sort=reviewCount&keyword=${param.keyword}">人气</a>
-			<a class="fSort"
-				<c:if test="${'date'==param.sort}">class="fSort-cur"</c:if>
-				href="/sortProduct?sort=date&keyword=${param.keyword}">新品</a> <a
-				class="fSort"
-				<c:if test="${'sale'==param.sort}">class="fSort-cur"</c:if>
-				href="/sortProduct?sort=sale&keyword=${param.keyword}">销量</a> <a
-				class="fSort"
-				<c:if test="${'price'==param.sort}">class="fSort-cur"</c:if>
-				href="/sortProduct?sort=price&keyword=${param.keyword}">价格</a>
+			<a
+				class="fSort<c:if test="${requestScope.sc.comprehensive == 1}"> fSort-cur</c:if>"
+				id="comprehensive">综合</a> <a
+				class="fSort<c:if test="${requestScope.sc.newProduct == 1 }"> fSort-cur</c:if>"
+				id="newProduct">新品</a> <a
+				class="fSort<c:if test="${requestScope.sc.salesVolume == 1 }"> fSort-cur</c:if>"
+				id="salesVolume">销量</a> <a
+				class="fSort<c:if test="${requestScope.sc.price == 1 }"> fSort-cur</c:if>"
+				id="price">价格</a>
+			<script>
+				$(function() {
+					//排序按钮点击事件 start
+					$("#comprehensive").click(function() {
+						resetCondition();
+						$("#comprehensiveInput").val("1");
+						$("#conditionSearch").submit();
+					});
+					$("#newProduct").click(function() {
+						resetCondition();
+						$("#newProductInput").val("1");
+						$("#conditionSearch").submit();
+					});
+					$("#salesVolume").click(function() {
+						resetCondition();
+						$("#salesVolumeInput").val("1");
+						$("#conditionSearch").submit();
+					});
+					$("#price").click(function() {
+						resetCondition();
+						$("#priceInput").val("1");
+						$("#conditionSearch").submit();
+					});
+
+					function resetCondition() {
+						$("#comprehensiveInput").val("0");
+						$("#newProductInput").val("0");
+						$("#salesVolumeInput").val("0");
+						$("#priceInput").val("0");
+						$("#pageNoInput").val("1");
+					}
+
+					//排序按钮点击事件 end
+					
+					//分页按钮点击事件 start
+					$("#pageButton .enabled").click(function () {
+						var pageNo = $(this).attr("id");
+						$("#pageNoInput").val(pageNo);
+						$("#conditionSearch").submit();
+					});
+				})
+			</script>
 		</div>
 		<div style="clear: both;"></div>
 		<c:forEach items="${requestScope.page.data}" var="p">
@@ -236,8 +289,8 @@ em {
 						<a href="${ctx }/product/${p.productTypeId}.action">${p.productName}</a>
 					</p>
 					<p class="productStatus">
-						<span>销量<em>${p.salesVolume}</em></span> <span>评价<a
-							href="#nowhere">0</a></span> <span class="ww-light"><a></a></span>
+						<span>销量<em>${p.salesVolume}</em></span> <span>评价<a>${p.reviewCount}</a></span>
+						<span class="ww-light"><a></a></span>
 					</p>
 				</div>
 			</div>
@@ -264,6 +317,67 @@ em {
 			</div>
 		</c:if>
 		<div style="clear: both"></div>
+	</div>
+	<style>
+#pageButton {
+	display: flex;
+	justify-content: center;
+	height: 100px;
+	font-size: 14px;
+	align-items: center;
+	color: #999;
+}
+
+#pageButton>div {
+	
+}
+
+#pageButtonBar>b {
+	border: 1px solid #E5E5E5;
+	padding: 8px 14px;
+	float: left;
+	font-weight: 400;
+	color: #999;
+	background-color: #EFEFEF;
+}
+
+#pageButtonBar>.enabled {
+	cursor: pointer;
+	color: #2953A6;
+	background-color:white;
+}
+
+#pageButtonBar>.enabled:hover {
+	background-color: #EFEFEF;
+	text-decoration: underline;
+}
+
+#pageChange>#inputPageNo {
+	width: 40px;
+	height: 20px;
+}
+
+#pageNoSubmit {
+	color: black;
+}
+</style>
+	<div id="pageButton">
+		<div id="pageButtonBar">
+			<!-- jstl设置变量 -->
+			<c:set var="pageNo" value="${requestScope.page.pageNo}"/>
+			<c:set var="pageTotal" value="${requestScope.page.pageTotal}"/>
+			<b class="<c:if test="${pageNo != 1}">enabled</c:if>" id="1">上一页</b>
+			<c:forEach begin="1" end="${pageTotal }"
+				varStatus="index">
+				<b class="<c:if test="${pageNo != index.index }">enabled</c:if>" id="${index.index }">${index.index }</b>
+			</c:forEach>
+			<b class="<c:if test="${pageNo != pageTotal}">enabled</c:if>" id="${pageTotal}">下一页</b>
+		</div>
+		<div id="pageChange">
+			&nbsp&nbsp共${pageTotal}页，到第<input type="text"
+				id="inputPageNo" value="${pageNo}" />页&nbsp&nbsp<input
+				type="button" value="确定" id="pageNoSubmit" />
+		</div>
 	</div>
 </div>
 

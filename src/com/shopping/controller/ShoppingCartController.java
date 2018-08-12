@@ -35,7 +35,7 @@ public class ShoppingCartController {
 	public Integer delCartItem(HttpSession session, BigInteger sCartId) {
 		User user = (User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
 		Integer count = scService.delShoppingCart(user.getUserId(), sCartId);
-		this.resetCartNum(count, session, user.getUserId());
+		this.resetCartNum(session);
 		return count;
 	}
 
@@ -55,10 +55,20 @@ public class ShoppingCartController {
 
 	@RequestMapping("/common/addsc")
 	@ResponseBody
-	public Integer addShoppingCart(HttpSession session, BigInteger ptId, Integer quantity) {
+	public Integer getCarNum(HttpSession session, BigInteger ptId, Integer quantity) {
 		User user = (User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
 		Integer count = scService.addShoppingCart(ptId, user.getUserId(), quantity);
-		this.resetCartNum(count, session, user.getUserId());
+		if (count > 0) {
+			this.resetCartNum(session);
+		}
+		return count;
+	}
+
+	@RequestMapping("/common/getCarNum")
+	@ResponseBody
+	public Integer addShoppingCart(HttpSession session) {
+		resetCartNum(session);
+		Integer count = (Integer) session.getAttribute(HttpVal.SHOPPING_CAR_COUNT_KEY);
 		return count;
 	}
 
@@ -66,15 +76,13 @@ public class ShoppingCartController {
 	/**
 	 * 重新设置购物车数量
 	 * 
-	 * @param count,sql语句执行结果
 	 * @param session
 	 * @param userId用户编号
 	 */
-	public void resetCartNum(Integer count, HttpSession session, BigInteger userId) {
+	public void resetCartNum(HttpSession session) {
 		// 查询购物车里的商品项的数量，然后放入session
-		if (count > 0) {
-			Integer shoppingCarNum = scService.getUserShoppingCarCount(userId);
-			session.setAttribute(HttpVal.SHOPPING_CAR_COUNT_KEY, shoppingCarNum);
-		}
+		User user = (User) session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
+		Integer shoppingCarNum = scService.getUserShoppingCarCount(user.getUserId());
+		session.setAttribute(HttpVal.SHOPPING_CAR_COUNT_KEY, shoppingCarNum);
 	}
 }

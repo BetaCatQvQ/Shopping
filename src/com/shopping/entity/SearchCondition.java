@@ -14,15 +14,31 @@ public class SearchCondition {
 	 */
 	private String keywords = "";
 
-	// getter -- setter
+	/**
+	 * 综合
+	 */
+	private Integer comprehensive = 1;
+
+	/**
+	 * 新品
+	 */
+	private Integer newProduct = 0;
+
+	/**
+	 * 销售量
+	 */
+	private Integer salesVolume = 0;
+
+	/**
+	 * 价格
+	 */
+	private Integer price = 0;
+
 	public Integer getCthId() {
 		return cthId;
 	}
 
 	public void setCthId(Integer cthId) {
-		if (cthId == null) {
-			cthId = -1;
-		}
 		this.cthId = cthId;
 	}
 
@@ -31,9 +47,6 @@ public class SearchCondition {
 	}
 
 	public void setPageNo(Integer pageNo) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
 		this.pageNo = pageNo;
 	}
 
@@ -42,10 +55,42 @@ public class SearchCondition {
 	}
 
 	public void setKeywords(String keywords) {
-		if (keywords == null) {
-			keywords = "";
-		}
 		this.keywords = keywords;
 	}
+
+	public Integer getComprehensive() {
+		return comprehensive;
+	}
+
+	public void setComprehensive(Integer comprehensive) {
+		this.comprehensive = comprehensive;
+	}
+
+	public Integer getNewProduct() {
+		return newProduct;
+	}
+
+	public void setNewProduct(Integer newProduct) {
+		this.newProduct = newProduct;
+	}
+
+	public Integer getSalesVolume() {
+		return salesVolume;
+	}
+
+	public void setSalesVolume(Integer salesVolume) {
+		this.salesVolume = salesVolume;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	// getter -- setter
+	
 
 }

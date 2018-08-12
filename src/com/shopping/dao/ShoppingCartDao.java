@@ -54,4 +54,7 @@ public interface ShoppingCartDao {
 			@Param("quantity") Integer quantity);
 
 	public ShoppingCart getByUserIdAndProductTypeId(@Param("ptId") BigInteger ptId, @Param("userId") BigInteger userId);
+
+	public List<ShoppingCart> getByUserIdAndShoppingCartIds(@Param("scIds") Integer[] scIds,
+			@Param("userId") BigInteger userId);
 }

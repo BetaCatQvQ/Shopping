@@ -57,7 +57,7 @@
 	</select>
 	
 	<select id="getProductListByCondition" resultType="Map">
-		SELECT `p`.`categoryThreeId`,`p`.`productName`,`pi`.`productImagePath`,COUNT(*) AS `salesVolume`,`minPriceTable`.`minPrice`,`minPriceTable`.`productTypeId`
+		SELECT `p`.`categoryThreeId`,`p`.`productName`,`pi`.`productImagePath`,COUNT(*) AS `salesVolume`,`minPriceTable`.`minPrice`,`minPriceTable`.`productTypeId`,COUNT(`rv`.`reviewId`) AS `reviewCount`
 		FROM `product` AS `p`
 		INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
 		INNER JOIN (
@@ -69,6 +69,7 @@
 		)  AS `c`ON `pi`.`productImageId` = `c`.`productImageId`
 		INNER JOIN `producttype` AS `pt` ON `p`.`productId` = `pt`.`productId`
 		INNER JOIN `orderitem` AS `oi` ON `oi`.`productTypeId` = `pt`.`productTypeId`
+		INNER JOIN `review` AS `rv` ON `rv`.`orderItemId` = oi.`orderItemId`
 		INNER JOIN (
 			SELECT `pt`.`productId`,MIN(`pt`.`productTypeId`) AS `productTypeId`,MIN(`pt`.`salePrice`) AS `minPrice` FROM `producttype` AS `pt`
 			GROUP BY `pt`.`productId`
@@ -82,8 +83,51 @@
 		</if>
 		
 		GROUP BY `p`.`productId`
-		ORDER BY `p`.`productCreateDate` DESC
+		<choose>
+			<when test="sc.newProduct == 1">
+				ORDER BY p.`productCreateDate` DESC
+			</when>
+			<when test="sc.salesVolume == 1">
+				ORDER BY `salesVolume` DESC
+			</when>
+			<when test="sc.price == 1">
+				ORDER BY `minPrice`
+			</when>
+			<when test="sc.comprehensive == 1">
+				ORDER BY p.`productName` DESC
+			</when>
+		</choose>
 		LIMIT #{page.startRow},#{page.pageCount}
+	</select>
+	
+	<select id="getProductListCountByCondition" resultType="Integer">
+		SELECT COUNT(*) as `count` FROM
+			(SELECT `p`.`productId`
+			FROM `product` AS `p`
+			INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
+			INNER JOIN (
+				SELECT MIN(`pi`.`productImageId`) AS `productImageId` FROM `product` AS `p`
+				INNER JOIN `productimage` AS `pi` ON `p`.`productId` = `pi`.`productId`
+				WHERE `p`.`categoryThreeId` = 1
+				GROUP BY `p`.`productId`
+				ORDER BY `pi`.`productImageId`
+			)  AS `c`ON `pi`.`productImageId` = `c`.`productImageId`
+			INNER JOIN `producttype` AS `pt` ON `p`.`productId` = `pt`.`productId`
+			INNER JOIN `orderitem` AS `oi` ON `oi`.`productTypeId` = `pt`.`productTypeId`
+			INNER JOIN `review` AS `rv` ON `rv`.`orderItemId` = oi.`orderItemId`
+			INNER JOIN (
+				SELECT `pt`.`productId`,MIN(`pt`.`productTypeId`) AS `productTypeId`,MIN(`pt`.`salePrice`) AS `minPrice` FROM `producttype` AS `pt`
+				GROUP BY `pt`.`productId`
+			) AS `minPriceTable` ON `p`.`productId` = `minPriceTable`.`productId`
+			where `oi`.`status` >= 1
+			<if test="sc.cthId != -1">
+				AND `p`.`categoryThreeId` = #{sc.cthId}
+			</if>
+			<if test="sc.keywords != ''">
+				AND `p`.`productName` LIKE #{sc.keywords}
+			</if>
+			GROUP BY `p`.`productId`
+		) AS `produ`
 	</select>
 	
 </mapper>

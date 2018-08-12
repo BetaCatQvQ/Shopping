@@ -14,21 +14,25 @@ import com.shopping.entity.Order;
 import com.shopping.entity.OrderItem;
 import com.shopping.service.OrderItemService;
 import com.shopping.service.ProductTypeService;
+import com.shopping.service.ShoppingCartService;
 
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 	@Resource
 	private OrderItemDao oiDao;
-	
+
 	@Resource
 	private OrderDao oDao;
-	
+
 	@Resource
 	private ProductTypeService ptService;
-	
-	
+
+	@Resource
+	private ShoppingCartService scService;
+
 	/**
 	 * ����һ��������
+	 * 
 	 * @param orderId
 	 * @param item
 	 * @param status
@@ -40,20 +44,22 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 	/**
 	 * �޸Ķ���״̬
+	 * 
 	 * @param status
 	 * @param orderId
 	 */
 	@Override
 	public void changeOrderStatus(Integer status, Long orderId) {
 		Order order = oDao.findOrderById(new BigInteger(orderId.toString()));
-		order.getOrderItems().forEach(item ->{
-			ptService.changeStock(item.getProductType().getProductTypeId().longValue(),item.getQuantity().longValue());
+		order.getOrderItems().forEach(item -> {
+			ptService.changeStock(item.getProductType().getProductTypeId().longValue(), item.getQuantity().longValue());
 		});
 		oiDao.changeOrderStatus(status, orderId);
 	}
 
 	/**
 	 * ���ݶ������޸�״̬
+	 * 
 	 * @param status
 	 * @param orderId
 	 * @param orderItemId
@@ -63,13 +69,13 @@ public class OrderItemServiceImpl implements OrderItemService {
 		oiDao.changeOrderStatusForItem(status, orderId, orderItemId);
 	}
 
-
 	@Override
 	public Boolean changeOrderItemQuantity(BigInteger orderId, BigInteger orderItemId, Integer quantity) {
 		Optional<OrderItem> opt = Optional.ofNullable(oiDao.findItemByOrderIdAndItemId(orderId, orderItemId));
-		opt.ifPresent(item ->{
+		opt.ifPresent(item -> {
 			oiDao.changeOrderItemQuantity(orderId, orderItemId, quantity);
 		});
 		return opt.isPresent();
 	}
+	
 }

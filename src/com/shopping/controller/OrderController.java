@@ -48,18 +48,23 @@ public class OrderController {
 		return "bought";
 	}
 
-	@PostMapping("/createOrder")
-	public String createOrder(String message, Long productTypeId, Integer number,
-			@ModelAttribute("address") Address address,
-			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
-		OrderItem item = new OrderItem();
-		item.setProductType(ptService.findById(productTypeId));
-		item.setQuantity(number);
-		item.setStatus(0);
-		item.setRemark(message == null ? "" : message);
-		List<OrderItem> items = new ArrayList<>();
-		items.add(item);
-		model.addAttribute("order", oService.createOrder(user, items));
+	@RequestMapping("/createOrder")
+	public String createOrder(String message, String[] productTypeIdAndNumber,
+			@ModelAttribute("address") Address address, @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
+			Model model) {
+		// 存储订单项
+		List<OrderItem> oiList = new ArrayList<>();
+		for (String string : productTypeIdAndNumber) {
+			// 分割数据
+			String[] ptIdAndNum = string.split("-");
+			OrderItem oi = new OrderItem();
+			oi.setProductType(ptService.findById(Long.parseLong(ptIdAndNum[0])));
+			oi.setQuantity(Integer.parseInt(ptIdAndNum[1]));
+			oi.setStatus(0);
+			oiList.add(oi);
+		}
+		// 添加订单
+		model.addAttribute("order", oService.createOrder(user, oiList));
 		return "confirmPay";
 	}
 
@@ -82,6 +87,5 @@ public class OrderController {
 			@PathVariable("orderid") BigInteger orderId) {
 		return oService.delOrder(user, orderId);
 	}
-	
-	
+
 }
