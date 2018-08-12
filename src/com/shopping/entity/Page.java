@@ -4,27 +4,27 @@ import java.util.List;
 
 public class Page<T> {
 	/**
-	 * Òª²éÑ¯µÄÒ³ºÅ£¬Ä¬ÈÏµÚ1Ò³
+	 * è¦æŸ¥è¯¢çš„é¡µå·ï¼Œé»˜è®¤ç¬¬1é¡µ
 	 */
 	private Integer pageNo = 1;
 	/**
-	 * Ã¿Ò³µÄ¼ÇÂ¼Êı£¬Ä¬ÈÏ30Ìõ
+	 * æ¯é¡µçš„è®°å½•æ•°ï¼Œé»˜è®¤30æ¡
 	 */
 	private Integer pageCount = 30;
 	/**
-	 * ²éÑ¯ÆğÊ¼ĞĞ
+	 * æŸ¥è¯¢èµ·å§‹è¡Œ
 	 */
 	private Integer startRow;
 	/**
-	 * ¼ÇÂ¼×ÜÊı
+	 * è®°å½•æ€»æ•°
 	 */
 	private Integer rowTotal;
 	/**
-	 * Ò³Ãæ×ÜÊı
+	 * é¡µé¢æ€»æ•°
 	 */
 	private Integer pageTotal;
 	/**
-	 * ´æ´¢²éÑ¯µÄÊı¾İ
+	 * å­˜å‚¨æŸ¥è¯¢çš„æ•°æ®
 	 */
 	private List<T> data;
 
@@ -74,7 +74,7 @@ public class Page<T> {
 
 	/**
 	 *
-	 * @param pageNoÒ³ï¿½ï¿½
+	 * @param pageNoé¡µé”Ÿæ–¤æ‹·
 	 */
 	public Page(Integer pageNo) {
 		super();

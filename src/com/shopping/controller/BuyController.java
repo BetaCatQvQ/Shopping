@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.shopping.entity.ProductType;
 import com.shopping.entity.ShoppingCart;
@@ -41,6 +42,9 @@ public class BuyController {
 	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
 			@PathVariable("number") Integer number, Model model) {
+			             @PathVariable("number") Integer number,
+			             @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
+			             Model model) {
 		Optional<ProductType> ptOptional = Optional.ofNullable(ptService.findById(productTypeId));
 		if (ptOptional.isPresent()) {
 			if (ptOptional.get().getRestQuantity() < number) {
@@ -75,6 +79,12 @@ public class BuyController {
 			total += price;
 		}
 		model.addAttribute("total", total);
+	
+	@GetMapping
+	public String buyForCart(List<Integer> orderItemIds) {
+		for(Integer item : orderItemIds) {
+			out.println(item);
+		}
 		return "buyPage";
 	}
 }

@@ -226,10 +226,10 @@
             </tr>
             <tr>
                 <td>收货信息：</td>
-                <td>${address.address}，${address.userName}， ${address.phone}，${address.postalcode} </td>
+                <td>${order.address.addressName}，${order.address.consignee}， ${order.address.phone}</td>
             </tr>
             <tr>
-                <td>成交时间：</td>
+                <td>下单时间：</td>
                 <td>${order.orderCreateDate}</td>
             </tr>
         </table>

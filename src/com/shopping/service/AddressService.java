@@ -13,4 +13,6 @@ public interface AddressService {
 	public Integer upd(Address address, BigInteger userId);
 
 	public Integer del(Integer addressId, BigInteger userId);
+	
+	List<Address> findAddressByUser(BigInteger userId);
 }

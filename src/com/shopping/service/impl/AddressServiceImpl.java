@@ -40,4 +40,11 @@ public class AddressServiceImpl implements AddressService {
 	public List<Address> getList(BigInteger userId) {
 		return aDao.getList(userId);
 	}
+	@Override
+	public List<Address> findAddressByUser(BigInteger userId){
+		if (userId == null) {
+			return null;
+		}
+		return aDao.findAddressByUser(userId);
+	}
 }

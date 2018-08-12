@@ -142,57 +142,41 @@ button.redButton:hover {
 }
 </style>
 <script>
-	$(function() {
+    $(function(){
 
-		$("form.loginForm").submit(
-				function() {
-					if (0 == $("#name").val().length
-							|| 0 == $("#password").val().length) {
-						$("span.errorMessage").html("请输入账号密码");
-						$("div.loginErrorMessageDiv").show();
-						return false;
-					}
-					return true;
-				});
+      
+        $("form.loginForm").submit(function(){
+            if(0==$("#name").val().length||0==$("#password").val().length){
+                $("span.errorMessage").html("请输入账号密码");
+                $("div.loginErrorMessageDiv").show();
+                return false;
+            }
+            return true;
+        });
 
-		$("form.loginForm input").keyup(function() {
-			$("div.loginErrorMessageDiv").hide();
-		});
-		$("#login_form")
-				.on(
-						'submit',
-						null,
-						function() {
-							var user = $(this).serialize();
-							console.log(user);
-							$
-									.post(
-											'${ctx}/user/login.action',
-											user,
-											function(data) {
-												console.log(data, '--result');
-												console.log(document.referrer,
-														'--ref')
-												if (eval(data) == 1) {
-													if (document.referrer != window.location.href) {
-														window.location.href = document.referrer;
-													}
-													if (window.location.pathname == '/Shopping/user/login.action') {
-														window.location.href = 'http://localhost:8080/Shopping/';
-													} else {
-														window.location = window.location.href;
-													}
-												} else {
-													$("span.errorMessage")
-															.html(eval(data));
-													$(
-															"div.loginErrorMessageDiv")
-															.show();
-												}
-											})
-							return false;
-						});
-	})
+        $("form.loginForm input").keyup(function(){
+            $("div.loginErrorMessageDiv").hide();
+        });
+        $("#login_form").on('submit',null,function(){
+        	var user = $(this).serialize();
+        	console.log(user);
+        	$.post('${ctx}/user/login.action',user,function(data){
+        		if(eval(data) == 1){
+					if(document.referrer != '' && document.referrer != window.location.href){
+						window.location = document.referrer;
+        			}else if(window.location.pathname == '/Shopping/user/login.action'){
+        				window.location = 'http://localhost:8080/Shopping/';
+        			}else{
+        			    window.location = window.location.href;        				
+        			}
+        		} else{
+        			  $("span.errorMessage").html(eval(data));
+        		      $("div.loginErrorMessageDiv").show();
+        		}
+        	})
+        	return false;
+        });
+    })
 </script>
 <div class="content">
 	<div class="login-banner-wrap"
