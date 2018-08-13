@@ -192,18 +192,26 @@ span.cartSumPrice {
 		$(".deleteOrderItem").click(function() {
 			var delFlag = window.confirm("确认删除？");
 			if (delFlag) {
+				var ela = $(this);
 				var sCartId = $(this).attr("orderitemid");
 				$.post("${ctx}/sc/common/del.action", {
 					"sCartId" : sCartId
 				}, function(count) {
 					if (count == 1) {
-						location.reload();
+						ela.parent().parent().remove();
+						updateCartNum();
 					} else {
 						window.alert("删除失败");
 					}
 				}, "json");
 			}
 		});
+		
+		function updateCartNum() {
+			$.post("${ctx}/sc/common/getCarNum.action",function(data){
+				$("#cartTotalItemNumber").html(data);
+			});
+		}
 
 		$("img.cartProductItemIfSelected")
 				.click(
@@ -353,15 +361,14 @@ span.cartSumPrice {
 				});
 
 		$("button.createOrderButton").click(function() {
-			var params = "";
 			$(".cartProductItemIfSelected").each(function() {
 				if ("selectit" == $(this).attr("selectit")) {
-					var orderItemId = $(this).attr("orderItemId");
-					params += "&orderItemId=" + orderItemId;
+					var scId = $(this).attr("orderItemId");
+					var $hide = $("<input type='hidden' name='scId' value='"+scId+"'/>");
+					$("#balance").append($hide);
 				}
 			});
-			params = params.substring(1);
-			location.href = "buy?" + params;
+			$("#balance").submit();
 		});
 
 	});
@@ -504,7 +511,7 @@ span.cartSumPrice {
 							scId="${sc.shoppingCartId}">
 								${sc.productType.salePrice*sc.quantity} </span></td>
 						<td><a class="deleteOrderItem"
-							orderItemId="${sc.shoppingCartId}" href="#nowhere">删除</a></td>
+							orderItemId="${sc.shoppingCartId}">删除</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -520,7 +527,9 @@ span.cartSumPrice {
 		<div class="pull-right">
 			<span>已选商品 <span class="cartSumNumber">0</span> 件
 			</span> <span>合计 (不含运费): </span> <span class="cartSumPrice">￥0.00</span>
-			<button class="createOrderButton" disabled="disabled">结 算</button>
+			<form method="post" style="display: inline-block;" action="${ctx}/common/buy/createOrder.action" id="balance">
+				<button class="createOrderButton" disabled="disabled">结 算</button>
+			</form>
 		</div>
 
 	</div>

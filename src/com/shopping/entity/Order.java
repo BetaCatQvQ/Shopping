@@ -37,6 +37,8 @@ public class Order {
 	@FK
 	private Address address = new Address();
 
+	private String remark;
+
 	// getter --- setter
 	public BigInteger getOrderId() {
 		return orderId;
@@ -84,6 +86,14 @@ public class Order {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

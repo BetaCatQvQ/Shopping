@@ -56,7 +56,6 @@
         <img class="aliPayImg" src="img/fore/alipay2wei.jpg">
     </div>
 
-
     <div>
         <a href="payed?order_id=${param.order_id}&total=${param.total}">
             <button class="confirmPay">确认支付</button>

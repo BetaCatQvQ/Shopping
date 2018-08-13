@@ -10,7 +10,7 @@ public class OrderItem {
 	/**
 	 * ��Ʒ����
 	 */
-	private ProductType productType;
+	private ProductType productType = new ProductType();
 	/**
 	 * ����
 	 */

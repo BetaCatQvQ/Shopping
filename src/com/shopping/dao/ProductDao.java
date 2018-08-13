@@ -34,4 +34,14 @@ public interface ProductDao {
 	 */
 	public List<Map<String, Object>> getProductListByCondition(@Param("sc") SearchCondition sc,
 			@Param("page") Page<Map<String, Object>> page);
+	
+	/**
+	 * 通过条件查询商品总数
+	 * 
+	 * @param categoryThreeId
+	 * @param page
+	 * @return
+	 */
+	public Integer getProductListCountByCondition(@Param("sc") SearchCondition sc,
+			@Param("page") Page<Map<String, Object>> page);
 }

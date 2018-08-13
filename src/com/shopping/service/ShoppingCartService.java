@@ -17,4 +17,9 @@ public interface ShoppingCartService {
 	public Integer quantityPlus(BigInteger userId, BigInteger scId);
 
 	public Integer addShoppingCart(BigInteger ptId, BigInteger userId, Integer quantity);
+	
+	public List<ShoppingCart> getByUserIdAndShoppingCartIds(Integer[] scIds,BigInteger userId);
+	
+	public Integer delShoppingCartByProductTypeId(BigInteger userId, BigInteger ptId);
+	
 }

@@ -35,6 +35,8 @@ public class ProductServiceImpl implements ProductService {
 		sc.setKeywords("%" + sc.getKeywords() + "%");
 		List<Map<String, Object>> products = pDao.getProductListByCondition(sc, page);
 		page.setData(products);
+		Integer rowTotal = pDao.getProductListCountByCondition(sc, page);
+		page.setRowTotal(rowTotal);
 		return page;
 	}
 }

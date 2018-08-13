@@ -45,7 +45,7 @@
 	</select>
 	
 	<insert id="createOrder">
-	    insert into `order` values(#{orderId},#{address.addressId},#{user.userId},#{orderCreateDate})
+	    insert into `order`(`orderId`,`addressId`,`userId`,`orderCreateDate`) values(#{orderId},#{address.addressId},#{user.userId},#{orderCreateDate})
 	</insert>
 	<delete id="delOrder">
 	  	DELETE from orderitem 

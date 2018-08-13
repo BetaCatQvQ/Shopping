@@ -445,6 +445,7 @@ div.selected_item {
                         $(".addCartButton").css("background-color", "lightgray");
                         $(".addCartButton").css("border-color", "lightgray");
                         $(".addCartButton").css("color", "black");
+                        updateCartNum();
                     }
                     else {
                     }
@@ -452,7 +453,13 @@ div.selected_item {
              );
             return false;
         }
-
+		
+		function updateCartNum() {
+			$.post("${ctx}/sc/common/getCarNum.action",function(data){
+				$("#cartTotalItemNumber").html(data);
+			});
+		}
+		
         $(".addCartLink").click(function () {
         	$.post("${ctx}/user/checkLogin.action",function(data){
         		if(data > 0){
