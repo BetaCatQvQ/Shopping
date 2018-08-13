@@ -361,7 +361,7 @@ button.submitOrderButton {
 								<span>￥${item.salePrice}</span>
 							</td>
 							<td><span class="orderItemProductNumber" name="number">${number}</span>
-								<input type="hidden" value="${item.productType.productTypeId }-${item.quantity }"
+								<input type="hidden" value="${item.productTypeId}-${number }"
 								name="productTypeIdAndNumber" /></td>
 							<td>
 								<%--<span class="orderItemUnitSum">--%> <%--￥<fmt:formatNumber type="number" value="${oi.product.price*oi.number}"--%>
@@ -451,7 +451,7 @@ button.submitOrderButton {
 </div>
 
 <%@include file="include/footer.jsp"%>
-=======
+<style>
     div.buyPageDiv {
         margin: 20px auto;
         max-width: 1013px;

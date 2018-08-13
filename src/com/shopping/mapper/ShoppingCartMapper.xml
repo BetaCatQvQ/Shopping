@@ -36,6 +36,10 @@
 		DELETE FROM `shoppingcart` WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}
 	</delete>
 	
+	<delete id="delShoppingCartByProductTypeId">
+		DELETE FROM `shoppingcart` WHERE `userId` = #{userId} AND `productTypeId` = #{ptId}
+	</delete>
+	
 	<update id="changeQuantity">
 		UPDATE `shoppingcart` SET `quantity` = #{quantity}
 		WHERE `userId` = #{userId} AND `shoppingCartId` = #{scId}

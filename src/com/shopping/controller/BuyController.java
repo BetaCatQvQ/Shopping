@@ -41,10 +41,8 @@ public class BuyController {
 
 	@GetMapping("/one/{productTypeId}-{number}")
 	public String buyOne(@PathVariable("productTypeId") final Long productTypeId,
-			@PathVariable("number") Integer number, Model model) {
-			             @PathVariable("number") Integer number,
-			             @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
-			             Model model) {
+			@PathVariable("number") Integer number, @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user,
+			Model model) {
 		Optional<ProductType> ptOptional = Optional.ofNullable(ptService.findById(productTypeId));
 		if (ptOptional.isPresent()) {
 			if (ptOptional.get().getRestQuantity() < number) {
@@ -79,11 +77,13 @@ public class BuyController {
 			total += price;
 		}
 		model.addAttribute("total", total);
-	
+		return "buyPage";
+	}
+
 	@GetMapping
 	public String buyForCart(List<Integer> orderItemIds) {
-		for(Integer item : orderItemIds) {
-			out.println(item);
+		for (Integer item : orderItemIds) {
+			System.out.println(item);
 		}
 		return "buyPage";
 	}
