@@ -8,4 +8,6 @@ public interface UserDao {
 	public User commonUserLogin(@Param("username") String username, @Param("pwd") String pwd);
 
 	public void createUser(User user);
+
+    Integer findUserName(@Param("username") String userName);
 }

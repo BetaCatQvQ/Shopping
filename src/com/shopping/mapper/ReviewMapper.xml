@@ -27,4 +27,9 @@
 	    inner join producttype as pt on pt.productTypeId = oi.productTypeId 
 	    where pt.productTypeId = #{id}
 	</select>
+	
+	<insert id="review" >
+	    insert into review values(null,#{userId},#{orderItemId},#{content},#{date})
+	</insert>
+	
 </mapper>

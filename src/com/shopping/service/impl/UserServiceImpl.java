@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
 			item.setUserId(new BigInteger(SnowFlake.getId().toString()));
 			uDao.createUser(item);
 		});
-		return user;
+		return optional.get();
+	}
+
+	@Override
+	public Integer findUserName(String userName) {
+		return uDao.findUserName(userName);
 	}
 }

@@ -69,11 +69,10 @@
     </div>
     <div class="payedAddressInfo">
         <ul>
-            <li>收货地址：${o.address} ${o.receiver} ${o.mobile }</li>
+            <li>收货地址：${o.address.address} ${o.address.consignee} ${o.address.phone }</li>
             <li>实付款：<span class="payedInfoPrice">
-            ￥${param.total}
+            ￥${total}
             </li>
-            <li>预计02月31日送达    </li>
         </ul>
 
         <div class="paedCheckLinkDiv">
@@ -88,7 +87,7 @@
     </div>
 
     <div class="warningDiv">
-        <img src="img/fore/warning.png">
+        <img src="${ctx }/img/fore/warning.png">
         <b>安全提醒：</b>下单后，<span class="redColor boldWord">用QQ给您发送链接办理退款的都是骗子！</span>天猫不存在系统升级，订单异常等问题，谨防假冒客服电话诈骗！
     </div>
 

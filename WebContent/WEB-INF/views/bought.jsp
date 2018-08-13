@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 
 <%@include file="include/header.jsp"%>
@@ -96,7 +96,7 @@ div.orderItemWangWangGif {
 	display: inline-block;
 	width: 67px;
 	height: 22px;
-	background-image: url(img/fore/wangwang.gif);
+	background-image: url(${ctx}/img/fore/wangwang.gif);
 	background-repeat: no-repeat;
 	background-color: transparent;
 	background-attachment: scroll;
@@ -432,23 +432,23 @@ div.page_num{
 		</div>
 		<div>
 			<a orderStatus="1"
-				href="${ctx }/common/order.action?pageNo=${param.pageNo==null?1:param.pageNo}&orderStatus=1">待发货</a>
+				href="${ctx }/common/order.action?pageNo=1&orderStatus=1">待发货</a>
 		</div>
 		<div>
 			<a orderStatus="3"
-				href="${ctx }/common/order.action?pageNo=${param.pageNo==null?1:param.pageNo}&orderStatus=3">派送中</a>
+				href="${ctx }/common/order.action?pageNo=1&orderStatus=3">派送中</a>
 		</div>
 		<div>
 			<a orderStatus="2"
-				href="${ctx }/common/order.action?pageNo=${param.pageNo==null?1:param.pageNo}&orderStatus=2">待收货</a>
+				href="${ctx }/common/order.action?pageNo=1&orderStatus=2">待收货</a>
 		</div>
 		<div>
 			<a orderStatus="4"
-				href="${ctx }/common/order.action?pageNo=${param.pageNo==null?1:param.pageNo}&orderStatus=4">待评价</a>
+				href="${ctx }/common/order.action?pageNo=1&orderStatus=4">待评价</a>
 		</div>
 		<div>
 			<a orderStatus="5"
-				href="${ctx }/common/order.action?pageNo=${param.pageNo==null?1:param.pageNo}&orderStatus=5"
+				href="${ctx }/common/order.action?pageNo=1&orderStatus=5"
 				class="noRightborder">已完成</a>
 		</div>
 		<div class="orderTypeLastOne">
@@ -551,41 +551,52 @@ div.page_num{
 								data-oiid-total="${oi.orderItemId }">￥${oi.productType.salePrice * oi.quantity }</div>
 							<div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
 						</td>
-							<td valign="middle"
-								class="orderListItemButtonTD orderItemOrderInfoPartTD"
-								style="width: 160px;">
-								<c:choose>
-									<c:when test="${oi.productType.restQuantity eq 0 && oi.status eq 0}">
-										<span>暂时无货</span>
-									</c:when>
-									<c:when test="${oi.status eq 0 }">
-										<a href="${ctx }/common/order/payOrder/${o.orderId}.action">
-											<button class="orderListItemConfirm">付款</button>
-										</a>
-									</c:when>
-									<c:when test="${oi.status eq 1 }">
-										<span>待发货</span>
-									</c:when>
-									<c:when test="${oi.status eq 2 }">
-										<a href="confirmPay?order_id=${o.orderId}">
-											<button class="orderListItemConfirm">确认收货</button>
-										</a>
-									</c:when>
-									<c:when test="${oi.status eq 3 }">
-										<span>派送中</span>
-									</c:when>
-									<c:when test="${oi.status eq 4 }">
-										<a href="review?order_id=${o.orderId}">
-											<button class="orderListItemReview">评价</button>
-										</a>
-									</c:when>
-									<c:when test="${oi.status eq 5 }">
-										<span>已完成</span>
-									</c:when>
-								</c:choose></td>
+							<c:if test="${oi.status != 4 && oi.status != 5 && st.index eq 0}">
+									<td valign="middle"
+									    <c:if test="${param.orderStatus != \"all\" }">
+									    rowspan="${o.orderItems.size()}"
+									    </c:if>
+										class="orderListItemButtonTD orderItemOrderInfoPartTD"
+										style="width: 160px;">
+										<c:choose>
+											<c:when test="${oi.productType.restQuantity eq 0 && oi.status eq 0}">
+												<span>暂时无货</span>
+											</c:when>
+											<c:when test="${oi.status eq 0 }">
+												<a href="${ctx }/common/order/payOrder/${o.orderId}.action?toStatus=1">
+													<button class="orderListItemConfirm">付款</button>
+												</a>
+											</c:when>
+											<c:when test="${oi.status eq 1 }">
+												<span>待发货</span>
+											</c:when>
+											<c:when test="${oi.status eq 2 }">
+												<a href="${ctx }/common/order/payOrder/${o.orderId}.action?toStatus=4">
+													<button class="orderListItemConfirm">确认收货</button>
+												</a>
+											</c:when>
+											<c:when test="${oi.status eq 3 }">
+												<span>派送中</span>
+											</c:when>
+										</c:choose>
+								  </td>
+							</c:if>
+							<c:if test="${oi.status eq 4 or oi.status eq 5 }">
+								<td valign="middle"
+									class="orderListItemButtonTD orderItemOrderInfoPartTD"
+									style="width: 160px;">
+									<c:choose>
+										<c:when test="${oi.status eq 4 }">
+											<button data-status-oiid="${oi.orderItemId }" data-status-oid="${o.orderId }" class="orderListItemReview">评价</button>
+										</c:when>
+										<c:when test="${oi.status eq 5 }">
+											<span>已完成</span>
+										</c:when>
+									</c:choose>
+								</td>
+							</c:if>
 					</tr>
 				</c:forEach>
-
 			</table>
 		</c:forEach>
 			
@@ -614,6 +625,12 @@ div.page_num{
 	         };
 	     $("[name=pre]").click(pre);
 	     $("[name=next]").click(next);
+	     $('.orderListItemReview[data-status-oiid]').click(change_status_to_review);
+	    function change_status_to_review(){
+	    	window.oiid = $(this).attr('data-status-oiid');
+	    	window.oid = $(this).attr('data-status-oid');
+	    	$('#reviewModal').modal('show');
+	    }
 	</script>
 </div>
 <%@include file="include/footer.jsp"%>

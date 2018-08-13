@@ -45,7 +45,8 @@ public class ProductType {
 	 * 商品对应的属性
 	 */
 	private List<ProductPropertyValue> productPropertyValues;
-
+	
+	private List<ProductImage> productImages;
 
 	// getter --- setter
 	public BigInteger getProductTypeId() {
@@ -126,6 +127,14 @@ public class ProductType {
 
 	public void setProductTypeCreateDate(Date productTypeCreateDate) {
 		this.productTypeCreateDate = productTypeCreateDate;
+	}
+
+	public List<ProductImage> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(List<ProductImage> productImages) {
+		this.productImages = productImages;
 	}
 
 }

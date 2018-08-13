@@ -112,6 +112,22 @@
         $("div.registerErrorMessageDiv").show();
         </c:if>
 
+        $("#name").on('blur',null,e => {
+        	const ele = e.target;
+        	let username = ele.value;
+        	const isNotUse = data => {
+        		if(data == 1){
+        			 $("span.errorMessage").html("用户名已被使用");
+                     $("div.registerErrorMessageDiv").show();                     
+                     $("button[type=\"submit\"]").attr('disabled',true);
+        		}else{
+        			$("button[type=\"submit\"]").attr('disabled',false);
+                    $("div.registerErrorMessageDiv").hide();
+        		}
+        	}
+        	$.post("${ctx}/user/checkusername.action",{'userName':username},isNotUse)
+        })
+        
         $("form.registerFrom").submit(function () {
             if (0 == $("#name").val().length || 0 == $("#password").val().length) {
                 $("span.errorMessage").html("请输入账号密码");
@@ -123,12 +139,25 @@
                 $("div.registerErrorMessageDiv").show();
                 return false;
             }
-            return true;
+            return register($(this).serialize());
         });
 
         $("form.registerFrom input").keyup(function () {
             $("div.registerErrorMessageDiv").hide();
         });
+        
+        function register(data){
+        	$.post('${ctx }/user/register.action',data,result =>{
+        		result = eval(result);
+        		if(result == 1){
+        			window.location.href = "${ctx}/user/register/success.action"
+        		}else{
+        			 $("span.errorMessage").html("register failed");
+        		     $("div.registerErrorMessageDiv").show();
+        		}
+        	},'json');
+        	return false;
+        }
     })
 </script>
 <div class="page">

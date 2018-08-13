@@ -1,5 +1,7 @@
 package com.shopping.service.impl;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,5 +20,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<Review> findReviewByProdyctTypeId(Long productTypeId) {
 		return rDao.findReviewByProdyctTypeId(productTypeId);
+	}
+
+	@Override
+	public Integer addReview(BigInteger orderItemId, BigInteger userId, String content) {
+		return rDao.review(orderItemId,userId,content,new Date());
 	}
 }

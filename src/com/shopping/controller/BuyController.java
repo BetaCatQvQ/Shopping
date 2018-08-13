@@ -1,6 +1,9 @@
 package com.shopping.controller;
 
-import java.util.List;
+import static java.lang.System.out;
+
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -57,9 +60,9 @@ public class BuyController {
 	}
 
 	@GetMapping("/confirmed/{orderId}")
-	public String comfirmed(@PathVariable("orderId") Long orderId) {
+	public String comfirmed(@PathVariable("orderId") Long orderId,Integer toStatus) {
 		if (orderId != null) {
-			oiService.changeOrderStatus(1, orderId);
+			oiService.changeOrderStatus(toStatus, orderId);
 		}
 		return "orderConfirmedPage";
 	}
@@ -80,11 +83,14 @@ public class BuyController {
 		return "buyPage";
 	}
 
-	@GetMapping
-	public String buyForCart(List<Integer> orderItemIds) {
-		for (Integer item : orderItemIds) {
-			System.out.println(item);
-		}
+	
+	@PostMapping
+	public String buyForCart(ArrayList<Map<String,Object>> json) {
+//		for(Integer item : orderItemId) {
+//			out.println(item);
+//		}
+		out.println(json.size());
 		return "buyPage";
+		
 	}
 }

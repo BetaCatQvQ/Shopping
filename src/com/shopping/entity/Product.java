@@ -20,7 +20,7 @@ public class Product {
 	 * 产品上架日期
 	 */
 	private Date productCreateDate;
-
+	
 	// getter --- setter
 	public BigInteger getProductId() {
 		return productId;
@@ -53,4 +53,5 @@ public class Product {
 	public void setProductCreateDate(Date productCreateDate) {
 		this.productCreateDate = productCreateDate;
 	}
+	
 }

@@ -87,8 +87,10 @@ public class OrderController {
 
 	@GetMapping("/payOrder/{orderId}")
 	public String payOrder(@PathVariable("orderId") BigInteger orderid,
-			@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, Model model) {
-		Order order = oService.findOrderById(orderid);
+			               @ModelAttribute("toStatus") Integer toStatus,
+						   @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, 
+						   Model model) {
+		Order order = oService.findOrderById(orderid);	
 		order.setUser(user);
 		model.addAttribute("order", order);
 		return "confirmPay";
