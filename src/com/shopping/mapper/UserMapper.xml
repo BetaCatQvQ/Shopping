@@ -25,4 +25,9 @@
 	<insert id="createUser">
 	    insert into `user` values(#{userId},#{userName},#{userPwd},#{role},#{userCreateDate})
 	</insert>
+	
+	<select id="findUserName" resultType="java.lang.Integer">
+	    select count(1) from user where username = #{username}
+	</select>
+	
 </mapper>

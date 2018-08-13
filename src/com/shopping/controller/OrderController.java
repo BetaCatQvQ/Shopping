@@ -68,6 +68,7 @@ public class OrderController {
 
 	@GetMapping("/payOrder/{orderId}")
 	public String payOrder(@PathVariable("orderId") BigInteger orderid,
+			               @ModelAttribute("toStatus") Integer toStatus,
 						   @SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user, 
 						   Model model) {
 		Order order = oService.findOrderById(orderid);		
@@ -77,7 +78,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/delOrder/{orderid}")
-	public @ResponseBody String delOrder(@PathVariable("orderid") BigInteger orderId,HttpSession session) {
+	public @ResponseBody String delOrder(@PathVariable("orderid") BigInteger orderId, HttpSession session) {
 		User user = (User)session.getAttribute(HttpVal.SESSION_COMMON_USER_KEY);
 		return oService.delOrder(user, orderId);
 	}

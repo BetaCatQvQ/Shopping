@@ -464,7 +464,7 @@ const get_address = () => {
                 <c:if test="${!empty items}">
                 <c:forEach items="${items}" var="item" varStatus="st">
                    <tr class="orderItemTR">
-                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}${item.productType.productTypeImagePath }">
+                        <td class="orderItemFirstTD"><img class="orderItemImg" src="${ctx}/${item.productType.productTypeImagePath }">
                         </td>
                         <td class="orderItemProductInfo">
                             <a href="${ctx }/product/${item.productType.productTypeId}.action" class="orderItemProductLink">

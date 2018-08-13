@@ -1,6 +1,9 @@
 package com.shopping.controller;
 
-import java.util.List;
+import static java.lang.System.out;
+
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -9,18 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.shopping.entity.ProductType;
 import com.shopping.entity.User;
-import com.shopping.service.AddressService;
 import com.shopping.service.OrderItemService;
 import com.shopping.service.OrderService;
 import com.shopping.service.ProductTypeService;
 import com.shopping.util.HttpVal;
-
-import static java.lang.System.out;
 
 @Controller
 @RequestMapping("/common/buy")
@@ -54,18 +55,20 @@ public class BuyController {
 	}
 
 	@GetMapping("/confirmed/{orderId}")
-	public String comfirmed(@PathVariable("orderId") Long orderId) {
+	public String comfirmed(@PathVariable("orderId") Long orderId,Integer toStatus) {
 		if (orderId != null) {
-			oiService.changeOrderStatus(1, orderId);
+			oiService.changeOrderStatus(toStatus, orderId);
 		}
 		return "orderConfirmedPage";
 	}
 	
-	@GetMapping
-	public String buyForCart(List<Integer> orderItemIds) {
-		for(Integer item : orderItemIds) {
-			out.println(item);
-		}
+	@PostMapping
+	public String buyForCart(ArrayList<Map<String,Object>> json) {
+//		for(Integer item : orderItemId) {
+//			out.println(item);
+//		}
+		out.println(json.size());
 		return "buyPage";
+		
 	}
 }
