@@ -477,10 +477,6 @@ const get_address = () => {
 
                         </td>
                         <td>
-
-                                <%--<span class="orderItemProductPrice">￥<fmt:formatNumber type="number"--%>
-                                <%--value="${oi.product.price}"--%>
-                                <%--minFractionDigits="2"/></span>--%>
                             <span>${item.productType.price}</span>
                         </td>
                         <td>
