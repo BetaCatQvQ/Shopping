@@ -471,12 +471,10 @@ div.selected_item {
 			<img class="bigImg"
 				src="${ctx}${defaultProduct.productTypeImagePath}">
 			<div class="smallImageDiv">
-				<%--
-				<c:forEach items="${product.productTypes}" var="p">
-					<img class="smallImg" src="${ctx}${p.productTypeImagePath }"
-						bigImgURL="${ctx}${p.productTypeImagePath }">
+				<c:forEach items="${defaultProduct.productImages}" var="p">
+					<img class="smallImg" src="${ctx}/${p.productImagePath }"
+						bigImgURL="${ctx}/${p.productImagePath }">
 				</c:forEach>
-				 --%>
 				<div class="img4load hidden"></div>
 			</div>
 		</div>

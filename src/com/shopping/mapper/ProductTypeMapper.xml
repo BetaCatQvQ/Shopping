@@ -29,6 +29,9 @@
 		<collection property="productDetailImages"
 			ofType="ProductDetailImage"
 			resultMap="com.shopping.dao.ProductDetailImageDao.BaseResultMap" />
+	    <collection property="productImages"
+			ofType="ProductImage"
+			resultMap="com.shopping.dao.ProductImageDao.BaseResultMap" />
 		<collection property="productPropertyValues"
 			ofType="ProductPropertyValue"
 			resultMap="com.shopping.dao.ProductPropertyValueDao.FullResultMap" />
@@ -41,7 +44,8 @@
 		inner join productdetailimage as img on img.productId = p.productId
 		inner join productpropertyvalue as pv on pv.productId = p.productId
 		inner join productproperty as p2 on pv.productPropertyId = p2.productPropertyId
-		inner join product p3  on p.productId = p3.productId
+		inner join product as p3 on p.productId = p3.productId
+		inner join productimage as pi on pi.productId = p3.productId
 		where p.productTypeId = #{id}
 	</select>
 	<update id="setProductTypeStock">

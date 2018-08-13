@@ -96,7 +96,7 @@ div.orderItemWangWangGif {
 	display: inline-block;
 	width: 67px;
 	height: 22px;
-	background-image: url(img/fore/wangwang.gif);
+	background-image: url(${ctx}/img/fore/wangwang.gif);
 	background-repeat: no-repeat;
 	background-color: transparent;
 	background-attachment: scroll;
@@ -587,9 +587,7 @@ div.page_num{
 									style="width: 160px;">
 									<c:choose>
 										<c:when test="${oi.status eq 4 }">
-											<a href="review?order_id=${o.orderId}">
-												<button class="orderListItemReview">评价</button>
-											</a>
+											<button data-status-oiid="${oi.orderItemId }" data-status-oid="${o.orderId }" class="orderListItemReview">评价</button>
 										</c:when>
 										<c:when test="${oi.status eq 5 }">
 											<span>已完成</span>
@@ -627,6 +625,12 @@ div.page_num{
 	         };
 	     $("[name=pre]").click(pre);
 	     $("[name=next]").click(next);
+	     $('.orderListItemReview[data-status-oiid]').click(change_status_to_review);
+	    function change_status_to_review(){
+	    	window.oiid = $(this).attr('data-status-oiid');
+	    	window.oid = $(this).attr('data-status-oid');
+	    	$('#reviewModal').modal('show');
+	    }
 	</script>
 </div>
 <%@include file="include/footer.jsp"%>
