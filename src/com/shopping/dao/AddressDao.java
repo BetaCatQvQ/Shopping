@@ -17,4 +17,6 @@ public interface AddressDao {
 	List<Address> findAddressByUser(BigInteger userId);
 
 	Address findAddressByUserAndAddressId(@Param("userId") BigInteger userId, @Param("addressId") Integer addressId);
+	
+	Integer addAddress(Address address);
 }

@@ -29,7 +29,7 @@
 	</delete>
   <insert id="addAddress">
 	    insert into address
-	    values(null,#{userId},#{addressName},#{consignee},#{phone})
+	    values(null,#{user.userId},#{addressName},#{consignee},#{phone})
 	</insert>
 	<delete id="delAddress">
 	    delete from address

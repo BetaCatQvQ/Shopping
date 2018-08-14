@@ -53,3 +53,38 @@
         </div>
     </div>
 </div>
+<div class="modal" id="addAddressModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog deleteConfirmModalDiv">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">输入地址:</h4>
+            </div>
+             <div class="modal-body">
+             <form id="addressForm">
+                 地&nbsp;&nbsp;址:&nbsp;<input type="text" name="addressName"/><br><br>
+                 收货人:&nbsp;<input type="text" name="consignee" /><br><br>
+                 手机号:&nbsp;<input type="text" name="phone" /><br><br>
+             </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+                <button class="btn btn-primary deleteConfirmButton" onclick="submit_address()" type="button">确认</button>
+                <script>
+                    function submit_address(){
+                    	let data = $("#addressForm").serialize();
+                    	$.post('${ctx}/address/add.action',data,function(result){
+                    		if(eval(result) == 1){
+                    			alert('添加成功!');
+                    			window.location.reload();
+                    		}else{
+                    			alert('添加失败!');
+                    		}
+                    	},'JSON')
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,8 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public Integer add(Address address) {
-		return jdbcTool.autoInsert(address);
+		//return jdbcTool.autoInsert(address);
+		return aDao.addAddress(address);
 	}
 
 	@Override

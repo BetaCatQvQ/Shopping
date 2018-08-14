@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -29,6 +30,16 @@ public class AddressController {
 			return null;
 		}
 		return aService.findAddressByUser(user.getUserId());
+	}
+	
+	@PostMapping("/add")
+	public @ResponseBody String addAddress(Address address,@SessionAttribute(HttpVal.SESSION_COMMON_USER_KEY) User user) {
+		Integer status = -1;
+		if (address != null) {
+			address.setUser(user);
+			status = aService.add(address);
+		}
+		return String.format("{status:%d}", status);
 	}
 
 }
